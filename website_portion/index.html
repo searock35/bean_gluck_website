@@ -2,17 +2,29 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>TextTrader.com</title>
+	<title>Book Hookups</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="script.js"></script>
 </head>
+
 <body>
-	<h1>Hi</h1>
-	This is a list now
-	<ul>
-		<li><a href = "index2.html">Website? </a></li>
-		<li><button>hey click me pleaseee</button></li>
-		<li></li>
-		<li></li>
-		<li></li>
-	</ul>
+	<h1>Book Hookups</h1>
+	Book Hookups is your one stop shop for buying and selling books
+
+	
+	<form action="/action.php" method="post">
+		<div id="book_search_bar">Book Title/ISBN: <input name="name" type="text" /> <br /> </div>
+	    
+
+	  	Select your school:
+	    <select name="gender">
+	        <option selected = "selected" value="Messiah">Messiah University</option>
+	        <option value="Penn State">Penn State University</option>
+	    </select><br /> 
+	    <input checked="checked" name="local" type="checkbox" value="daily" /> Include Local Searches <br />
+	    <input type="submit" value="Search" />
+	</form>
+	
 </body>
 </html>

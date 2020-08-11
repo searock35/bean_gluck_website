@@ -1,4 +1,26 @@
+body {
+	background: gray;
+}
+
 h1 {
+	color: #ccc;
 	font-style:'arial';
 	
+}
+
+#book_search_bar {
+	text-align: center;
+	margin: 50px 0px 100px 0px;
+	
+
+
+
+}
+
+#book_search_bar input {
+	width: 40%;
+	height: 60px;
+	color: green;
+	font-size: 30px;
+	font-style: 'arial';
 }
