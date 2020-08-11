@@ -8,19 +8,31 @@ h1 {
 	
 }
 
+h2 {
+	text-align: center;
+	font-style: 'helvetica';
+}
+
+form {
+	text-align: center;
+}
+
 #book_search_bar {
 	text-align: center;
 	margin: 50px 0px 100px 0px;
-	
-
-
+	font-size: 50px;
 
 }
 
 #book_search_bar input {
 	width: 40%;
 	height: 60px;
-	color: green;
+	color: #444;
 	font-size: 30px;
 	font-style: 'arial';
+	text-align: center;
+}
+
+footer {
+
 }
