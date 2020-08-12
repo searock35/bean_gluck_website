@@ -8,57 +8,54 @@
     <script src="script.js"></script>
 </head>
 
-
-
-<body onload="makeJSON()">
-
+<body>
 	<header>
-		<h1 id='header'>Book Hookups</h1>
-		<div id='navbar'>
-			<p>
-				<button class="navbtn" my_ID = 'book_search_bar'>ClickMe!</button>
-				<button class="navbtn" my_ID = 'book_search_bar'>ClickMe</button>
-				<button class="navbtn" my_ID = 'book_search_bar'>ClickMe</button>
-				<button class="navbtn" my_ID = 'book_search_bar'>ClickMe</button>
-			</p>
-
-		</div>
+		<h1>Book Hookups</h1>
+		<nav>
+			<ul>
+				<li><a href="index2.html"><b>Book List</b></a></li>
+				<li><a href="index2.html"><b>About</b></a></li>
+				<li><a href="index2.html"><b>Donate</b></a></li>
+			</ul>
+		</nav>
 
 	</header>
 	
-	<h2>Book Hookups is your one stop shop for buying and selling books</h2>
+	<h2>Your one stop shop for buying and selling books, <em>on campus!</em></h2>
 
-	<ul>
-		<li><a href="index2.html">Click Here</a></li>
-	</ul>
+
 	<form action="/action.php" method="post">
 		<div id="book_search_bar">Book Title/ISBN: <br>
 			<input value = "enter info here" name="name" type="text" onclick="search_onclick();" />  
 		</div>
-	    
-
 	  	Select your school:
-	    <select name="school">
-	        <option selected = "selected" value="Messiah">Messiah University</option>
-	        <option value="Penn State">Penn State University</option>
-	    </select><br /> 
+	    <select name="school_select">
+	    	<option value="" selected disabled hidden>Select your school</option>
+	        <option value="messiah">Messiah University</option>
+	        <option value="penn_state">Penn State University</option>
+	    </select>
 	    <input checked="checked" name="local" type="checkbox" value="daily"/> Include Local Searches <br />
-
-	    <input type="submit" value="Search"/>
+	    <input id="form_submission" type="submit" value="Search"/>
 	</form>
 	
 	<footer>
+		Copyright 2020-2020. Created by Jared Gluck and Corey Bean.
 
 	</footer>
 
 	<script>
 		$(document).ready(function() {
-			$('.navbtn').on('click', function() {
+			$('select').on('change', function() {
 
-				var content = "New Content";
-				var id = $(this).attr("my_ID");
-				console.log($('#' + id).children().eq(1).attr('value'));
-				$('#' + id).children().eq(1).attr('value', 'changed');
+				var name = $(this).attr("name");
+				console.log(name);
+				if(name == "school_select") {
+					console.log("made it");
+					console.log($('header'));
+					$('header').removeClass();
+					var toAdd = $(this).attr("value");
+					$('header').addClass(toAdd);
+					}
 			});
 
 		});

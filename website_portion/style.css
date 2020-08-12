@@ -1,14 +1,52 @@
 body {
-	background: gray;
+	background: #ddd;
+  	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  	margin: 0;
 }
+
+
+/*-------------Default Header-----------------*/
 
 header {
-	background: #44d;
+	background: blue;
+	background-color: #112F54;
 }
 
+header h1 {
+	padding: 40px;
+	margin: 0;
+}
+
+
+/*-------------School Specific Headers-----------------*/
+
+/*Need to add capability to scrape school logo, size information, color, secondary color, and which contrast would be necessary for the navbar.*/
+/*This can all be done automatically then, through php or js*/
+header.messiah {
+	background: #44d;
+	background-color: #112F54;
+	background-image: url("images/messiah_logo.png");
+	background-size: 30%;
+	background-repeat: no-repeat;
+	background-position: center;
+
+}
+
+header.penn_state {
+	background: #44d;
+	background-color: white;
+	background-image: url("images/penn_state_logo.png");
+	background-size: 18%;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+/*-------------Header Style-------------*/
+
 h1 {
-	color: #ccc;
-	font-style:'arial';
+	color: #aaa;
+	font-family: Arial;
+	text-shadow: 2px 2px 1px black;
 	
 }
 
@@ -17,19 +55,75 @@ h2 {
 	font-style: 'helvetica';
 }
 
+nav a {
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-top: 40px;
+}
+
+nav a:hover {
+	color: #ddd;
+	/*text-shadow: 3px 3px 2px black;*/
+	
+}
+
+header .logo a {
+	background-image: url("images/textbooks.jpg");
+	background-size: 300px;
+	background-repeat: no-repeat;
+	display: inline-block;
+	text-indent: -999999px;
+	position: relative;
+	top:-40px;
+	height: 80px;
+	width: 300px;
+
+}
+nav ul {
+  	margin: 0;
+  	padding: 0px 0px 30px 30px;
+  	list-style-type: none;
+}
+
+nav li {
+	background-color: gray;
+  	border-radius: 3px;
+  	display: inline-block;
+  	margin-right: 20px;
+  	margin-bottom: 2px;
+  	padding:4px;
+  	box-shadow: 2px 2px;
+}
+
+nav li:hover {
+	box-shadow: 5px 5px 2px;
+	margin-bottom: 0px;
+	padding: 5px;
+
+}
+
+/*-------------Style for Main Page Form-----------------*/
 form {
 	text-align: center;
+	font-size: 25px;
+}
+
+select {
+	height: 33px;
+	width: 300px;
+	font-size:25px;
 }
 
 #book_search_bar {
 	text-align: center;
-	margin: 50px 0px 100px 0px;
+	margin: 50px 0px 30px 0px;
 	font-size: 50px;
 
 }
 
 #book_search_bar input {
-	width: 40%;
+	width: 60%;
 	height: 60px;
 	color: #444;
 	font-size: 30px;
@@ -37,31 +131,20 @@ form {
 	text-align: center;
 }	
 
+#form_submission {
+	margin: 30px;
+	height: 40px;
+	width: 140px;
+	font-size: 25px;
+}
+
+
+/*----------Footer Style-------------*/
 footer {
-
-}
-
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-table.book_list {
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#navbar {
-	display: inline-flex;
-	margin: 0;
+	background: #112F54;
+	font-size: 20px;
+	padding: 40px 0px 80px 0px;
 	text-align: center;
+	
 }
 
-#navbar button {
-	padding: 10px 30px;
-	margin: 0 100px;
-	display: inline-flex;
-	flex-direction: right;
-	border-radius: 4px;
-
-}
