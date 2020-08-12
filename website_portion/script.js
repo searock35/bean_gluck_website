@@ -17,4 +17,8 @@ function search_onclick() {
 	var search_bar = document.getElementById("book_search_bar");
 	var input = search_bar.getElementsByTagName("input");
 	input[0].value = '';
+
+
+
 }
+

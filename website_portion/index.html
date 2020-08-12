@@ -11,14 +11,18 @@
 
 
 <body onload="makeJSON()">
-	<h1>Book Hookups</h1>
+
+	<header>
+		<h1 id='header'>Book Hookups</h1>
+	</header>
+	
 	<h2>Book Hookups is your one stop shop for buying and selling books</h2>
 
 	<ul>
 		<li><a href="index2.html">Click Here</a></li>
 	</ul>
 	<form action="/action.php" method="post">
-		<div id="book_search_bar">Book Title/ISBN: <br> <input value = "enter ISBN here" name="name" type="text" onclick="search_onclick();" /> <br /> </div>
+		<div id="book_search_bar">Book Title/ISBN: <br> <input value = "enter info here" name="name" type="text" onclick="search_onclick();" /> <br /> </div>
 	    
 
 	  	Select your school:
@@ -27,15 +31,17 @@
 	        <option value="Penn State">Penn State University</option>
 	    </select><br /> 
 	    <input checked="checked" name="local" type="checkbox" value="daily"/> Include Local Searches <br />
+
 	    <input type="submit" value="Search"/>
 	</form>
 	
 	<footer>
-		
+
 	</footer>
 
 	<script>
 		$(document).ready(function() {
+
 		});
 	</script>
 </body>
