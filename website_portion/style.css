@@ -50,3 +50,18 @@ table.book_list {
 	margin-left: auto;
 	margin-right: auto;
 }
+
+#navbar {
+	display: inline-flex;
+	margin: 0;
+	text-align: center;
+}
+
+#navbar button {
+	padding: 10px 30px;
+	margin: 0 100px;
+	display: inline-flex;
+	flex-direction: right;
+	border-radius: 4px;
+
+}

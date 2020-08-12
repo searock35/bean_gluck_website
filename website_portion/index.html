@@ -14,6 +14,16 @@
 
 	<header>
 		<h1 id='header'>Book Hookups</h1>
+		<div id='navbar'>
+			<p>
+				<button class="navbtn" my_ID = 'book_search_bar'>ClickMe!</button>
+				<button class="navbtn" my_ID = 'book_search_bar'>ClickMe</button>
+				<button class="navbtn" my_ID = 'book_search_bar'>ClickMe</button>
+				<button class="navbtn" my_ID = 'book_search_bar'>ClickMe</button>
+			</p>
+
+		</div>
+
 	</header>
 	
 	<h2>Book Hookups is your one stop shop for buying and selling books</h2>
@@ -22,7 +32,9 @@
 		<li><a href="index2.html">Click Here</a></li>
 	</ul>
 	<form action="/action.php" method="post">
-		<div id="book_search_bar">Book Title/ISBN: <br> <input value = "enter info here" name="name" type="text" onclick="search_onclick();" /> <br /> </div>
+		<div id="book_search_bar">Book Title/ISBN: <br>
+			<input value = "enter info here" name="name" type="text" onclick="search_onclick();" />  
+		</div>
 	    
 
 	  	Select your school:
@@ -41,6 +53,13 @@
 
 	<script>
 		$(document).ready(function() {
+			$('.navbtn').on('click', function() {
+
+				var content = "New Content";
+				var id = $(this).attr("my_ID");
+				console.log($('#' + id).children().eq(1).attr('value'));
+				$('#' + id).children().eq(1).attr('value', 'changed');
+			});
 
 		});
 	</script>
