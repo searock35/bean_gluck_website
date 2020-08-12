@@ -1,8 +1,5 @@
 
 
-var search_bar = document.getElementByID('book_search_bar');
-
-search_bar.addEventListener("click")
 
 
 function makeJSON() {
@@ -11,10 +8,13 @@ function makeJSON() {
 	        "three" : [67, 5.0],
 	        "four" : [32, 4.1]};
 
-	console.log("Hey");
-
 	var dictstring = JSON.stringify(dict);
-
-
+	
+	
 }
 
+function search_onclick() {
+	var search_bar = document.getElementById("book_search_bar");
+	var input = search_bar.getElementsByTagName("input");
+	input[0].value = '';
+}
