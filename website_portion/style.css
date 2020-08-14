@@ -47,6 +47,7 @@ h1 {
 	color: #aaa;
 	font-family: Arial;
 	text-shadow: 2px 2px 1px black;
+	font-size: 70px;
 	
 }
 
@@ -60,6 +61,7 @@ nav a {
   text-decoration: none;
   text-transform: uppercase;
   margin-top: 40px;
+  text
 }
 
 nav a:hover {
