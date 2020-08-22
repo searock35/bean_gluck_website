@@ -20,7 +20,7 @@ function Login(props) {
                 enter pass:
 
                 <input type="text" value={pass} onChange={(event) => setPass(event.target.value)}/>
-                <button onClick={() => auth.login(() => history.push('/'), username, pass)}>Login</button>
+                <button onClick={() => auth.login(() => history.goBack(), username, pass)}>Login</button>
                 <button onClick={() => auth.logout(() => console.log("callback"))}>Logout</button>
             </div>
         )  

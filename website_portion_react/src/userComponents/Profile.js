@@ -1,21 +1,17 @@
 import React from 'react';
+import auth from '../api/auth';
 
 //Using user context, Profile will determine whether to load user's listings and requests or to redirect to a sign up page.
 
-class Profile extends React.Component {
-    constructor(props) {
-        super(props)
-        
-        
-        if(props.user.isLoggedIn) {
-            console.log("user is logged in")
-        }
-    }
-    render() {
-        return(
-            <h1>Profile of {this.props.user.username}</h1>
-        )
-    }
+function Profile() {
+
+    if(auth.isAuth()) console.log('user logged in');
+
+    return(
+
+        <h1>Profile of {auth.getUser().username}</h1>
+
+    )
 }
 
 

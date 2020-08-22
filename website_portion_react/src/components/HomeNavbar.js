@@ -1,53 +1,60 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import auth from '../api/auth';
 
 
 //Helper function that returns correct user links for whether the user is logged in or logged out
-function UserNav(props) {
-    if(props.user.isAuthenticated) {
+function UserNavDropdown(props) {
+
+
+    if(props.isAuth) {
+        console.log("Auth recognized by navDropdown")
         return(
             // Show "My Profile" and "Log Out"
-            <NavDropdown title={props.user.username} id="user-nav-dropdown">
-                <NavDropdown.Item><Link to="/profile">My Profile Page</Link></NavDropdown.Item>
+            <NavDropdown title={auth.currentUser.username} id="user-nav-dropdown">
+                <NavDropdown.Item eventKey="/profile">My Profile Page</NavDropdown.Item>
 
                 <NavDropdown.Divider />
-                <NavDropdown.Item><Link to="/logout">Logout</Link></NavDropdown.Item>
+                <NavDropdown.Item eventKey="/logout">Logout</NavDropdown.Item>
             </NavDropdown>
         )
     }
     else {
+        console.log("Auth NOT recognized by navDropdown")
         return(
             <NavDropdown title="Hello, guest!">
-                <NavDropdown.Item><Link to="/login">Login</Link></NavDropdown.Item>
-                <NavDropdown.Item><Link to="/register">Register</Link></NavDropdown.Item>
+                <NavDropdown.Item eventKey="/login">Login</NavDropdown.Item>
+                <NavDropdown.Item eventKey="/register">Register</NavDropdown.Item>
             </NavDropdown>
         )
     }
 }
 
 
-class HomeNavbar extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.currentUser = props.user;
-    }
+function HomeNavbar() {
     
-    render() {
-        return(
-            <Navbar bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand href="/">BookWorms</Navbar.Brand>
-                <Nav className="mr-auto">
-                    <Nav.Item><Link to="/" style={{ textDecoration: 'none' }}>Home</Link></Nav.Item>
-                    <Nav.Item><Link to="/donate">Features</Link></Nav.Item>
-                    <UserNav user={this.currentUser}></UserNav>
-                </Nav>
-            </Navbar>
-        )
-    }
+    const [authState, setAuthState] = useState(auth.isAuth());
+    auth.addStateManager(setAuthState);
+    const history = useHistory();
+
+    function handleSelect(eventKey) {
+        eventKey==="/logout" ? auth.logout(() => history.push('/')) : history.push(eventKey);
+    } 
+
+    return(
+        <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar.Brand>TextTrader</Navbar.Brand>
+            <Nav className="mr-auto" onSelect={handleSelect}>
+                <Nav.Link eventKey="/">Home</Nav.Link>
+                <Nav.Link eventKey="/donate">Donate</Nav.Link>
+                <UserNavDropdown isAuth={authState}/>
+            </Nav>
+        </Navbar>
+    )
+
 }
 
 export default HomeNavbar;

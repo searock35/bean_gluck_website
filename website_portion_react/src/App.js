@@ -8,45 +8,41 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 // import BookResults from './components/BookResults';
 import Profile from './userComponents/Profile';
-import ProtectedRoute from './userComponents/ProtectedRoute.js';
+import ProtectedRoute from './userComponents/ProtectedRoute';
 import Login from './userComponents/Login';
+import UserContext from './userComponents/UserContext';
+import storedUser from './userComponents/api/getUserFromCookies';
 
-// const defaultUser = {
-//   username: 'Guest',
-//   email: '',
-//   id: '0',
-//   isAuthenticated: false,
-// }
 
+
+//import last known user using cookies
 const currentUser = {
-  username: 'Searock35',
-  email: 'searock35@gmail.com',
-  id: '46843',
-  isAuthenticated: true,
+  ...storedUser
 }
-
-//somehow include functions to load in user information using cookies
 
 
 function App() {
   return (
     <Router>
-      <div className="container-md">
-        <HomeNavbar school='' user={currentUser} ></HomeNavbar>
-        <Switch>
-          <Route path="/" exact component={Home} />
+      <UserContext.Provider value={currentUser}>
+        <div className="container-md">
+          <HomeNavbar school='' ></HomeNavbar>
+          <Switch>
+            <Route path="/" exact component={Home} />
 
-          <Route path="/login">   
-            <Login />
-          </Route> 
+            <Route path="/login">   
+              <Login />
+            </Route> 
 
-          <ProtectedRoute path="/profile">
-            <Profile user={currentUser} />
-          </ProtectedRoute>
-        </Switch>
+            <ProtectedRoute path="/profile">
+              <Profile/>
+            </ProtectedRoute>
 
-        <Footer />
-      </div>
+          </Switch>
+
+          <Footer />
+        </div>
+      </UserContext.Provider>
     </Router>
   );
 }

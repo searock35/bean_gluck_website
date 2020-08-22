@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Redirect, useHistory } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import auth from '../api/auth';
 
 
@@ -13,7 +13,7 @@ function ProtectedRoute({children, ...rest}) {
         <Route 
             {...rest} 
             render={({ location }) => 
-                auth.isAuth() ? (children) : (<Redirect to="/login" />)
+                auth.isAuth() ? (children) : (history.push("/login"))
             }>
         </Route>
     )
