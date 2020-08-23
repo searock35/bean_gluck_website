@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import UserContext from '../userComponents/UserContext';
+import UserContext from '../user/UserContext';
 
 
 

@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import HomeNavbar from './components/HomeNavbar';
+import HomeNavbar from './common/HomeNavbar';
 // import Donate from './components/Donate';
-import Footer from './components/Footer';
-import Home from './components/Home';
+import Footer from './common/Footer';
+import Home from './home/Home';
 // import BookResults from './components/BookResults';
-import Dashboard from './userComponents/Profile';
-import ProtectedRoute from './userComponents/ProtectedRoute';
-import Login from './userComponents/Login';
-import UserContext from './userComponents/UserContext';
-import getStoredUser from './userComponents/api/getUserFromCookies';
-import UserListings from './userComponents/UserListings';
+import Dashboard from './user/Profile';
+import ProtectedRoute from './auth/ProtectedRoute';
+import Login from './auth/Login';
+import UserContext from './user/UserContext';
+import getStoredUser from './common/getUserFromCookies';
+import UserListings from './user/UserListings';
 
 
 

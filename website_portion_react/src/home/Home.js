@@ -1,6 +1,6 @@
 import React from 'react';
 //Style
-import './style/HomeStyle.css';
+import './HomeStyle.css';
 //Components
 import BookSearchForm from './BookSearchForm';
 //Dependencies

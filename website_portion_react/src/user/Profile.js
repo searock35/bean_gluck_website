@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import UserContext from './UserContext';
+import UserContext from '../user/UserContext';
 
 //Using user context, Profile will determine whether to load user's listings and requests or to redirect to a sign up page.
 

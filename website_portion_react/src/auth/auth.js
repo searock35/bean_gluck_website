@@ -1,4 +1,4 @@
-import getDefaultUser from "../userComponents/api/getDefaultUser";
+import getDefaultUser from "../common/getDefaultUser";
 
 //Need to make an auth object that will login user, logout user, and return whether the user is authenticated
 class Auth {

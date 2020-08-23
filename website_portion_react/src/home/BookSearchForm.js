@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 //API's
-import BooksAPI from '../api/books';
+import BooksAPI from '../common/books';
 //Components
-import Book from './Book';
+import Book from '../common/Book';
 
 function BookDropDown(props) {
 
