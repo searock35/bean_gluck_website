@@ -1,13 +1,10 @@
 import {createContext} from 'react';
+import getDefaultUser from './api/getDefaultUser';
 
-const defaultUser = {
-    username: 'Guest',
-    email: '',
-    id: '0',
-    schoolId: 'Messiah University',
-    isAuth: false
-}
 
-const UserContext = createContext(defaultUser);
+const UserContext = createContext({
+    ...getDefaultUser(),
+    changeUserContext: undefined
+});
 
 export default UserContext;

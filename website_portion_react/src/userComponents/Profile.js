@@ -1,16 +1,14 @@
-import React from 'react';
-import auth from '../api/auth';
+import React, { useContext } from 'react';
+import UserContext from './UserContext';
 
 //Using user context, Profile will determine whether to load user's listings and requests or to redirect to a sign up page.
 
 function Profile() {
 
-    if(auth.isAuth()) console.log('user logged in');
+    const userContext = useContext(UserContext);
 
     return(
-
-        <h1>Profile of {auth.getUser().username}</h1>
-
+        <h1>Profile of {userContext.username}</h1>
     )
 }
 

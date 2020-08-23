@@ -1,21 +1,15 @@
+import getDefaultUser from "./getDefaultUser";
 
 
 
 function getStoredUser() {
-    const defaultUser = {
-        username: 'Guest',
-        email: '',
-        id: '0',
-        schoolId: '01220420',
-        isAuth: false
-    };
-    
-    const storedUser = {
-        ...defaultUser,
-        isAuth: false
-    };
 
-    return storedUser;
+    
+    //look in cookies for the stored user, and put them in the stored user object
+    //TO DO
+
+    //if the user in cookies cannot be found, load default user
+    return getDefaultUser();
 }
 
-export default getStoredUser();
+export default getStoredUser;
