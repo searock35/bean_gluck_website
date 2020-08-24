@@ -12,7 +12,7 @@ function Book(props) {
     const userInfo = useContext(UserContext);
 
     //redirects user to book search page with bookID as the 
-    const linkHandler = (bookId) => history.push("/book-search/?bookId=" + bookId + "&schoolId=" + userInfo.schoolId);
+    const linkHandler = (bookId) => history.push("/book-search/?book-Id=" + bookId + "&school-Id=" + userInfo.schoolId);
 
     let idMessage = "";
     if(bookInfo.id.length < 10 || bookInfo.idIsCustom) {

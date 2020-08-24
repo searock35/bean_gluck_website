@@ -35,7 +35,7 @@ function BookSearchForm(props) {
 
     return (
         <form onSubmit={onSearchSubmit}>
-            <div id="book_search_bar" className="form-group"><label>Book Title/ISBN:</label>
+            <div id="book-search-bar" className="form-group"><label>Book Title/ISBN:</label>
                 <input 
                     id="mainSearch"
                     className="form-control form-control-lg"
@@ -56,7 +56,7 @@ function BookSearchForm(props) {
                         <option value="penn_state">Penn State University</option>
                     </select>
                 <input defaultChecked="checked" name="local" type="checkbox" value="daily" /> Include Local Searches <br />
-                <input id="form_submission" type="submit" value="Search" />
+                <input id="form-submission" type="submit" value="Search" />
             </div>
         </form>
     )

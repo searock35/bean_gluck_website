@@ -15,7 +15,7 @@ function UserNavDropdown(props) {
         return(
             // Show "My Profile" and "Log Out"
             <NavDropdown title={"Hello, " + currentUser.username + "!"} id="user-nav-dropdown">
-                <NavDropdown.Item eventKey={"/user/" + currentUser.username + "/dashboard"} >My Profile Page</NavDropdown.Item>
+                <NavDropdown.Item eventKey={"/user/" + currentUser.username} >My Profile Page</NavDropdown.Item>
 
                 <NavDropdown.Divider />
                 <NavDropdown.Item eventKey="/logout">Logout</NavDropdown.Item>
