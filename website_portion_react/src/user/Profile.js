@@ -1,14 +1,32 @@
-import React, { useContext } from 'react';
-import UserContext from '../user/UserContext';
+import React from 'react';
+import ProtectedRoute from '../auth/ProtectedRoute';
+import { Switch, useRouteMatch } from 'react-router-dom';
+import UserListings from './UserListings';
+import Dashboard from './Dashboard';
+import EditUserProfile from'./EditUserProfile';
 
 //Using user context, Profile will determine whether to load user's listings and requests or to redirect to a sign up page.
 
 function Profile() {
 
-    const userContext = useContext(UserContext);
 
-    return(
-        <h1>Profile of {userContext.username}</h1>
+    console.log(useRouteMatch());
+
+    return (
+
+        <Switch>
+            <ProtectedRoute exact path="/user/:username/">
+                <Dashboard/>
+            </ProtectedRoute>
+            
+            <ProtectedRoute path="/user/:username/my-listings">
+                <UserListings/>
+            </ProtectedRoute>
+
+            <ProtectedRoute path="/user/:username/edit">
+                <EditUserProfile/>
+            </ProtectedRoute>
+        </Switch>
     )
 }
 
