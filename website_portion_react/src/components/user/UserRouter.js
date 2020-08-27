@@ -18,9 +18,9 @@ function UserRouter() {
 
     let { path, url } = useRouteMatch();
     
-    console.log(path, url);
-
     const { username } = useParams();
+
+    console.log(path, username);
 
 
     if(currentUser.isAuth) {

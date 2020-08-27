@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import auth from './auth';
+import auth from './authAPI';
 import { Redirect, useHistory } from 'react-router-dom';
 import UserContext from '../user/UserContext';
 
@@ -11,12 +11,13 @@ function Login(props) {
 
     const currentUser = useContext(UserContext);
 
-    function handleLoginEvent(e) {
-
-        console.log(currentUser.username);
-        const newUser = auth.login(() => history.goBack(), username, pass);
+    function loginCb(newUser) {
         currentUser.changeUserContext(newUser);
-        console.log(currentUser.username);
+        history.goBack();
+    }
+
+    function handleLoginEvent(e) {
+        auth.login(loginCb, username, pass);
     }
 
 

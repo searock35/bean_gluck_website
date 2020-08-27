@@ -8,18 +8,20 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //Components
-import HomeNavbar from './common/HomeNavbar';
-import Footer from './common/Footer';
-import Home from './home/Home';
-import UserRouter from './user/UserRouter';
-import ProtectedRoute from './auth/ProtectedRoute';
-import Login from './auth/Login';
-import UserContext from './user/UserContext';
-import getStoredUser from './common/getUserFromCookies';
+import HomeNavbar from './components/common/HomeNavbar';
+import Footer from './components/common/Footer';
+import Home from './components/home/Home';
+import UserRouter from './components/user/UserRouter';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import Login from './components/auth/Login';
+import Donate from './components/donate/Donate';
+import UserContext from './components/user/UserContext';
+import getStoredUser from './components/auth/getStoredUser';
 
 
 function App() {
   const [userState, setUserState] = useState(getStoredUser());
+
   return (
     <Router>
       <UserContext.Provider value={{
@@ -32,7 +34,8 @@ function App() {
 
           <Switch>
             <Route path="/" exact component={Home} />
-            <Route path="/login" component={Login} />   
+            <Route path="/login" component={Login} />
+            <Route path="/donate" component={Donate} />
             <ProtectedRoute path="/user/:username/" component={UserRouter} />
           </Switch>
 

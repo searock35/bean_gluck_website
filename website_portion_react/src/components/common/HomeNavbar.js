@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import auth from '../auth/auth';
+import auth from '../auth/authAPI';
 import UserContext from '../user/UserContext';
 
 
