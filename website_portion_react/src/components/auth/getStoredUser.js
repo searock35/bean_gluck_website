@@ -1,4 +1,4 @@
-import getTokenFromCookies from "./getTokenFromCookies";
+import cookiesAPI from "./cookiesAPI";
 import getDefaultUser from "../common/getDefaultUser";
 
 
@@ -7,11 +7,11 @@ import getDefaultUser from "../common/getDefaultUser";
 // outputs: -> The user information from the web server
 function getStoredUser() {
     
-    const refreshToken = getTokenFromCookies();
+    const authToken = cookiesAPI.getAuthTokenInCookies();
     //use auth api to grab user info from server, then return the user for the context
 
     //TESTING PURPOSES: Gather user info from cookies for now, to test cookies
-    if(refreshToken === "01220420") {
+    if(authToken === "01220420") {
         return {
             username: 'searock35',
             email: 'searock35@gmail.com',

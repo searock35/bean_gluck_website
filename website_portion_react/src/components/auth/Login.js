@@ -8,7 +8,6 @@ function Login(props) {
     const [username, setUsername] = useState("");
     const [pass, setPass] = useState("");
     const history = useHistory();
-
     const currentUser = useContext(UserContext);
 
     function loginCb(newUser) {

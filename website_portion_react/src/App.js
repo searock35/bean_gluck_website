@@ -14,13 +14,15 @@ import Home from './components/home/Home';
 import UserRouter from './components/user/UserRouter';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import Login from './components/auth/Login';
+import Register from './components/auth/Register';
 import Donate from './components/donate/Donate';
 import UserContext from './components/user/UserContext';
-import getStoredUser from './components/auth/getStoredUser';
-
+import Error from './components/common/Error';
+import authAPI from './components/auth/authAPI';
 
 function App() {
-  const [userState, setUserState] = useState(getStoredUser());
+  const initUser = authAPI.refreshUser();
+  const [userState, setUserState] = useState(initUser);
 
   return (
     <Router>
@@ -31,12 +33,13 @@ function App() {
 
         <div className="container-md">
           <HomeNavbar />
-
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
             <Route path="/donate" component={Donate} />
             <ProtectedRoute path="/user/:username/" component={UserRouter} />
+            <Route path="/" component={Error} />
           </Switch>
 
           <Footer />

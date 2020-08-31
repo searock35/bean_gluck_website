@@ -1,16 +1,12 @@
-import React, { useContext } from 'react';
-import UserContext from './userComponents/UserContext';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import cookiesAPI from './components/auth/cookiesAPI';
 
 
 function TestComponent() {
 
-    console.log("TestComponent");
-    const userContext = useContext(UserContext);
-
     return (
         <div>
-            <button onClick={() => console.log(userContext.username)}><Link to="/user/searock35/dashboard">{userContext.username}</Link></button>
+            <button onClick={() => console.log(cookiesAPI.getAuthTokenInCookies())}>Log Cookies</button>
         </div>
     )
 }
