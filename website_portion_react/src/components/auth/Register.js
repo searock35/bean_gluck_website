@@ -17,6 +17,7 @@ function Register() {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        console.log("Registered");
         //Add functionality later.
     }
 
@@ -27,9 +28,7 @@ function Register() {
             [id]: value
         }))
         
-        validate({
-            [id]: value
-        });
+        validate({ [id]: value });
 
     }
 
@@ -42,25 +41,34 @@ function Register() {
 
     const validate = values => {
       
-        if (!values.firstName) {
-            setError("firstName", "Required");
-        } else if (values.firstName === "admin") {
-            setError("firstName", "Nice try!");
+        if (typeof values.firstName === "string") {
+            if(values.firstName ==="") {
+                setError("firstName", "Required");
+            } else if (values.firstName === "admin") {
+                setError("firstName", "Nice try!");
+            }
         }
         
-        if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-            setError("email", "Invalid email");
-        } else {
-            setError("email", "");
+        if (typeof values.email === "string") {
+            if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+                setError("email", "Invalid email");
+            } else {
+                setError("email", "");
+            }
         }
     
-
-        if (values.password.length >= 8 && values.password.length < 32) {
-            setError("password", "");
-        } else if (values.password.length===0) {
-            setError("password", "Required");
-        } else {
-            setError("password", "Invalid Password");
+        if (typeof values.password === "string") {
+            if (values.password.length >= 8 && values.password.length < 32) {
+                if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/i.test(values.password)) {
+                    setError("password", "Invalid password");
+                } else {
+                    setError("password", "");
+                }
+            } else if (values.password.length===0) {
+                setError("password", "Required");
+            } else {
+                setError("password", "Incorrect Length");
+            }
         }
       };
 
@@ -98,7 +106,7 @@ function Register() {
                 <Form.Label>Password</Form.Label>
                 <Form.Control type="password" placeholder="Password" value={user.password} onChange={onChangeHandler} />
                 <Form.Text className="text-muted">
-                    Password must be longer than 8 characters, and must include 1 number and 1 special character. <span style={{color: "red"}}>{errors.password}</span>
+                    Password must be 8-32 characters long, and must include uppercase and lowercase, a number and a special character. <span style={{color: "red"}}>{errors.password}</span>
                 </Form.Text>
             </Form.Group>
             <Form.Group controlId="school">
