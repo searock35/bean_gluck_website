@@ -48,10 +48,10 @@ class Auth {
     }
 
     //Login will send new user through the callback function
-    login(cb, username, password) {
+    login(cb, email, password) {
         //send api username and password to recieve auth token
 
-        if(username==="searock35" && password==="coocie343") {
+        if(email==="searock35@gmail.com" && password==="coocie343") {
             console.log("Passed")
 
             //An authtoken and refreshtoken have been generated for current user.

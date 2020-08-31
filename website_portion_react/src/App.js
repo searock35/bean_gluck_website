@@ -19,6 +19,7 @@ import Donate from './components/donate/Donate';
 import UserContext from './components/user/UserContext';
 import Error from './components/common/Error';
 import authAPI from './components/auth/authAPI';
+//import TestComponent from './TestComponent';
 
 function App() {
   const initUser = authAPI.refreshUser();

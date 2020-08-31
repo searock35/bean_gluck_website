@@ -28,8 +28,9 @@ class cookiesAPI {
         console.log("setting authtoken to: ", authToken);
 
         const dt = new Date();
-        dt.setHours(dt.getHours + 1);
 
+        dt.setMinutes(dt.getMinutes() + 60);
+        
         this.cookies.set("authToken", authToken, {
             //httpOnly: true,
             expires: dt
