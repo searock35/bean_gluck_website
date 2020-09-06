@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 //API's
-import BooksAPI from '../common/books';
+import BooksAPI from '../common/booksAPI';
 //Components
 import Book from '../common/Book';
 
@@ -8,7 +8,7 @@ function BookDropDown(props) {
 
     const allBooks = props.books.map( (book) => 
     <li className="book-drop-down-entry" key={book.id}>
-        <Book bookInfo={book} />
+        <Book bookInfo={book} clickable="true" />
     </li>
     )
 

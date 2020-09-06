@@ -16,6 +16,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Donate from './components/donate/Donate';
+import BookResults from './components/search/BookResults';
 import UserContext from './components/user/UserContext';
 import Error from './components/common/Error';
 import authAPI from './components/auth/authAPI';
@@ -38,6 +39,7 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/book-search/" component={BookResults} />
             <Route path="/donate" component={Donate} />
             <ProtectedRoute path="/user/:username/" component={UserRouter} />
             <Route path="/" component={Error} />

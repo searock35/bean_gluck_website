@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Form, Col, Button } from "react-bootstrap";
+import { useHistory } from 'react-router-dom';
+import auth from './authAPI';
+import UserContext from '../user/UserContext';
 
 function Register() {
+
+    const history = useHistory();
+    const currentUser = useContext(UserContext);
 
     const [user, setUser] = useState({
         firstName: "",
@@ -11,46 +17,89 @@ function Register() {
         school: ""
     })
 
-    const [errors, setErrors] = useState({
-        ...user
-    });
+    const errors = {
+        firstName: "Required",
+        lastName: "Required",
+        password: "Required",
+        email: "Required",
+        school: "Required"
+    };
+
+
+
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log("Registered");
-        //Add functionality later.
+        var success = true;
+
+        if(errorsClear()) {
+            const regCb = (newUser) => {
+                currentUser.changeUserContext(newUser);
+                history.push('/');
+            }
+            success = auth.register(regCb);
+            if(success === false) {
+                console.log("bad reg");
+            }
+        } else {
+            console.log("Data not correct");
+        }
+    }
+
+    const errorsClear = () => {
+        var clear = true;
+        for (const error in errors) {
+            if (errors[error].length > 0) clear = false;
+        }
+        console.log(clear);
+        return clear
+    }
+
+    const showSubmit = (show) => {
+        if(show === "true") {
+            console.log("ready to submit");
+            document.getElementById("reg-submit-button").removeAttribute("disabled");
+        }
     }
 
     const onChangeHandler = (e) => {
+        e.preventDefault();
         const { id, value } = e.target;
         setUser((user) => ({
             ...user,
             [id]: value
         }))
-        
-        validate({ [id]: value });
-
     }
 
     const setError = (name, value) => {
-        setErrors({
-            ...errors,
-            [name]: value,
-        })
+        errors[name] = value
     }
 
     const validate = values => {
-      
         if (typeof values.firstName === "string") {
-            if(values.firstName ==="") {
+            if(values.firstName === "") {
                 setError("firstName", "Required");
-            } else if (values.firstName === "admin") {
-                setError("firstName", "Nice try!");
+            } else if (values.firstName.length < 2 || values.firstName.length > 32) {
+                setError("firstName", "Invalid length");
+            } else {
+                setError("firstName", "");
+            }
+        }
+
+        if (typeof values.lastName === "string") {
+            if(values.lastName === "") {
+                setError("lastName", "Required");
+            } else if (values.firstName.length < 2 || values.firstName.length > 32) {
+                setError("lastName", "Invalid length");
+            } else {
+                setError("lastName", "");
             }
         }
         
         if (typeof values.email === "string") {
-            if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+            if(values.email.length === 0) {
+                setError("email", "Required");
+            } else if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
                 setError("email", "Invalid email");
             } else {
                 setError("email", "");
@@ -70,7 +119,18 @@ function Register() {
                 setError("password", "Incorrect Length");
             }
         }
-      };
+
+        if (typeof values.school === "string") {
+            if(values.school.length > 0) {
+                setError("school", "");
+            } else {
+                setError("school", "Please choose a school");
+            }
+        }
+    };
+
+    validate(user);
+    errorsClear() ? showSubmit("true") : showSubmit("false");
 
     return (
         <Form onSubmit={submitHandler}>
@@ -90,7 +150,7 @@ function Register() {
                     </Col>
                 </Form.Row>
                 <Form.Text className="text-muted">
-                    This is the name your peers will see for your book listings.
+                    This is the name your peers will see for your book listings. <span style={{color: "red"}}>{errors.firstName}</span>
                 </Form.Text>
             </Form.Group>
 
@@ -112,18 +172,12 @@ function Register() {
             <Form.Group controlId="school">
                 <Form.Label>School</Form.Label>
                 <Form.Control type="school" placeholder="Search for your school" value={user.school} onChange={onChangeHandler} />
+                <Form.Text className="text-muted">This is where you expect to be buying and selling books. <span style={{color: "red"}}>{errors.school}</span></Form.Text>
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button id = "reg-submit-button" variant="primary" type="submit" disabled>
                 Submit
             </Button>
         </Form>
-        // <div key="divKey">
-        //     <form onSubmit={submitHandler} key="formkey">
-        //         First Name:<input type="text" name="firstName" value={user.firstName} onChange={onChangeHandler}/>
-        //         Last Name:<TextInput name="lastName" value={user.lastName} onChange={onChangeHandler}/>
-        //         Password: <TextInput name="password" value={user.password} onChange={onChangeHandler}/>
-        //     </form>
-        // </div>
     );
 }
 

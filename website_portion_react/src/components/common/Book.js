@@ -5,14 +5,22 @@ import UserContext from '../user/UserContext';
 
 
 //the book item will recieve the information from the database as props.bookInfo
+//props: bookInfo = {title, author, edition, id, amount}
+//       clickable = "true" : book will link to search, DEFAULT is FALSE
+
 function Book(props) {
 
     const history = useHistory();
     const bookInfo = props.bookInfo;
     const userInfo = useContext(UserContext);
 
-    //redirects user to book search page with bookID as the 
-    const linkHandler = (bookId) => history.push("/book-search/?book-Id=" + bookId + "&school-Id=" + userInfo.schoolId);
+    var linkHandler;
+    if(props.clickable === "true") {
+        //redirects user to book search page with bookID and schoolID in saerch criteria
+        linkHandler = (bookId) => history.push("/book-search?bookId=" + bookId + "&schoolId=" + userInfo.schoolId);
+    } else {
+        linkHandler = () => (0)
+    }
 
     let idMessage = "";
     if(bookInfo.id.length < 10 || bookInfo.idIsCustom) {

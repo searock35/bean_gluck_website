@@ -82,6 +82,21 @@ class Auth {
         cb(getDefaultUser);
     }
 
+    register(cb) {
+        //call to API to create a new user, with a return to make sure the registration info is valid.
+        //in the future, use API to figure out if user is successfully created then return true. Else, return false.
+        var didPass = true;
+
+        if(didPass) {
+            console.log("registered");
+            this.authToken = "01220420";
+            cookiesAPI.setAuthTokenInCookies(this.authToken);
+            cb(this.testUser);
+        } else {
+            return didPass;
+        }
+    }
+
     //Check to see if user is still authenticated, using server API in the future.
     isAuth() {
         //in future, verify that authToken is valid using userID and authtoken to server API
