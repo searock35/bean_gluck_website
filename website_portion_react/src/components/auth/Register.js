@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Form, Col, Button } from "react-bootstrap";
-import { useHistory } from 'react-router-dom';
-import auth from './authAPI';
-import UserContext from '../user/UserContext';
+import { useHistory, Redirect } from 'react-router-dom';
+import authAPI from '../../tools/api/authAPI';
+import UserContext from '../../tools/react/UserContext';
+import getDefaultUser from '../../tools/getDefaultUser';
 
 function Register() {
 
@@ -25,9 +26,6 @@ function Register() {
         school: "Required"
     };
 
-
-
-
     const submitHandler = (e) => {
         e.preventDefault();
         var success = true;
@@ -37,7 +35,7 @@ function Register() {
                 currentUser.changeUserContext(newUser);
                 history.push('/');
             }
-            success = auth.register(regCb);
+            success = authAPI.register(regCb);
             if(success === false) {
                 console.log("bad reg");
             }
@@ -131,6 +129,15 @@ function Register() {
 
     validate(user);
     errorsClear() ? showSubmit("true") : showSubmit("false");
+
+    //if user is logged in, redirect them away from this page
+    if(authAPI.isAuth()) {
+        if (currentUser.email === getDefaultUser().email) {
+        //for this case, usertoken is enabled but User is not actually logged in on client. This should never happen.
+        authAPI.logout();
+        } else {
+            return <Redirect to="/" />
+    }}
 
     return (
         <Form onSubmit={submitHandler}>

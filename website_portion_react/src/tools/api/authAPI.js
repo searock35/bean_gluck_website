@@ -1,4 +1,4 @@
-import getDefaultUser from "../common/getDefaultUser";
+import getDefaultUser from "../getDefaultUser";
 import cookiesAPI from "./cookiesAPI";
 
 

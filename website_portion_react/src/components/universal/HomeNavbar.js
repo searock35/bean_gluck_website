@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import auth from '../auth/authAPI';
-import UserContext from '../user/UserContext';
+import auth from '../../tools/api/authAPI';
+import UserContext from '../../tools/react/UserContext';
 
 
 //Helper function that returns correct user links for whether the user is logged in or logged out

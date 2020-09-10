@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, useHistory, useRouteMatch } from 'react-router-dom';
-import auth from './authAPI';
+import auth from '../api/authAPI';
 
 
 function ProtectedRoute({children, ...rest}) {

@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 //Tools
-import { Switch, Redirect, useRouteMatch, useParams } from 'react-router-dom';
-import ProtectedRoute from '../auth/ProtectedRoute';
-import UserContext from './UserContext';
+import { Route, Switch, Redirect, useRouteMatch, useParams } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
+import UserContext from '../react/UserContext';
 //Components
-import UserListings from './UserListings';
-import Dashboard from './Dashboard';
-import EditUserProfile from'./EditUserProfile';
-import Unauthorized from './Unauthorized';
+import UserListings from '../../components/user/UserListings';
+import Dashboard from '../../components/user/Dashboard';
+import EditUserProfile from'../../components/user/EditUserProfile';
+import Unauthorized from '../../components/user/Unauthorized';
 
 
 //This route will be used for all locations starting with ./user/:username, and will redirect accordingly.
@@ -16,21 +16,11 @@ function UserRouter() {
 
     const currentUser = useContext(UserContext);
 
-    let { path, url } = useRouteMatch();
+    let { url } = useRouteMatch();
     
     const { username } = useParams();
 
-    console.log(path, username);
-
-
-    if(currentUser.isAuth) {
-        
-        if(username==="unauthorized") return (<Unauthorized/>)
-
-        if(username !== currentUser.username) return (<Redirect to="/user/unauthorized"/>)
-        
-    }
-
+    if(username !== currentUser.username) return (<Redirect to="/user/unauthorized"/>)
     
     return (
         
@@ -46,6 +36,8 @@ function UserRouter() {
             <ProtectedRoute exact path={url}>
                 <Dashboard/>
             </ProtectedRoute>
+
+            <Route path="/user/unauthorized" component={Unauthorized} />
 
         </Switch>
     )

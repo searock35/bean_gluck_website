@@ -8,18 +8,18 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 //Components
-import HomeNavbar from './components/common/HomeNavbar';
-import Footer from './components/common/Footer';
+import HomeNavbar from './components/universal/HomeNavbar';
+import Footer from './components/universal/Footer';
 import Home from './components/home/Home';
-import UserRouter from './components/user/UserRouter';
-import ProtectedRoute from './components/auth/ProtectedRoute';
+import UserRouter from './tools/router/UserRouter';
+import ProtectedRoute from './tools/router/ProtectedRoute';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import Donate from './components/donate/Donate';
-import BookResults from './components/search/BookResults';
-import UserContext from './components/user/UserContext';
-import Error from './components/common/Error';
-import authAPI from './components/auth/authAPI';
+import Donate from './components/static/Donate';
+import BookResults from './components/search/ListingsResults';
+import UserContext from './tools/react/UserContext';
+import Error from './components/static/Error';
+import authAPI from './tools/api/authAPI';
 //import TestComponent from './TestComponent';
 
 function App() {

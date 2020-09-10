@@ -1,0 +1,90 @@
+import React, { useContext, useState } from 'react';
+import { Button, Form, Alert } from 'react-bootstrap';
+import listingRequestAPI from '../../../tools/api/listingRequestAPI';
+import UserContext from '../../../tools/react/UserContext';
+
+const SuccessAlert = (props) => {
+    let variant = "warning";
+    let string = "An error occurred, no response from request API";
+    if(props.success === "true") {
+        variant = "success";
+        string = "Listing request successful!";
+    } else if (props.success === "false") {
+        variant = "warning";
+        string = "Listing request failed. Refresh the page and try again in a minute. If that fails, try another browser."
+    }
+
+    if(typeof props.success === "string") {
+        return <Alert variant={variant}>{string}</Alert>
+    } else {
+        return null;
+    }
+
+}
+
+const Listing = (props) => {
+
+    const currentUser = useContext(UserContext);
+    const placeHolderText = "Ask for availability, add any stipulations, etc.";
+
+    const [success, setSuccess] = useState();
+    const [buyOrRent, setBuyOrRent] = useState("buy");
+    const [message, setMessage] = useState()
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        console.log(e.target);
+        setSuccess(listingRequestAPI.requestListing( {action: buyOrRent, message: "I'd like this book sir", userId: currentUser.userId} ));
+    }
+
+    const messageChangeHandler = (e) => {
+        e.preventDefault();
+        setMessage(e.target.value);
+    }
+
+    const radioHandler = (e) => {
+        const { id } = e.target;
+        setBuyOrRent(id);
+    }
+
+    if(props.length < 3) return <ul>Listing Error</ul>
+
+    console.log(buyOrRent);
+
+    return (
+        <div>
+            <SuccessAlert success={success}></SuccessAlert>
+            <ul className="search-listing">
+                <li className="name">
+                    Name: {props.firstName} {props.lastName}
+                </li>
+                <li className="condition">
+                    Condition: {props.condition}
+                </li>
+                <li className="rental-price">
+                    Rental Price: {props.rentalPrice}
+                </li>
+                <li className="selling-price">
+                    Selling Price: {props.sellingPrice}
+                </li>
+                <li className="form">
+                    <Form onSubmit={submitHandler}>
+                        <Form.Group controlId="request.message">
+                            <Form.Label>Message (optional):</Form.Label>
+                            <Form.Control as="textarea" rows="2" placeholder={placeHolderText} value={message} onChange={messageChangeHandler}/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Check inline label="Rent" type="radio" id="rent" name="buyOrSell" checked={buyOrRent==="rent"} onChange={radioHandler} />
+                            <Form.Check inline label="Buy" type="radio" id="buy"name="buyOrSell" checked={buyOrRent==="buy"} onChange={radioHandler}/>
+                            <Button id={props.listingId} variant="primary" type="submit">
+                                Request
+                            </Button>
+                        </Form.Group>
+                    </Form>
+                </li>
+            </ul>
+        </div>
+    );
+}
+
+export default Listing;

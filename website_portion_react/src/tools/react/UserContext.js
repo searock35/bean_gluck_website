@@ -1,5 +1,5 @@
 import {createContext} from 'react';
-import getDefaultUser from '../common/getDefaultUser';
+import getDefaultUser from '../getDefaultUser';
 
 
 const UserContext = createContext({
