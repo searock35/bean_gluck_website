@@ -5,7 +5,7 @@ import ProtectedRoute from './ProtectedRoute';
 import UserContext from '../react/UserContext';
 //Components
 import UserListings from '../../components/user/UserListings';
-import Dashboard from '../../components/user/Dashboard';
+import Dashboard from '../../components/user/dashboard/Dashboard';
 import EditUserProfile from'../../components/user/EditUserProfile';
 import Unauthorized from '../../components/user/Unauthorized';
 

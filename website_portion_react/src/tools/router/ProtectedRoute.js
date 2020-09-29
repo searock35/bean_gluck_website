@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, useHistory, useRouteMatch } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import auth from '../api/authAPI';
 
 
@@ -7,9 +7,6 @@ function ProtectedRoute({children, ...rest}) {
 
     const history = useHistory();
 
-    let match = useRouteMatch();
-
-    console.log(match.params.username);
 
     if(auth.isAuth) { 
         return (

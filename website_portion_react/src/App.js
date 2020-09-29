@@ -20,6 +20,7 @@ import BookResults from './components/search/ListingsResults';
 import UserContext from './tools/react/UserContext';
 import Error from './components/static/Error';
 import authAPI from './tools/api/authAPI';
+import { Container } from 'react-bootstrap';
 //import TestComponent from './TestComponent';
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
         changeUserContext: (newUser) => setUserState(newUser)
       }}>
 
-        <div className="container-md">
+        <Container fluid>
           <HomeNavbar />
           <Switch>
             <Route path="/" exact component={Home} />
@@ -46,7 +47,7 @@ function App() {
           </Switch>
 
           <Footer />
-        </div>
+        </Container>
 
       </UserContext.Provider>
     </Router>

@@ -1,0 +1,33 @@
+.user-lists {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    font-size: 25px;
+}
+
+.user-lists .requests-box {
+    width: 40%;
+    border: solid;
+}
+
+.user-lists .listings-box {
+    width: 40%;
+    border: solid;
+}
+
+.user-lists .requests-box h1{
+    margin: 10px;
+}
+
+.user-lists .listings-box h1{
+    margin: 10px;
+}
+
+.page-heading {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 30px;
+}
+

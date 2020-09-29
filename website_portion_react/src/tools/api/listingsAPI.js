@@ -13,6 +13,11 @@ class listingsAPI {
             {firstName: "John", lastName: "Lennon", condition: "OK", rentalPrice: "20$", sellingPrice: "30$", listingId: "4"},
             {firstName: "Sally", lastName: "Bridgewell", condition: "Brand New", rentalPrice: "50$", sellingPrice: "90$", listingId: "5"},
         ]
+
+        this.testUserListings = [
+            {title: "Bridge to nowhere", bookId: "8", condition: "Good", rentalPrice: "20", sellingPrice: "30", listingId: "1", requests: "2"},
+            {title: "Ender's Legal Fees", bookId: "812", condition: "Terrible", rentalPrice: "5", sellingPrice: "12", listingId: "2", requests: "4"}
+        ]
     }
 
     getSchoolListings(bookId, userId) {
@@ -23,6 +28,10 @@ class listingsAPI {
     getLocalListings(bookId, userId) {
 
         return(this.testListingsSchool)
+    }
+
+    getListingsByUser(userId) {
+        return(this.testUserListings)
     }
 }
 

@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
-import UserContext from '../../tools/react/UserContext';
+import React from 'react';
+import "./Footer.css"
 
 function Footer () {
-    const userContext = useContext(UserContext);
     return(
-        <div className="container">
+        <div className="universal-footer">
             <footer>
-                Created by Jared Gluck and Corey Bean, {userContext.username}
+                Created by Jared Gluck and Corey Bean
             </footer>
         </div>
 
