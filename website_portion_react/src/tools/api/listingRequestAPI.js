@@ -14,6 +14,8 @@ class listingRequestAPI {
             return("false");
         }
 
+        console.log(requestInfo);
+
         //for now, return true for a success and false for a failure
         return("true");
     }

@@ -9,9 +9,11 @@ const SuccessAlert = (props) => {
     if(props.success === "true") {
         variant = "success";
         string = "Listing request successful!";
-    } else if (props.success === "false") {
+    } else if (props.success === "authError") {
         variant = "warning";
-        string = "Listing request failed. Refresh the page and try again in a minute. If that fails, try another browser."
+        string = "Listing request failed. You need to be logged in to request a listing; login or register using the navbar above."
+    } else {
+        string = "Refresh the page and try again in a minute. If that fails, try another browser."
     }
 
     if(typeof props.success === "string") {
@@ -34,7 +36,12 @@ const Listing = (props) => {
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(e.target);
-        setSuccess(listingRequestAPI.requestListing( {action: buyOrRent, message: "I'd like this book sir", userId: currentUser.userId} ));
+        if(currentUser.userId === "0") {
+            setSuccess("authError");
+            console.log("Auth Error");
+        } else {
+            setSuccess(listingRequestAPI.requestListing( {action: buyOrRent, message: message, userId: currentUser.userId} ));
+        }
     }
 
     const messageChangeHandler = (e) => {
@@ -48,8 +55,6 @@ const Listing = (props) => {
     }
 
     if(props.length < 3) return <ul>Listing Error</ul>
-
-    console.log(buyOrRent);
 
     return (
         <div>
