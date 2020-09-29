@@ -19,7 +19,6 @@ const BookResults = () => {
     const LocalListings = () => {
         const books = listingsAPI.getLocalListings(bookId, "1");
         const bookList = books.map((value) => (<li key={value.listingId}><Listing {...value} /></li>));
-        console.log(bookList);
         
         return (<ul className="local-listings">
             {bookList}

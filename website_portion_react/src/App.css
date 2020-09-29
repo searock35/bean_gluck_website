@@ -36,12 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-footer {
-  background-color: lightslategray;
-  bottom: 0;
-  font-size: 20px;
-  height: 5rem;
-  position: absolute;
-  text-align: center;
-}
