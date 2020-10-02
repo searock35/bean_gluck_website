@@ -8,6 +8,11 @@
 - IsAuth: given JWT token, verify that the token has not expired yet and return true/false
 - Register: given registration information (firstName, lastName, email, password (len 8 -32), school) register user in database, return JWT token
 
+# Future Ideas
+- Add Facebook interfacing for messaging and posting new listings to Messiah Bookstore (needed to ease facebook users over onto site)
+- Add login through Facebook for same reason
+- Flesh out Authentication system, figure out how admins work / etc.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
