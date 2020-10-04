@@ -20,8 +20,11 @@ function UserRouter() {
     
     const { username } = useParams();
 
-    if(username !== currentUser.username) return (<Redirect to="/user/unauthorized"/>)
-    
+    if(username !== currentUser.username) {
+        console.log(username);
+        return (<Redirect to="/user/unauthorized"/>)
+    }
+
     return (
         
         <Switch>

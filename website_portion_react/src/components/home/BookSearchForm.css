@@ -1,0 +1,67 @@
+.bookDropDown {
+    background-color: black;
+    color: rgb(0, 0, 0);
+    font-family: Arial;
+    height: 200px;
+    margin: 0px;
+    overflow: scroll;
+    padding: 30px;
+    padding-top: 1px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.bookDropDown::-webkit-scrollbar {
+    display: none;
+}
+
+.bookDropDown {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.bookDropDown ul {
+    margin: 0px;
+    padding-left:0px;
+    margin: 5px 7px;
+}
+
+.bookDropDown ul li ul {
+    background-color: white;
+    border: solid;
+    border-color: gray;
+    margin: 0px;
+    margin-bottom: 10px;
+    padding-left:30px;
+}
+
+.bookDropDown ul li ul:hover {
+    background-color: gray;
+}
+
+.book-search-bar {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    height: 300px;
+}
+
+#mainSearch {
+    font-size: 50px;
+    height: 2em;
+}
+
+.school-selector {
+    margin: 10px;
+}
+
+.search-options {
+    margin: auto;
+    color: blue;
+    text-align: center;
+}
+
+.search-options #form-submission {
+    margin: 10px;
+    height: 3em;
+    width: 10em;
+}

@@ -7,13 +7,14 @@ import listingsAPI from '../../../tools/api/listingsAPI';
 import listingRequestAPI from '../../../tools/api/listingRequestAPI';
 import Listing from './components/Listing';
 import OutgoingRequest from './components/OutgoingRequest';
+import { useHistory } from 'react-router-dom';
 
 
 function ListingsBox(props) {
     const data = listingsAPI.getListingsByUser(props.userId)
     const userListings = data.map((value) => (<li key={value.listingId}><Listing {...value} /></li>));
     return(
-        <div className="listings-box">
+        <div className="scroll-containers listings-box">
             <h1>My Listings</h1>
             <ul>
                 {userListings}
@@ -27,7 +28,7 @@ function RequestsBox(props) {
     const userRequests = data.map((value) => (<li key={value.requestId}><OutgoingRequest {...value} /></li>));
 
     return(
-        <div className="requests-box">
+        <div className="scroll-containers requests-box">
             <h1>Outgoing Requests</h1>
             <ul>
                 {userRequests}
@@ -37,8 +38,9 @@ function RequestsBox(props) {
 }
 
 function UserInfo() {
+    const history = useHistory();
     const userInfo = UserInfoAPI.getUserInfo();
-    
+    const editRedirect = () => history.push("./" + userInfo.username + "/edit");
 
     return(
         <div className="user-info">
@@ -46,7 +48,7 @@ function UserInfo() {
                 <li>Name: {userInfo.firstName} {userInfo.lastName}</li>
                 <li>Major: {userInfo.major}</li>
                 <li>Graduating Year: {userInfo.gradYear}</li>
-                <li>Home City: {userInfo.homeCity} <Button href={"./" + userInfo.username + "/edit"}>Edit</Button></li>
+                <li>Home City: {userInfo.homeCity} <Button onClick={editRedirect}>Edit</Button></li>
             
             </ul>
         </div>

@@ -21,9 +21,6 @@ class BooksAPI {
     //NEEDS API IMPLEMENTATION
     getAutoComplete(searchString) {
 
-        console.log("search string", searchString);
-
-
         if(searchString==='') return [];
         return this.booksArray;
     }
