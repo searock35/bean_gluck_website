@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
 //API's
-import BooksAPI from '../../tools/api/booksAPI';
 //Components
 import Book from '../pieces/Book';
+
+import axios from 'axios'
 
 import "./BookSearchForm.css";
 
 const defaultSearchString = 'Enter book ISBN, Title, Author';
+const restURL = 'http://localhost:8080'
 
 function BookDropDown(props) {
 
     const allBooks = props.books.map( (book) => 
-    <li className="book-drop-down-entry" key={book.id}>
+    <li className="book-drop-down-entry" key={book.isbn}>
         <Book bookInfo={book} clickable="true" />
     </li>
     )
-    console.log(props.searchString)
+
     if(props.searchString === "" || props.searchString === defaultSearchString) {
         console.log("empty");
         return null;
@@ -40,9 +42,27 @@ function BookSearchForm(props) {
         
     function onChangeSearchText(e) {
         setSearchText(e.target.value);
+        console.log(e.target.value)
+
+        if(e.target.value==='') {
+            setBookList([])
+            console.log("I HAVE RETURNED")
+            return;
+        };
+
+        axios.get(restURL + '/search?search_string=' + e.target.value)
+        
+            .then( (response) => {
+                console.log('adjusting ret value', response.data[0])
+                setBookList(response.data);
+
+            }, 
+            (error) => {
+                console.log(error);
+                setBookList([]);
+            });
 
         //sets state of book list from result by Books API
-        setBookList(BooksAPI.getAutoComplete(e.target.value));
     }
 
     return (
