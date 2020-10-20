@@ -1,0 +1,21 @@
+
+.edit-page-container {
+    display: flex;
+}
+.edit-profile-form {
+    border: solid;
+    border-color: rgb(212, 208, 208);
+    border-radius: 5px;
+    margin: 50px;
+    padding: 20px;
+    width: 50%;
+}
+
+.profile-preview {
+    border: solid;
+    border-color: rgb(212, 208, 208);
+    border-radius: 5px;
+    margin: 50px;
+    padding: 20px;
+    width: 50%;
+}

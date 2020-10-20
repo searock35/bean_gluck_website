@@ -1,10 +1,29 @@
 import React, { useState, useContext } from 'react';
 import authAPI from '../../tools/api/authAPI';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Alert } from 'react-bootstrap';
 import { Redirect, useHistory } from 'react-router-dom';
 import UserContext from '../../tools/react/UserContext';
 import getDefaultUser from '../../tools/getDefaultUser';
 
+
+const SuccessAlert = (props) => {
+    let variant = "warning";
+    let string = ""
+    if(props.success === "success") {
+        variant = "success";
+        string = "Listing request successful!";
+    } else if (props.success === "badCred") {
+        variant = "warning";
+        string = "Invalid username and/or password."
+    }
+
+    if(typeof props.success === "string") {
+        return <Alert variant={variant}>{string}</Alert>
+    } else {
+        return null;
+    }
+
+}
 
 function Login(props) {
     const [fields, setFields] = useState({
@@ -12,12 +31,15 @@ function Login(props) {
         password: "",
     });
 
+    const [loginState, setLoginState] = useState()
+
     const history = useHistory();
     const currentUser = useContext(UserContext);
 
-    function loginCb(newUser) {
+    function loginCb(newUser, returnString) {
+        setLoginState(returnString);
         currentUser.changeUserContext(newUser);
-        history.goBack();
+        if(returnString === "success") history.goBack();
     }
 
     function handleLoginEvent(e) {
@@ -32,6 +54,9 @@ function Login(props) {
             [id]: value
         })
     }
+
+
+    
 
     if(authAPI.isAuth()) {
         if (currentUser.email === getDefaultUser().email) {
@@ -62,6 +87,9 @@ function Login(props) {
             <Button variant="primary" type="submit">
                 Login
             </Button>
+            <SuccessAlert success={loginState}>
+                Success!
+            </SuccessAlert>
         </Form>
     )   
 }

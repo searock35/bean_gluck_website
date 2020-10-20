@@ -1,3 +1,5 @@
+import axios from 'axios'
+import restURL from './restURL'
 
 //API class that will manage book search engine. Will recieve the current search entry as
 //input and return the list of matches.
@@ -20,12 +22,19 @@ class BooksAPI {
     
     //NEEDS API IMPLEMENTATION
     getAutoComplete(searchString) {
+        if(searchString==='') return;
 
-        console.log("search string", searchString);
+        axios.get(restURL + '/search?search_string=' + searchString)
+        
+            .then( (response) => {
+                console.log('adjusting ret value', response.data[0])
+                return(this.booksArray);
 
-
-        if(searchString==='') return [];
-        return this.booksArray;
+            }, 
+            (error) => {
+                console.log(error);
+                return(this.booksArray)
+            });
     }
 
     //NEEDS API IMPLEMENTATION.

@@ -48,9 +48,10 @@ class Auth {
     }
 
     //Login will send new user through the callback function
+    //returns database success string
     login(cb, email, password) {
         //send api username and password to recieve auth token
-
+        let return_string = "Success"
         if(email==="searock35@gmail.com" && password==="coocie343") {
             console.log("Passed")
 
@@ -60,12 +61,13 @@ class Auth {
             cookiesAPI.setAuthTokenInCookies(this.authToken);
 
             //TODO: Return actual user
-            cb(this.testUser);
+            cb(this.testUser, return_string);
 
         } else {
             this.isAuthenticated=false;
             console.log("Incorrect username and password");
-            cb(getDefaultUser());
+            return_string=("badCred");
+            cb(getDefaultUser(), return_string);
         }
  
     }

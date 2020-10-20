@@ -23,10 +23,10 @@ function Book(props) {
     }
 
     let idMessage = "";
-    if(bookInfo.id.length < 10 || bookInfo.idIsCustom) {
-        idMessage = "ID: " + bookInfo.id;
+    if(bookInfo.isbn.length < 10 || bookInfo.idIsCustom) {
+        idMessage = "ID: " + bookInfo.isbn;
     } else {
-        idMessage = "ISBN: " + bookInfo.id;
+        idMessage = "ISBN: " + bookInfo.isbn;
     }
 
     let amountMessage = "Listings: ";
@@ -34,7 +34,7 @@ function Book(props) {
     else amountMessage+="None";
     
     return (
-    <ul className="book-info" onClick={() => linkHandler(bookInfo.id)}>
+    <ul className="book-info" onClick={() => linkHandler(bookInfo.isbn)}>
         <li className="book-title">Title: {bookInfo.title}</li>
         <li className="book-edition">Edition: {bookInfo.edition}</li>
         <li className="book-author">Book Author: {bookInfo.author}</li>

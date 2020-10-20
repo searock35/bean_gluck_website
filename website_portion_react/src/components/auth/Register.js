@@ -140,7 +140,7 @@ function Register() {
     }}
 
     return (
-        <Form onSubmit={submitHandler}>
+        <Form noValidate onSubmit={submitHandler}>
             <h1>User Registration</h1>
             <Form.Group controlId="fullName">
                 <Form.Label>Name</Form.Label>

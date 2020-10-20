@@ -6,14 +6,20 @@
     font-size: 25px;
 }
 
-.user-lists .requests-box {
-    width: 40%;
+.scroll-containers {
     border: solid;
+    height: 500px;
+    overflow: scroll;
+    width: 40%;
 }
 
-.user-lists .listings-box {
-    width: 40%;
-    border: solid;
+.scroll-containers::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-containers {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .user-lists .requests-box h1{
