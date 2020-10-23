@@ -15,3 +15,10 @@ urlpatterns = [
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
+
+from rest_framework.authtoken import views
+
+urlpatterns += [
+    path('api-token-auth/', views.obtain_auth_token)
+]
+
