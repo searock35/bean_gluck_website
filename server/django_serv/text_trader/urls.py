@@ -11,6 +11,12 @@ urlpatterns = [
     path('api/listings/<int:pk>/', views.ListingDetail.as_view(), name='listing-detail'),
     path('api/requests/', views.ListingRequestList.as_view(), name='request-list'),
     path('api/requests/<int:pk>/', views.ListingRequestDetail.as_view(), name='request-detail'),
+    path('api/localities/', views.LocalityList.as_view(), name='locality-list'),
+    path('api/localities/<int:pk>/', views.LocalityDetail.as_view(), name='locality-detail'),
+    path('api/schools/', views.SchoolList.as_view(), name='school-list'),
+    path('api/schools/<int:pk>/', views.SchoolDetail.as_view(), name='school-detail'),
+    path('api/authors/', views.AuthorList.as_view(), name='author-list'),
+    path('api/authors/<int:pk>', views.AuthorDetail.as_view(), name='author-detail'),
     path('api/', views.api_root),
 ]
 

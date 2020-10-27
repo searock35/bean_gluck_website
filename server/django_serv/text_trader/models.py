@@ -24,13 +24,25 @@ class UserCustomer(models.Model):
     major = models.ManyToManyField('Major')
 
 class Book(models.Model):
-
+    # A title for the book, a string
     title = models.CharField(max_length=50, help_text="Enter the book's title")
+
+    #The book's isbn. Not necessary only if there is no ISBN. Book needs either ISBN or is_custom is true.
     isbn = models.CharField(max_length=13, help_text="Enter the 13 number ISBN, if applicable", blank=True, null=True)
+
+    #Sets whether the book has an ISBN. Used to enable users to add custom binder pages/class packets
     is_custom = models.BooleanField(default=False)
-    author = models.CharField(max_length=40, help_text="Enter author name, if applicable (just one)")
-    edition = models.PositiveSmallIntegerField(help_text="Enter edition number")
-    description = models.CharField(max_length= 200, blank=True, null=True)
+
+    #The author(s) of the book 
+    author = models.ManyToManyField('Author')
+
+    #The edition of the book, can be null
+    edition = models.PositiveSmallIntegerField(help_text="Enter edition number", null=True)
+
+    #An optional description for the book.
+    description = models.CharField(max_length=200, null=True)
+
+    #Not sure if needed, but keeps track of who added the book. Not needed.
     creator_id = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True)
 
     def save(self, *args, **kwargs):
@@ -42,6 +54,16 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+class Author(models.Model):
+    #first name for the author
+    first_name = models.CharField(max_length=25)
+
+    #last name for author
+    last_name = models.CharField(max_length=25)
+
+    #Not sure if needed, but keeps track of who added the book. Not needed.
+    creator_id = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True)
+
 class Locality(models.Model):
     #A locality references a city, state and zip code
 
@@ -51,7 +73,7 @@ class Locality(models.Model):
     state = models.CharField(max_length = 2, choices=US_STATES, null=False)
 
     #The zip code, can be standard 5 digit or custom 9 digit
-    zip = models.CharField(max_length = 10, null=False)
+    zip_code = models.CharField(max_length = 10, null=False)
 
 class School(models.Model):
     #A school is a university where sales and purchases will be made.
@@ -129,6 +151,22 @@ class Major(models.Model):
     major_name = models.CharField(max_length=25, null=False)
 
 class Transaction(models.Model):
+    #the corresponding listing request this transaction fulfills.
     listing_request = models.ForeignKey('ListingRequest', on_delete=models.CASCADE)
+
+    #the final cash price of the transaction
     transaction_price = models.FloatField(null=True)
+
+    #the date of the transaction
     date_time = models.DateTimeField(null=True)
+
+    #the location of the transaction (optional)
+    school_location = models.ForeignKey('SchoolLocation', on_delete=models.SET_NULL, null=True)
+
+class SchoolLocation(models.Model):
+    #A short and unique identifier
+    title = models.CharField(max_length=25)
+
+    #A description of the location.
+    description = models.CharField(max_length=150, null=True)
+    

@@ -77,19 +77,25 @@ WSGI_APPLICATION = 'django_serv.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'CLIENT': {
+#             'name': 'test',
+#             'host': "mongodb+srv://searock35:uGZpUZonZHWSS7ig@cluster0.emqsa.mongodb.net/test?retryWrites=true&w=majority",
+#             'username': 'searock35',
+#             'password': 'uGZpUZonZHWSS7ig',
+#             "authMechanism": "SCRAM-SHA-1",
+#         },
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo',
-        'CLIENT': {
-            'name': 'test',
-            'host': "mongodb+srv://searock35:uGZpUZonZHWSS7ig@cluster0.emqsa.mongodb.net/test?retryWrites=true&w=majority",
-            'username': 'searock35',
-            'password': 'uGZpUZonZHWSS7ig',
-            "authMechanism": "SCRAM-SHA-1",
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
