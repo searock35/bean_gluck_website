@@ -16,16 +16,16 @@ const BookResults = () => {
 
     const bookId = query.get("bookId");
     
-    const LocalListings = () => {
-        const books = listingsAPI.getLocalListings(bookId, "1");
-        const bookList = books.map((value) => (<li key={value.listingId}><Listing {...value} /></li>));
-        
-        return (<ul className="local-listings">
-            {bookList}
-        </ul>);
-    }
+        const LocalListings = () => {
+            const books = listingsAPI.getLocalListings(bookId, "1");
+            const bookList = books.map((value) => (<li key={value.listingId}><Listing {...value} /></li>));
+            
+            return (<ul className="local-listings">
+                {bookList}
+            </ul>);
+        }
 
-    return (
+    return (//Adding BS text
         <div>
             <div className="listings-book-header">
                 <h1>Listings for: </h1>
