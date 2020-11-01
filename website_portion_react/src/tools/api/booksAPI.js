@@ -11,15 +11,19 @@ class BooksAPI {
     //TEMPORARY PLACEHOLDER FOR API IMPLEMENTATION
     constructor() {
         this.booksArray = [
-            { title: "Madagascar Unlimited", author: "Randall", edition: "8th", id: "1" },
-            { title: "Django Unhinged", author: "Corey", edition: "8th", id: "2", amount: 5},
-            { title: "Django 2", author: "Corey", edition: "8th", id: "3" },
-            { title: "Esperanza Rising", author: "Mr. Horning", edition: "8th", id: "4" },
-            { title: "Hunger Games", author: "JK Rowling", edition: "8th", id: "5" },
-            { title: "Kryptonite Sucks", author: "Superman", edition: "8th", id: "6" },
+            { title: "Madagascar Unlimited", author: "Randall", edition: "8th", id: "1", isbn: "1" },
+            { title: "Django Unhinged", author: "Corey", edition: "8th", id: "2", amount: 5, isbn: "2"},
+            { title: "Django 2", author: "Corey", edition: "8th", id: "3", isbn: "3" },
+            { title: "Esperanza Rising", author: "Mr. Horning", edition: "8th", id: "4", isbn: "4"},
+            { title: "Hunger Games", author: "JK Rowling", edition: "8th", id: "5", isbn: "5" },
+            { title: "Kryptonite Sucks", author: "Superman", edition: "8th", id: "6", isbn: "6" },
         ]
     }
-    
+
+    getTestArray() {
+        return(this.booksArray);
+    } 
+
     //NEEDS API IMPLEMENTATION
     getAutoComplete(searchString) {
         if(searchString==='') return;

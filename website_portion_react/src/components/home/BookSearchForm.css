@@ -5,7 +5,7 @@
     height: 200px;
     margin: 0px;
     overflow: scroll;
-    padding: 30px;
+    padding: 1px;
     padding-top: 1px;
     padding-left: 0px;
     padding-right: 0px;
@@ -21,7 +21,6 @@
 }
 
 .bookDropDown ul {
-    margin: 0px;
     padding-left:0px;
     margin: 5px 7px;
 }
@@ -33,6 +32,20 @@
     margin: 0px;
     margin-bottom: 10px;
     padding-left:30px;
+}
+
+.bookDropDown .new-book-creator {
+    font-size:20px;
+    background-color: white;
+    border: solid;
+    border-color: gray;
+    margin: auto;
+    display: flex;
+    height: 100px;
+}
+
+.bookDropDown .new-book-creator:hover {
+    background-color: gray;
 }
 
 .bookDropDown ul li ul:hover {

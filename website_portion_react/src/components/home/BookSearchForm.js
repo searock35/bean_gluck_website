@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Book from '../pieces/Book';
 
 import axios from 'axios'
-
+import BooksAPI from '../../tools/api/booksAPI'
 import "./BookSearchForm.css";
 
 const defaultSearchString = 'Enter book ISBN, Title, Author';
@@ -18,13 +18,20 @@ function BookDropDown(props) {
     </li>
     )
 
+    const createBook = () => console.log("Going to book creation page");
+
     if(props.searchString === "" || props.searchString === defaultSearchString) {
         console.log("empty");
         return null;
     }
     return(
         <div className="form-group bookDropDown">
-            <ul>{allBooks}</ul>
+            <ul>
+                {allBooks}
+                <li className='new-book-creator' onClick={createBook}>
+                    Create a new listing.
+                </li> 
+            </ul>
         </div>
     );
 }
@@ -59,7 +66,8 @@ function BookSearchForm(props) {
             }, 
             (error) => {
                 console.log(error);
-                setBookList([]);
+                // setBookList([]);
+                setBookList(BooksAPI.getTestArray());
             });
 
         //sets state of book list from result by Books API
