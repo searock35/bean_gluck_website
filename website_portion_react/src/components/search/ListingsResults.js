@@ -25,7 +25,7 @@ const BookResults = () => {
             </ul>);
         }
 
-    return (//Adding BS text
+    return (    //Adding BS text
         <div>
             <div className="listings-book-header">
                 <h1>Listings for: </h1>

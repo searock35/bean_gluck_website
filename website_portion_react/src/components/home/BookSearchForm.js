@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 //API's
 //Components
 import Book from '../pieces/Book';
@@ -6,6 +6,7 @@ import Book from '../pieces/Book';
 import axios from 'axios'
 import BooksAPI from '../../tools/api/booksAPI'
 import "./BookSearchForm.css";
+import { useHistory } from 'react-router-dom';
 
 const defaultSearchString = 'Enter book ISBN, Title, Author';
 const restURL = 'http://localhost:8080'
@@ -18,10 +19,11 @@ function BookDropDown(props) {
     </li>
     )
 
-    const createBook = () => console.log("Going to book creation page");
+    const history = useHistory();
+    const createBook = () => history.push("/book-create/");
 
     if(props.searchString === "" || props.searchString === defaultSearchString) {
-        console.log("empty");
+        // console.log("empty");
         return null;
     }
     return(
@@ -38,7 +40,6 @@ function BookDropDown(props) {
 
 function BookSearchForm(props) {
 
-    
     const [searchText, setSearchText] = useState(defaultSearchString); 
     const [bookList, setBookList] = useState([]);  
 
@@ -46,32 +47,26 @@ function BookSearchForm(props) {
         console.log("form submitted");
         e.preventDefault();
     }
+
+    useEffect(() => {
+        let isMounted = 1;
+        if (searchText && !(searchText===defaultSearchString)) {
+
+            BooksAPI.getAutoComplete(searchText)
+                .then(books => isMounted && setBookList(books))
+                .catch(err => console.log(err))
+ 
+        } else setBookList([])
+       
+        return (() => isMounted = 0)
+ 
+    }, [searchText])
         
     function onChangeSearchText(e) {
         setSearchText(e.target.value);
-        console.log(e.target.value)
+    };
 
-        if(e.target.value==='') {
-            setBookList([])
-            console.log("I HAVE RETURNED")
-            return;
-        };
-
-        axios.get(restURL + '/search?search_string=' + e.target.value)
-        
-            .then( (response) => {
-                console.log('adjusting ret value', response.data[0])
-                setBookList(response.data);
-
-            }, 
-            (error) => {
-                console.log(error);
-                // setBookList([]);
-                setBookList(BooksAPI.getTestArray());
-            });
-
-        //sets state of book list from result by Books API
-    }
+    
 
     return (
         <form onSubmit={onSearchSubmit}>
@@ -98,9 +93,6 @@ function BookSearchForm(props) {
             </div>
         </form>
     )
-
-
-
 }
 
 export default BookSearchForm;

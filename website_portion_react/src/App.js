@@ -17,6 +17,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Donate from './components/static/Donate';
 import BookResults from './components/search/ListingsResults';
+import NewBookCreator from './components/create/NewBookCreator';
 import UserContext from './tools/react/UserContext';
 import Error from './components/static/Error';
 import authAPI from './tools/api/authAPI';
@@ -36,12 +37,13 @@ function App() {
 
         <Container fluid>
           <HomeNavbar />
-          <Test />
+          {/* <Test /> */}
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/book-search/" component={BookResults} />
+            <Route path="/book-create/" component={NewBookCreator} />
             <Route path="/donate" component={Donate} />
             <ProtectedRoute path="/user/:username/" component={UserRouter} />
             <Route path="/" component={Error} />
