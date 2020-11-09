@@ -37,7 +37,7 @@ function App() {
 
         <Container fluid>
           <HomeNavbar />
-          {/* <Test /> */}
+          <Test />
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/login" component={Login} />
