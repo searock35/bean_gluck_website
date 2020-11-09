@@ -7,6 +7,7 @@ import axios from 'axios'
 import BooksAPI from '../../tools/api/booksAPI'
 import "./BookSearchForm.css";
 import { useHistory } from 'react-router-dom';
+import { Form } from 'react-bootstrap';
 
 const defaultSearchString = 'Enter book ISBN, Title, Author';
 const restURL = 'http://localhost:8080'
@@ -66,8 +67,19 @@ function BookSearchForm(props) {
         setSearchText(e.target.value);
     };
 
-    
+    function SchoolSelectOption() {
 
+        return (
+            <Form.Group controlId="schoolSelect">
+                <Form.Label>Select your school: </Form.Label>
+                <Form.Control as="select">
+                    <option value="messiah">Messiah University</option>
+                    <option value="penn_state">Penn State University</option>
+                </Form.Control>
+            </Form.Group>
+        )
+    }     
+ 
     return (
         <form onSubmit={onSearchSubmit}>
             <div className="form-group book-search-bar">
@@ -82,16 +94,9 @@ function BookSearchForm(props) {
                 />
                 <BookDropDown books={bookList} searchString={searchText}/>
             </div>
-            <div className="form-group search-options">
-                Select your school: 
-                <select name="school_select" className="school-selector">
-                        <option value="messiah">Messiah University</option>
-                        <option value="penn_state">Penn State University</option>
-                    </select>
-                    {/* Include Local Searches <input defaultChecked="checked" name="local" type="checkbox" value="daily" /> <br /> */}
-                <br /><input id="form-submission" type="submit" value="Search" />
-            </div>
-        </form>
+            <SchoolSelectOption />
+            <br /><input id="form-submission" type="submit" value="Search" />
+       </form>
     )
 }
 
