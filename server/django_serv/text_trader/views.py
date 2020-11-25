@@ -44,12 +44,33 @@ class AuthorDetail(generics.RetrieveUpdateDestroyAPIView):
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+# class PurchaseList(generics.ListAPIView):
+#     serializer_class = PurchaseSerializer
+
+#     def get_queryset(self):
+#         """
+#         Optionally restricts the returned purchases to a given user,
+#         by filtering against a `username` query parameter in the URL.
+#         """
+#         queryset = Purchase.objects.all()
+#         username = self.request.query_params.get('username', None)
+#         if username is not None:
+#             queryset = queryset.filter(purchaser__username=username)
+#         return queryset
+
 class ListingList(generics.ListCreateAPIView):
     queryset = models.Listing.objects.all()
     serializer_class = serializers.ListingSerializer
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        queryset = models.Listing.objects.all()
+        schoolId = self.request.query_params.get('schoolId', None)
+        bookId = self.request.query_params.get('bookId', None)
+        user_set = models.UserCustomer.filter(school = schoolId)
+        return models.Listing.objects.filter(book = bookId)
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 

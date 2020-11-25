@@ -1,6 +1,5 @@
 from django.db import models
 import datetime
-from localflavor.us.us_states import US_STATES
 
 class UserCustomer(models.Model):
     #map these additional fields to the auth.user field
@@ -70,7 +69,7 @@ class Locality(models.Model):
     city = models.CharField(max_length = 20, null=False, blank=False)
 
     #The state, etc. PA, CA, ME
-    state = models.CharField(max_length = 2, choices=US_STATES, null=False)
+    state = models.CharField(max_length = 2, null=False)
 
     #The zip code, can be standard 5 digit or custom 9 digit
     zip_code = models.CharField(max_length = 10, null=False)

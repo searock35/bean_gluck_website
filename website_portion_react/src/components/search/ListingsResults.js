@@ -17,7 +17,14 @@ const BookResults = () => {
     const bookId = query.get("bookId");
     
         const LocalListings = () => {
-            const books = listingsAPI.getLocalListings(bookId, "1");
+            let books;
+            listingsAPI.getLocalListings(bookId, "1")
+                            .then(returned_book => books = returned_book)
+                            .catch(error => {
+                                console.log(error)
+                                books = []
+                            })
+
             const bookList = books.map((value) => (<li key={value.listingId}><Listing {...value} /></li>));
             
             return (<ul className="local-listings">

@@ -1,6 +1,0 @@
-{
-    "python.pythonPath": "/home/searock35/.virtualenvs/text_trader_project/bin/python",
-    "python.linting.pylintArgs": [
-        "--load-plugins=pylint_django"
-    ]
-}

@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'text_trader',
-    'localflavor',
+    'text_trader'
 ]
 
 MIDDLEWARE = [
@@ -92,8 +91,14 @@ WSGI_APPLICATION = 'django_serv.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'book_site',
+        'HOST': '', #localhost
+        'PORT': '3306',
+        'USER': 'root',
+        'PASSWORD': 'TurfM3l@nun562'
+        
+
     }
 }
 

@@ -49,7 +49,7 @@ function App() {
             <Route path="/" component={Error} />
           </Switch>
 
-          <Footer />
+          {/* <Footer /> */}
         </Container>
 
       </UserContext.Provider>

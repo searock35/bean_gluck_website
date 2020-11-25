@@ -1,4 +1,5 @@
 //Use search string to gather listings from database.
+import axios from 'axios';
 
 //Listing information to be listed: { firstName, lastName, condition, rentalPrice, sellingPrice }
 
@@ -20,9 +21,15 @@ class listingsAPI {
         ]
     }
 
-    getSchoolListings(bookId, userId) {
+    getSchoolListings(bookId, schoolId) {
         //Use bookId to gather local listings from the database. Return a table with 10 of the listings
-        return(this.testListingsSchool);
+        let ret = [];
+
+        axios.get('localhost:8080/api/listings/?bookId={bookId}&schoolId={schoolId}')
+            .then(listings => ret = listings)
+            .catch(err => ret = this.testListingsSchool)
+
+        return(ret);
     }
 
     getLocalListings(bookId, userId) {
