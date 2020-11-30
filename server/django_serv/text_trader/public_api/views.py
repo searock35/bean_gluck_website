@@ -5,8 +5,6 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from rest_framework import status
 from rest_framework import filters
-from rest_framework.authtoken.models import Token
-from rest_framework.authtoken.views import ObtainAuthToken
 
 from django.contrib.auth.models import User
 from text_trader.permissions import IsOwnerOrReadOnly
@@ -20,34 +18,20 @@ def api_root(request, format=None):
         'users': reverse('user-list', request=request, format=format),
         'customers': reverse('customer-list', request=request, format=format),
         'listings': reverse('listing-list', request=request, format=format),
-        'listing-requests': reverse('request-list', request=request, format=format),
+        'listingRequests': reverse('request-list', request=request, format=format),
         'books': reverse('book-list', request=request, format=format),
-        'book-search': reverse('book-search', request=request, format=format),
+        'bookSearch': reverse('book-search', request=request, format=format),
         'authors': reverse('author-list', request=request, format=format),
         'schools': reverse('school-list', request=request, format=format),
         'majors': reverse('major-list', request=request, format=format),
         'localities': reverse('locality-list', request=request, format=format),
     })
 
-    
-class CustomAuthToken(ObtainAuthToken):
+# class BookList(generics.ListCreateAPIView):
+#     queryset = models.Book.objects.all()
+#     serializer_class = serializers.BookSerializer
 
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data,
-                                           context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({
-            'token': token.key,
-            'user_id': user.pk,
-        })
-
-class RegisterCustomer(generics.CreateAPIView):
-    serializer_class = serializers.RegisterCustomerSerializer
-
-    permission_classes = [permissions.AllowAny]
-    
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class BookList(generics.ListCreateAPIView):
     queryset = models.Book.objects.all()
@@ -55,11 +39,6 @@ class BookList(generics.ListCreateAPIView):
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-class BookDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.Book.objects.all()
-    serializer_class = serializers.BookSerializer
-
-    permission_classes = [permissions.IsAuthenticated]
 
 class BookSearch(generics.ListAPIView):
     queryset = models.Book.objects.all()
@@ -67,10 +46,11 @@ class BookSearch(generics.ListAPIView):
     filter_backends = [filters.SearchFilter]
     search_fields = ['isbn', 'title', 'authors__first_name', 'authors__last_name']
 
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-class BasicSchoolList(generics.ListAPIView):
-    queryset = models.School.objects.all()
-    serializer_class = serializers.BasicSchoolSerializer
+class BookDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = models.Book.objects.all()
+    serializer_class = serializers.BookSerializer
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
@@ -86,46 +66,41 @@ class AuthorDetail(generics.RetrieveUpdateDestroyAPIView):
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
+# class PurchaseList(generics.ListAPIView):
+#     serializer_class = PurchaseSerializer
+
+#     def get_queryset(self):
+#         """
+#         Optionally restricts the returned purchases to a given user,
+#         by filtering against a `username` query parameter in the URL.
+#         """
+#         queryset = Purchase.objects.all()
+#         username = self.request.query_params.get('username', None)
+#         if username is not None:
+#             queryset = queryset.filter(purchaser__username=username)
+#         return queryset
+
 class ListingList(generics.ListCreateAPIView):
     queryset = models.Listing.objects.all()
     serializer_class = serializers.ListingSerializer
 
-    def create(self, request, *args, **kwargs):
-        # check for customer
-        try:
-            customer = models.Customer.objects.get(user=request.user)
-        except models.Customer.DoesNotExist:
-            return Response({"error":"User has no customer attribute"}, status=status.HTTP_400_BAD_REQUEST)
-
-        override_status = request.data.pop('override', 'False')
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        d = serializer.validated_data
-        if override_status == 'False':
-            listing_matches = models.Listing.objects.filter(book=d['book'], owner=customer)
-            if len(listing_matches) > 0:
-                # don't save, just respond
-                return Response({"error":"A partial match to this listing exists"}, status=status.HTTP_400_BAD_REQUEST)
-
-        self.perform_create(serializer, customer)
-        
-        serializer.save()
-        return Response(serializer.data)
-
-    def perform_create(self, serializer, customer):
-        serializer.save(owner=customer)
-
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
     def get_queryset(self):
         queryset = models.Listing.objects.all()
         schoolId = self.request.query_params.get('schoolId', None)
+        # if (schoolId == None):
+        #     # Try and scrape school from user
+        #     schoolId = self.request.user.
         bookId = self.request.query_params.get('bookId', None)
-        user_set = models.Customer.objects.filter(school = schoolId)
+        user_set = models.UserCustomer.objects.filter(school = schoolId)
         if bookId != None and schoolId != None:
             return models.Listing.objects.filter(book=bookId)
         return models.Listing.objects.all()
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
 
 class ListingDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Listing.objects.all()
@@ -138,10 +113,9 @@ class ListingRequestList(generics.ListCreateAPIView):
     serializer_class = serializers.ListingRequestSerializer
 
     def perform_create(self, serializer):
-        cust = models.Customer.objects.get(user = self.request.user)
-        serializer.save(owner=cust)
+        serializer.save(owner=self.request.user)
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 class ListingRequestDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.ListingRequest.objects.all()
@@ -158,14 +132,14 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = serializers.UserSerializer
 
 class CustomerList(generics.ListCreateAPIView):
-    queryset = models.Customer.objects.all()
+    queryset = models.UserCustomer.objects.all()
     serializer_class = serializers.CustomerSerializer
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
 class CustomerDetail(generics.RetrieveAPIView):
-    queryset = models.Customer.objects.all()
+    queryset = models.UserCustomer.objects.all()
     serializer_class = serializers.CustomerSerializer
     
 class LocalityList(generics.ListCreateAPIView):
@@ -176,7 +150,7 @@ class LocalityDetail(generics.RetrieveAPIView):
     queryset = models.Locality.objects.all()
     serializer_class = serializers.LocalitySerializer
 
-class SchoolList(generics.ListCreateAPIView):
+class SchoolList(generics.ListAPIView):
     queryset = models.School.objects.all()
     serializer_class = serializers.SchoolSerializer
 

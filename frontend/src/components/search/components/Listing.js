@@ -61,16 +61,16 @@ const Listing = (props) => {
             <SuccessAlert success={success}></SuccessAlert>
             <ul className="search-listing">
                 <li className="name">
-                    Name: {props.firstName} {props.lastName}
+                    Name: {props.owner.first_name} {props.owner.last_name}
                 </li>
                 <li className="condition">
                     Condition: {props.condition}
                 </li>
                 <li className="rental-price">
-                    Rental Price: {props.rentalPrice}
+                    Rental Price: {props.rental_price}
                 </li>
                 <li className="selling-price">
-                    Selling Price: {props.sellingPrice}
+                    Selling Price: {props.purchase_price}
                 </li>
                 <li className="form">
                     <Form onSubmit={submitHandler}>
@@ -81,7 +81,7 @@ const Listing = (props) => {
                         <Form.Group>
                             <Form.Check inline label="Rent" type="radio" id="rent" name="buyOrSell" checked={buyOrRent==="rent"} onChange={radioHandler} />
                             <Form.Check inline label="Buy" type="radio" id="buy"name="buyOrSell" checked={buyOrRent==="buy"} onChange={radioHandler}/>
-                            <Button id={props.listingId} variant="primary" type="submit">
+                            <Button id={props.id} variant="primary" type="submit">
                                 Request
                             </Button>
                         </Form.Group>

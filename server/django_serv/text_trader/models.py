@@ -1,12 +1,12 @@
 from django.db import models
 import datetime
 
-class UserCustomer(models.Model):
+class Customer(models.Model):
     #map these additional fields to the auth.user field
-    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=False)
 
     #user should be associated with a school, but shouldn't be deleted if school gets deleted somehow
-    school = models.ForeignKey('School', on_delete=models.SET_NULL, blank=False, null=True)
+    school = models.ForeignKey('School', on_delete=models.SET_NULL, null=True)
 
     #the user's home area
     locality = models.ForeignKey('Locality', on_delete=models.SET_NULL, blank=False, null=True)
@@ -18,22 +18,25 @@ class UserCustomer(models.Model):
     grad_year = models.IntegerField(null=True, blank=True)
 
     #the user's address, optional
-    address = models.CharField(max_length=45, null=True)
+    address = models.CharField(max_length=45, null=True, blank=True)
 
     major = models.ManyToManyField('Major')
+
+    def __str__(self):
+        return self.user.first_name + " " + self.user.last_name  + " from " + self.school.name
 
 class Book(models.Model):
     # A title for the book, a string
     title = models.CharField(max_length=50, help_text="Enter the book's title")
 
     #The book's isbn. Not necessary only if there is no ISBN. Book needs either ISBN or is_custom is true.
-    isbn = models.CharField(max_length=13, help_text="Enter the 13 number ISBN, if applicable", blank=True, null=True)
+    isbn = models.CharField(max_length=13, help_text="Enter the 13 number ISBN, if applicable", blank=True, null=True, unique=True)
 
     #Sets whether the book has an ISBN. Used to enable users to add custom binder pages/class packets
     is_custom = models.BooleanField(default=False)
 
     #The author(s) of the book 
-    author = models.ManyToManyField('Author')
+    authors = models.ManyToManyField('Author')
 
     #The edition of the book, can be null
     edition = models.PositiveSmallIntegerField(help_text="Enter edition number", null=True)
@@ -42,7 +45,10 @@ class Book(models.Model):
     description = models.CharField(max_length=200, null=True)
 
     #Not sure if needed, but keeps track of who added the book. Not needed.
-    creator_id = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True)
+    creator = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True)
+
+    # Used to relate books to courses
+    course = models.ManyToManyField('Course')
 
     def save(self, *args, **kwargs):
         if (not self.is_custom) and (self.isbn == None):
@@ -63,6 +69,9 @@ class Author(models.Model):
     #Not sure if needed, but keeps track of who added the book. Not needed.
     creator_id = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return self.first_name + " " + self.last_name
+
 class Locality(models.Model):
     #A locality references a city, state and zip code
 
@@ -74,11 +83,14 @@ class Locality(models.Model):
     #The zip code, can be standard 5 digit or custom 9 digit
     zip_code = models.CharField(max_length = 10, null=False)
 
+    def __str__(self):
+        return self.city + ", " + self.state
+
 class School(models.Model):
     #A school is a university where sales and purchases will be made.
 
     #the name of the school or university
-    school_name = models.CharField(max_length=40, help_text="Enter school name here")
+    name = models.CharField(max_length=40, help_text="Enter school name here", unique=True)
 
     #primary color
     primary_color = models.CharField(max_length=7, default='#ff6347')
@@ -90,10 +102,10 @@ class School(models.Model):
     date_added = models.DateField(auto_now_add=True)
 
     #The address of the school
-    school_address = models.CharField(max_length=75, null=False, blank=False)
+    address = models.CharField(max_length=75, null=False, blank=False)
 
     #The locality (city, state, zip) of the school
-    locality_id = models.ForeignKey("Locality", on_delete=models.PROTECT)
+    locality = models.ForeignKey("Locality", on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
@@ -113,12 +125,12 @@ class Listing(models.Model):
     book = models.ForeignKey('Book', on_delete=models.CASCADE)
     
     #the owner of the listing
-    owner = models.ForeignKey('auth.User', related_name='listings', on_delete=models.CASCADE)
+    owner = models.ForeignKey('Customer', related_name='listings', on_delete=models.CASCADE)
 
     #The user can provide a purchase price, rental price or both. They need to set negotiable to true
     #  to be able to set both to zero.
-    purchase_price = models.IntegerField(null=True, blank=True)
-    rental_price = models.IntegerField(null=True, blank=True)
+    purchase_price = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    rental_price = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     negotiable = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
@@ -138,16 +150,22 @@ class ListingRequest(models.Model):
     listing = models.ForeignKey('Listing', on_delete=models.CASCADE)
 
     #the user making the request
-    owner = models.ForeignKey('auth.User', related_name='listingRequests', on_delete=models.CASCADE)
+    owner = models.ForeignKey('Customer', related_name='listingRequests', on_delete=models.CASCADE)
     
     #an optional rental price that is different from the advertised cost
-    rental_asking_price = models.IntegerField(null=True, blank=True)
+    rental_asking_price = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
 
     #an optional asking price that is different from the advertised cost
-    purchase_asking_price = models.IntegerField(null=True, blank=True)
+    purchase_asking_price = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+
+    def __str__(self):
+        return f'Request for {self.listing.book.title} owned by {self.listing.owner.user.first_name}'
 
 class Major(models.Model):
     major_name = models.CharField(max_length=25, null=False)
+
+    def __str__(self):
+        return self.major_name
 
 class Transaction(models.Model):
     #the corresponding listing request this transaction fulfills.
@@ -169,3 +187,16 @@ class SchoolLocation(models.Model):
     #A description of the location.
     description = models.CharField(max_length=150, null=True)
     
+
+class Course(models.Model):
+    # This is a class, used largely to suggest books to users based on major/classes
+    title = models.CharField(max_length=30)
+
+    # Course prefix, etc. ENGR
+    department = models.CharField(max_length=5)
+
+    # Number identifying level, e.g. 365
+    level = models.CharField(max_length=4)
+
+    # Identifies majors that must take this class
+    major = models.ManyToManyField('Major')

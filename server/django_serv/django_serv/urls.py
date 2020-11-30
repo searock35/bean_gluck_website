@@ -19,6 +19,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
-    path('', include('text_trader.urls')),
+    # path('api/', include('text_trader.urls_public')),
+    path('api-private/', include('text_trader.urls')),
 ]
 

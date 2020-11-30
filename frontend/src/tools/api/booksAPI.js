@@ -24,18 +24,18 @@ class BooksAPI {
         return(this.booksArray);
     } 
 
-    //NEEDS API IMPLEMENTATION
     getAutoComplete(searchString) {
 
         return new Promise((resolve, reject) => {
-            axios.get(restURL + '/search?search_string=' + searchString)
+            axios.get(restURL + '/book-search', {
+                params: {
+                    search: searchString
+                }
+            })
             
-                .then( (response) => {
-                    // console.log('adjusting ret value', response.data[0])
-                    resolve(this.booksArray);
-
-                }, 
-                (error) => {
+                .then((response) => resolve(response.data)) 
+                .catch((error) => {
+                    console.log("REJECTED");
                     reject(this.booksArray);
                     //STILL A BUG FEATURE
                 });
@@ -43,15 +43,12 @@ class BooksAPI {
         })
    }
 
-    //NEEDS API IMPLEMENTATION.
     getBookFromId(id) {
-        let defaultBook = {title: "Book not recognized.", author: "Unknown", edition: "Unknown", id: {id}}
-        this.booksArray.forEach((book) => {
-            if ( book.id === id ) {
-                defaultBook = book;
-            }
-        })  
-        return defaultBook;  
+        return new Promise((resolve, reject) => {
+            axios.get(restURL + '/books/' + id)
+                .then((response) => resolve(response.data))
+                .catch((err) => reject(err))
+        })
     }
 
 }

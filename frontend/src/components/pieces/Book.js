@@ -8,8 +8,8 @@ function Book(props) {
     const schoolId = props.schoolId;
 
     //redirects user to book search page with bookID and schoolID in search criteria
-    const createListingHandler = () => history.push("/create-listing?bookId=" + bookInfo.bookId + "&schoolId=" + schoolId);
-    const getListingsHandler = () => history.push("/listings?bookId=" + bookInfo.bookId + "&schoolId=" + schoolId);
+    const createListingHandler = () => history.push("/create-listing?bookId=" + bookInfo.id + "&schoolId=" + schoolId);
+    const getListingsHandler = () => history.push("/listings?bookId=" + bookInfo.id + "&schoolId=" + schoolId);
 
     let idMessage = "";
     if (bookInfo.idIsCustom) {
@@ -18,17 +18,22 @@ function Book(props) {
         idMessage = "ISBN: " + bookInfo.isbn;
     }
 
-    let amountMessage = "Listings: ";
-    if (bookInfo.amount) amountMessage += bookInfo.amount;
-    else amountMessage += "None";
+    // let amountMessage = "Listings: ";
+    // if (bookInfo.amount) amountMessage += bookInfo.amount;
+    // else amountMessage += "None";
+    console.log(bookInfo)
+    let author = "Not Listed"
+    if (bookInfo.authors[0]) {
+        author = bookInfo.authors[0]
+    }
     
     return (
         <ul className="book-info">
             <li className="book-title">Title: {bookInfo.title}</li>
             <li className="book-edition">Edition: {bookInfo.edition}</li>
-            <li className="book-author">Book Author: {bookInfo.author}</li>
+            <li className="book-author">Book Author: {author}</li>
             <li className="book-id">{idMessage}</li> 
-            <li className="book-amount">{amountMessage}</li>
+            {/* <li className="book-amount">{amountMessage}</li> */}
 
             {props.clickable &&
                 <div className="clickable-items">

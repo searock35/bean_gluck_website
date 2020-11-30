@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
-//API's
-//Components
 import Book from '../pieces/Book';
 
-import axios from 'axios'
 import BooksAPI from '../../tools/api/booksAPI'
+import GeneralAPI from '../../tools/api/generalAPI'
 import "./BookSearchForm.css";
 import { useHistory } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 
 const defaultSearchString = 'Enter book ISBN, Title, Author';
-const restURL = 'http://localhost:8080'
 
 function BookDropDown(props) {
 
     const allBooks = props.books.map( (book) => 
     <li className="book-drop-down-entry" key={book.isbn}>
-        <Book bookInfo={book} clickable="true" />
+        <Book bookInfo={book} schoolId={props.schoolId} clickable="true" />
     </li>
     )
 
@@ -42,6 +39,8 @@ function BookDropDown(props) {
 function BookSearchForm(props) {
 
     const [searchText, setSearchText] = useState(defaultSearchString); 
+    const [schoolId, setSchoolId] = useState();
+    const [schools, setSchools] = useState([{id: 0, name: 'Loading...'}]);
     const [bookList, setBookList] = useState([]);  
 
     const onSearchSubmit = (e) => {
@@ -62,19 +61,31 @@ function BookSearchForm(props) {
         return (() => isMounted = 0)
  
     }, [searchText])
+
+    useEffect(() => {
+        GeneralAPI.getSchoolsBasic()
+        .then(school_list => setSchools(school_list))
+        .catch(err => console.log(err))
+    }, [])
         
     function onChangeSearchText(e) {
         setSearchText(e.target.value);
     };
 
-    function SchoolSelectOption() {
+    function schoolChange(e) {
+        setSchoolId(e.target.value);
+    }
+
+    function SchoolSelectOption(props) {
+        let options = props.schools.map((school) => {
+            return <option value={school.id} key={school.id}>{school.name}</option>
+        })
 
         return (
             <Form.Group controlId="schoolSelect">
                 <Form.Label>Select your school: </Form.Label>
-                <Form.Control as="select">
-                    <option value="messiah">Messiah University</option>
-                    <option value="penn_state">Penn State University</option>
+                <Form.Control as="select" onChange={schoolChange}>
+                    {options}
                 </Form.Control>
             </Form.Group>
         )
@@ -92,9 +103,9 @@ function BookSearchForm(props) {
                     onClick={(e) => (e.target.value===defaultSearchString) && setSearchText("")}
                     onChange={onChangeSearchText}
                 />
-                <BookDropDown books={bookList} searchString={searchText}/>
+                <BookDropDown books={bookList} schoolId={schoolId} searchString={searchText}/>
             </div>
-            <SchoolSelectOption />
+            <SchoolSelectOption schools={schools}/>
             <br /><input id="form-submission" type="submit" value="Search" />
        </form>
     )

@@ -3,28 +3,30 @@ from text_trader import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
-    path('api/books/', views.BookList.as_view(), name='book-list'),
-    path('api/books/<int:pk>/', views.BookDetail.as_view(), name='book-detail'),
-    path('api/users/', views.UserList.as_view(), name='user-list'),
-    path('api/users/<int:pk>/', views.UserDetail.as_view(), name='user-detail'),
-    path('api/listings/', views.ListingList.as_view(), name='listing-list'),
-    path('api/listings/<int:pk>/', views.ListingDetail.as_view(), name='listing-detail'),
-    path('api/requests/', views.ListingRequestList.as_view(), name='request-list'),
-    path('api/requests/<int:pk>/', views.ListingRequestDetail.as_view(), name='request-detail'),
-    path('api/localities/', views.LocalityList.as_view(), name='locality-list'),
-    path('api/localities/<int:pk>/', views.LocalityDetail.as_view(), name='locality-detail'),
-    path('api/schools/', views.SchoolList.as_view(), name='school-list'),
-    path('api/schools/<int:pk>/', views.SchoolDetail.as_view(), name='school-detail'),
-    path('api/authors/', views.AuthorList.as_view(), name='author-list'),
-    path('api/authors/<int:pk>', views.AuthorDetail.as_view(), name='author-detail'),
-    path('api/', views.api_root),
+    path('books/', views.BookList.as_view(), name='book-list'),
+    path('books/<int:pk>/', views.BookDetail.as_view(), name='book-detail'),
+    path('users/', views.UserList.as_view(), name='user-list'),
+    path('customers/', views.CustomerList.as_view(), name='customer-list'),
+    path('users/<int:pk>/', views.UserDetail.as_view(), name='user-detail'),
+    path('listings/', views.ListingList.as_view(), name='listing-list'),
+    path('listings/<int:pk>/', views.ListingDetail.as_view(), name='listing-detail'),
+    path('requests/', views.ListingRequestList.as_view(), name='request-list'),
+    path('requests/<int:pk>/', views.ListingRequestDetail.as_view(), name='request-detail'),
+    path('localities/', views.LocalityList.as_view(), name='locality-list'),
+    path('localities/<int:pk>/', views.LocalityDetail.as_view(), name='locality-detail'),
+    path('schools/', views.SchoolList.as_view(), name='school-list'),
+    path('schools/<int:pk>/', views.SchoolDetail.as_view(), name='school-detail'),
+
+    # Custom
+    path('auth/', views.CustomAuthToken.as_view(), name='get-auth'),
+    path('book-search/', views.BookSearch.as_view(), name='book-search'),
+    path('register/', views.RegisterCustomer.as_view()),
+
+    # Root
+    path('', views.api_root),
+
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
 
-from rest_framework.authtoken import views
-
-urlpatterns += [
-    path('api-token-auth/', views.obtain_auth_token)
-]
 
