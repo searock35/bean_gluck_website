@@ -1,75 +1,94 @@
 import getDefaultUser from "../getDefaultUser";
 import cookiesAPI from "./cookiesAPI";
+import axios from "axios";
+import restURL from "./restURL";
 
 
-//**********************TODO: ADD SERVER API IMPLEMENTATION */
 //Need to make an auth object that will login user, logout user, and return whether the user is authenticated
 class Auth {
-    constructor(props) {
-        //TEMPORARY. Currently used in place of an API to test if the user's key is correct
-
-        this.authToken = cookiesAPI.getAuthTokenInCookies();
-
-        //placeholder returned user. In the future, will scrape user info from database using username and password
-        this.testUser = {
-            username: 'searock35',
-            email: 'searock35@gmail.com',
-            userId: '7174190584',
-            schoolId: '01220420',
-            schoolName: 'Messiah University',
-            isAuth: true
-        }
+    constructor() {
+        this.authToken = cookiesAPI.getToken();
+        this.userId = cookiesAPI.getUserId();
     }
 
-    //Make server request for user information. If the server denies, return default user information.
+    getDefaultUser() {
+        return getDefaultUser()
+    }
+
     refreshUser() {
+        /* try and get new user information based on current token) */
+        return new Promise((resolve, reject) => {
+            if (this.authToken === "0") reject();
 
-        //TEMP FUNCTION
-        if (this.authToken === "01220420") {
-            //for now, return custom user
+            axios.get(restURL + "/get-user-with-token/", {
+                headers: {
+                    Authorization: "Token " + this.authToken
+                }
+            })
+                .then((response) => {
+                    let data = {
+                        ...response.data,
+                        isAuth: true
+                    };
+                    resolve(data); 
+                })
+                .catch(err => {
+                    reject(err);
+                })
 
-            return (this.testUser);
-        
-        } else {
-            return (getDefaultUser());
-        }
+        })
 
-        
-        
+
     }
 
-    getNewAuthToken() {
-        //send server refreshToken to gather new authtoken.
-        if(this.refreshToken === "1562") {
-            this.authToken="01220420";
-        }
+    /* Check that current user matches stored authtoken */
+    checkUser() {
 
-        cookiesAPI.setAuthTokenInCookies(this.authToken);
+        return new Promise((resolve, reject) => {
+            axios.get(restURL + "/verify-user/" + this.userId, {
+                headers: {
+                    Authorization: "Token " + this.authToken
+                }
+            })
+                .then((user) => resolve(user))
+                .catch((err) => reject(err))
+        })
+    }
+
+    getNewAuthToken(username, password) {
+        return new Promise((resolve, reject) => {
+            axios.post(restURL + "/get-auth-token/", {
+                username: username,
+                password: password
+            })
+                .then((response) => {
+                    this.authToken = response.data.token;
+                    this.userId = response.data.user_id;
+                    cookiesAPI.setToken(this.authToken)
+                    cookiesAPI.setUserId(this.userId)
+                    resolve() 
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject()
+                })
+        })
     }
 
     //Login will send new user through the callback function
-    //returns database success string
     login(cb, email, password) {
-        //send api username and password to recieve auth token
-        let return_string = "Success"
-        if(email==="searock35@gmail.com" && password==="coocie343") {
-            console.log("Passed")
-
-            //An authtoken and refreshtoken have been generated for current user.
-            this.authToken="01220420";
-            this.refreshToken="1562";
-            cookiesAPI.setAuthTokenInCookies(this.authToken);
-
-            //TODO: Return actual user
-            cb(this.testUser, return_string);
-
-        } else {
-            this.isAuthenticated=false;
-            console.log("Incorrect username and password");
-            return_string=("badCred");
-            cb(getDefaultUser(), return_string);
-        }
- 
+        this.getNewAuthToken(email, password)
+            .then(() => {
+                console.log("success!", this.authToken)
+                this.refreshUser()
+                    .then((user) => {
+                        cb(user)
+                    })
+                    .catch(() => {
+                        cb(getDefaultUser())
+                    })
+            })
+            .catch(() => cb(getDefaultUser()))
     }
 
     //Logs out user, by sending authtoken with proper request for the authtoken and associated user to be unvalidated

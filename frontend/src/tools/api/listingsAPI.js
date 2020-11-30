@@ -19,7 +19,7 @@ class listingsAPI {
     getSchoolListings(book, school) {
         //Use bookId to gather local listings from the database. Return a table with 10 of the listings
         return new Promise((resolve, reject) => {
-            axios.get(restURL + '/listings-school', {
+            axios.get(restURL + '/listings/school', {
                 params: {bookId: book,
                 schoolId: school}
             })

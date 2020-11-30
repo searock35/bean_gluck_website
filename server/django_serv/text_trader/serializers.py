@@ -6,7 +6,7 @@ from text_trader import models
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(required=True, validators=[UniqueValidator(queryset=User.objects.all())])
     username = serializers.CharField(required=True, validators=[UniqueValidator(queryset=User.objects.all())])
-    password = serializers.CharField(required=True, min_length=8)
+    password = serializers.CharField(required=True, min_length=8, write_only=True)
 
     def create(self, validated_data):
         user = User.objects.create_user(
@@ -93,6 +93,17 @@ class SchoolSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.School
         fields = ['id', 'name', 'primary_color', 'secondary_color', 'date_added', 'address', 'locality']
+
+# Meant to be passed a customer instance
+class CustomerInfoSerializer(serializers.Serializer):
+    username = serializers.ReadOnlyField(source='user.username')
+    email = serializers.ReadOnlyField(source='user.email')
+    userId = serializers.ReadOnlyField(source='user.id')
+    schoolId = serializers.ReadOnlyField(source='school.id')
+    schoolName = serializers.ReadOnlyField(source='school.name')
+    schoolColorPrimary = serializers.ReadOnlyField(source='school.primary_color')
+    schoolColorSecondary = serializers.ReadOnlyField(source='school.secondary_color')
+
 
 class LocalitySerializer(serializers.ModelSerializer):
 

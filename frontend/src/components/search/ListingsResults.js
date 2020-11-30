@@ -13,8 +13,7 @@ function useQuery() {
 const BookResults = () => {
     
     const query = useQuery();
-
-    const bookId = query.get("bookId");
+    const bookId = query.get("bookId")
     const schoolId = query.get("schoolId");
 
     const loadingString = "Loading..."
@@ -24,21 +23,21 @@ const BookResults = () => {
         booksAPI.getBookFromId(bookId)
         .then((response) => setBookInfo(response.data))
         .catch((err) => setBookInfo({error: err}))
-    }, [])
+    }, [bookId])
     
         const LocalListings = () => {
-            let books;
-            listingsAPI.getLocalListings(bookId, "1")
-                            .then(returned_book => books = returned_book)
+            let listings;
+            listingsAPI.getLocalListings(bookId)
+                            .then(returned_listings => listings = returned_listings)
                             .catch(error => {
                                 console.log(error)
-                                books = []
+                                listings = []
                             })
 
-            const bookList = books.map((value) => (<li key={value.listingId}><Listing {...value} /></li>));
+            const listingsList = listings.map((listing) => (<li key={listing.listingId}><Listing {...listing} /></li>));
             
             return (<ul className="local-listings">
-                {bookList}
+                {listingsList}
             </ul>);
         }
 

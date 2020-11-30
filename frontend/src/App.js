@@ -25,8 +25,19 @@ import { Container } from 'react-bootstrap';
 import Test from './Test';
 
 function App() {
-  const initUser = authAPI.refreshUser();
-  const [userState, setUserState] = useState(initUser);
+  let initUser; 
+
+  const [userState, setUserState] = useState(authAPI.getDefaultUser());
+
+  authAPI.refreshUser()
+
+    .then((user) => {
+      setUserState(user) 
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
 
   return (
     <Router>
@@ -37,7 +48,7 @@ function App() {
 
         <Container fluid>
           <HomeNavbar />
-          <Test />
+          {/* <Test /> */}
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/login" component={Login} />

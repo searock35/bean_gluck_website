@@ -11,7 +11,7 @@ const SuccessAlert = (props) => {
     let string = ""
     if(props.success === "success") {
         variant = "success";
-        string = "Listing request successful!";
+        string = "Login successful!";
     } else if (props.success === "badCred") {
         variant = "warning";
         string = "Invalid username and/or password."
@@ -27,7 +27,7 @@ const SuccessAlert = (props) => {
 
 function Login(props) {
     const [fields, setFields] = useState({
-        email: "",
+        username: "",
         password: "",
     });
 
@@ -36,15 +36,19 @@ function Login(props) {
     const history = useHistory();
     const currentUser = useContext(UserContext);
 
-    function loginCb(newUser, returnString) {
-        setLoginState(returnString);
-        currentUser.changeUserContext(newUser);
-        if(returnString === "success") history.goBack();
+    function loginCb(newUser) {
+        if (newUser.username === "Guest") {
+            setLoginState("badCred")
+        } else {
+            setLoginState("success")
+            currentUser.changeUserContext(newUser);
+            history.goBack();
+        }
     }
 
     function handleLoginEvent(e) {
         e.preventDefault();
-        authAPI.login(loginCb, fields.email, fields.password);
+        authAPI.login(loginCb, fields.username, fields.password);
     }
 
     const onChangeHandler = (e) => {
@@ -55,9 +59,6 @@ function Login(props) {
         })
     }
 
-
-    
-
     if(authAPI.isAuth()) {
         if (currentUser.email === getDefaultUser().email) {
             //for this case, usertoken is enabled but User is not actually logged in on client. This should never happen.
@@ -66,13 +67,13 @@ function Login(props) {
         } else {
             return <Redirect to="/" />
     }}
-    return (
 
+    return (
         <Form onSubmit={handleLoginEvent}>
             <h1>User Login</h1>
-            <Form.Group controlId="email">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" value={fields.email} onChange={onChangeHandler} />
+            <Form.Group controlId="username">
+                <Form.Label>Username</Form.Label>
+                <Form.Control placeholder="Enter Username" value={fields.username} onChange={onChangeHandler} />
                 <Form.Text className="text-muted">
                 </Form.Text>
             </Form.Group>

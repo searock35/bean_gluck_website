@@ -9,7 +9,7 @@ class generalAPI {
     getSchoolsBasic() {
 
         return new Promise((resolve, reject) => {
-            axios.get(restURL + '/school-list-basic')
+            axios.get(restURL + '/schools/basic/')
                 .then(response => resolve(response.data))
                 .catch(err => reject(err)) 
         })

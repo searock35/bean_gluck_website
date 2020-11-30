@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 class Validate {
 
     CONFIG_FUNCTIONS = {
@@ -16,11 +14,6 @@ class Validate {
     constructor() {
         this.fields = {}
         this.config_dictionary = {}
-        this.state = 0;
-        this.setState = 0;
-
-        this.setValidatedState = this.setValidatedState.bind(this)
-
     }
 
     addBaseField(name, config) {
@@ -41,29 +34,6 @@ class Validate {
         return "valid"
     } 
 
-    useValidatedState() {
-        if (Object.entries(this.config_dictionary).length === 0) {
-            console.log("You must add entries to the config dictionary!");
-        }
-
-        let arr = useState(this.fields);
-        this.state = arr[0]
-        this.setState = arr[1]
-        return [this.state, this.setValidatedState];
-    }
-
-    setValidatedState(new_items) {
-
-        let to_add_to_state = {}
-        for (var key in new_items) {
-            let err_str = this.validate(key, new_items[key])
-            to_add_to_state[key] = {"value": new_items[key], "error": err_str}
-        }            
-  
-        this.setState({
-            ...this.to_add_to_state
-        });
-    }
 
     checkSpaces() {
 
