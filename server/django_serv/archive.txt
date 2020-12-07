@@ -1,0 +1,30 @@
+
+class RegisterCustomerSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+    school = serializers.PrimaryKeyRelatedField(queryset=models.School.objects.all())
+    locality = LocalitySerializer()
+    major = serializers.PrimaryKeyRelatedField(many=True, queryset=models.Major.objects.all())
+
+    def create(self, validated_data):
+        l = LocalitySerializer(data=validated_data.pop('locality'))
+        u = UserSerializer(data=validated_data.pop('user'))
+
+        if not l.is_valid():
+            raise serializers.ValidationError({'detail':l.errors})
+        elif not u.is_valid():
+            raise serializers.ValidationError({'detail':u.errors})
+        
+        user = u.save()
+        locality = l.save()
+        majors = validated_data.pop('major')
+        ret = models.Customer.objects.create(**validated_data, user=user, locality=locality)
+
+        for m in majors:
+            ret.major.add(m)
+
+        return ret
+
+    class Meta:
+        model = models.Customer 
+        fields = ['user', 'school', 'locality',
+                    'grad_year', 'address', 'major']

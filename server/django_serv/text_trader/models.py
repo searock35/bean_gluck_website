@@ -3,7 +3,7 @@ import datetime
 
 class Customer(models.Model):
     #map these additional fields to the auth.user field
-    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=False)
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, null=False, primary_key=True)
 
     #user should be associated with a school, but shouldn't be deleted if school gets deleted somehow
     school = models.ForeignKey('School', on_delete=models.SET_NULL, null=True)
@@ -27,7 +27,10 @@ class Customer(models.Model):
 
 class Book(models.Model):
     # A title for the book, a string
-    title = models.CharField(max_length=50, help_text="Enter the book's title")
+    title = models.CharField(max_length=100, help_text="Enter the book's title")
+
+    # an optional subtitle field
+    subtitle = models.CharField(max_length=100, help_text="Enter a subtitle, if applicable", null=True, blank=True)
 
     #The book's isbn. Not necessary only if there is no ISBN. Book needs either ISBN or is_custom is true.
     isbn = models.CharField(max_length=13, help_text="Enter the 13 number ISBN, if applicable", blank=True, null=True, unique=True)
@@ -48,7 +51,7 @@ class Book(models.Model):
     creator = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True)
 
     # Used to relate books to courses
-    course = models.ManyToManyField('Course')
+    course = models.ManyToManyField('Course', through='CourseBook')
 
     def save(self, *args, **kwargs):
         if (not self.is_custom) and (self.isbn == None):
@@ -63,14 +66,21 @@ class Author(models.Model):
     #first name for the author
     first_name = models.CharField(max_length=25)
 
+    middle_initial = models.CharField(max_length=1, null=True, blank=True)
+
     #last name for author
     last_name = models.CharField(max_length=25)
 
     #Not sure if needed, but keeps track of who added the book. Not needed.
-    creator_id = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True)
+    creator = models.ForeignKey('auth.User', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return self.first_name + " " + self.last_name
+        if (self.middle_initial == "" or self.middle_initial == None):
+            middle_string = " "
+        else:
+            middle_string = " " + self.middle_initial + ". "
+
+        return self.first_name + middle_string + self.last_name
 
 class Locality(models.Model):
     #A locality references a city, state and zip code
@@ -133,6 +143,9 @@ class Listing(models.Model):
     rental_price = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     negotiable = models.BooleanField(default=False)
 
+    # has this listing been purchased?
+    fulfilled = models.BooleanField(default=False, blank=True)
+
     def save(self, *args, **kwargs):
         if (self.purchase_price == None) and (self.rental_price == None) and (not self.negotiable):
             return # The listing needs at least one or the other
@@ -169,10 +182,13 @@ class Major(models.Model):
 
 class Transaction(models.Model):
     #the corresponding listing request this transaction fulfills.
-    listing_request = models.ForeignKey('ListingRequest', on_delete=models.CASCADE)
+    listing_request = models.OneToOneField('ListingRequest', on_delete=models.CASCADE, primary_key=True)
 
     #the final cash price of the transaction
     transaction_price = models.FloatField(null=True)
+
+    #rented or bought?
+    was_rented = models.BooleanField(default=False)
 
     #the date of the transaction
     date_time = models.DateTimeField(null=True)
@@ -200,3 +216,35 @@ class Course(models.Model):
 
     # Identifies majors that must take this class
     major = models.ManyToManyField('Major')
+
+    school = models.ForeignKey('School', on_delete=models.CASCADE)
+
+class CourseBook(models.Model):
+    # This table represents a many to many relationship between books
+    # and the courses they are used in.
+
+    SEMESTERS = (
+        ('s',"Spring"),
+        ('m',"Summer"),
+        ('f',"Fall")
+    )
+
+    book = models.ForeignKey('Book', on_delete=models.CASCADE)
+    course = models.ForeignKey('Course', on_delete=models.CASCADE)
+    year = models.PositiveIntegerField()
+    semester = models.CharField(max_length = 1, choices=SEMESTERS)
+
+
+class RequestMessage(models.Model):
+
+    # The message this request is associated with.
+    request = models.ForeignKey('ListingRequest', on_delete=models.CASCADE)
+
+    # The message contents
+    message = models.CharField(max_length=150, blank=False,null=False)
+
+    # the date and time the message was sent
+    datetime = models.DateTimeField(auto_now=True)
+
+    # is the message sender the seller or buyer of the book?
+    is_seller = models.BooleanField(default=False, null=False, blank=True)

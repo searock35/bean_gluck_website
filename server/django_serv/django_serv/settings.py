@@ -88,21 +88,11 @@ REST_FRAMEWORK = {
     ]
 }
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         'CLIENT': {
-#             'name': 'test',
-#             'host': "mongodb+srv://searock35:uGZpUZonZHWSS7ig@cluster0.emqsa.mongodb.net/test?retryWrites=true&w=majority",
-#             'username': 'searock35',
-#             'password': 'uGZpUZonZHWSS7ig',
-#             "authMechanism": "SCRAM-SHA-1",
-#         },
-#     }
-# }
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'email-smtp.us-east-2.amazonaws.com'
+EMAIL_PORT = 587 
+EMAIL_HOST_USER = 'AKIA6FCR36GGU33ONM7R'
+EMAIL_HOST_PASSWORD = 'BCBAOUZalH159/l9/XMMYnZdHp+ObNyS9hVDTLZV6kwK'
 
 DATABASES = {
     'default': {
