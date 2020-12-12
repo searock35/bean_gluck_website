@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //Styles
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,27 +16,28 @@ import ProtectedRoute from './tools/router/ProtectedRoute';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Donate from './components/static/Donate';
-import ListingResults from './components/search/ListingsResults';
+import ListingsSearch from './components/search/ListingsSearch';
 import NewBookCreator from './components/create/NewBookCreator';
 import UserContext from './tools/react/UserContext';
 import Error from './components/static/Error';
 import authAPI from './tools/api/authAPI';
 import { Container } from 'react-bootstrap';
-import Test from './Test';
+// import Test from './Test';
+
 
 function App() {
-  let initUser; 
-
   const [userState, setUserState] = useState(authAPI.getDefaultUser());
 
-  authAPI.refreshUser()
+  useEffect(() => {
+    authAPI.refreshUser()
 
-    .then((user) => {
-      setUserState(user) 
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+      .then((user) => {
+        setUserState(user) 
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, []);
 
 
   return (
@@ -53,7 +54,7 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <Route path="/listings" component={ListingResults} />
+            <Route path="/listings" component={ListingsSearch} />
             <Route path="/book-create/" component={NewBookCreator} />
             <Route path="/donate" component={Donate} />
             <ProtectedRoute path="/user/:username/" component={UserRouter} />

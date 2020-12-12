@@ -137,6 +137,15 @@ class Listing(models.Model):
     #the owner of the listing
     owner = models.ForeignKey('Customer', related_name='listings', on_delete=models.CASCADE)
 
+    # The school where the user expects to sell the listing
+    school = models.ForeignKey(
+        'School', 
+        related_name='listings', 
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+
     #The user can provide a purchase price, rental price or both. They need to set negotiable to true
     #  to be able to set both to zero.
     purchase_price = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)

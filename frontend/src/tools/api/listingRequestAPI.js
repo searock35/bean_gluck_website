@@ -1,5 +1,7 @@
 
+import Axios from "axios";
 import authAPI from "./authAPI";
+import restURL from "./restURL";
 
 
 class listingRequestAPI {
@@ -23,20 +25,24 @@ class listingRequestAPI {
     }
 
     //requestInfo: action: ["buy" | "rent"], message: string, userId: string,
-    requestListing(requestInfo) {
-        const authToken = authAPI.authToken;
+    requestListing(listing_id, buyOrRent, asking_price) {
 
-        //format data and send correct request to server
-        //TODO
-
-        if(authToken === '0') {
-            return("false");
+        let requestInfo = {
+            listing: `${listing_id}`,
         }
 
-        console.log(requestInfo);
+        if (buyOrRent === "buy") requestInfo['purchase_asking_price'] = asking_price;
+        else requestInfo['rental_asking_price'] = asking_price;
 
-        //for now, return true for a success and false for a failure
-        return("true");
+        return new Promise((resolve, reject) => {
+            Axios.post(restURL + "/requests/", requestInfo, {
+                headers: {
+                    Authorization: "Token " + authAPI.authToken
+                }
+            })
+                .then((response) => resolve())
+                .catch((error) => reject(error))
+        })
     }
 
     getRequestsByListing(listingId) {

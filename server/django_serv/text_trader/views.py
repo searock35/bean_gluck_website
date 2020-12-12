@@ -13,7 +13,7 @@ from text_trader import models
 from text_trader import serializers
 
     
-class BookViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin, mixins.ListModelMixin):
+class BookViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin):
     queryset = models.Book.objects.all()
     serializer_class = serializers.BookSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -59,6 +59,37 @@ class CustomerViewSet(viewsets.GenericViewSet):
 
         return Response(cust.data)
 
+    @action(detail=False, methods=['get'], 
+        url_path='get-with-token', permission_classes=[permissions.IsAuthenticated])
+    def get_with_token(self, request):
+        customer = models.Customer.objects.get(user=request.user)
+        serializer = serializers.CustomerInfoSerializer(customer)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'], url_path='verify-user')
+    def verify_user(self, request, **kwargs):
+        # simply return success or error
+        if (request.user.pk == int(kwargs['pk'])):
+            return Response({'success':'User validated succesfully'})
+        else:
+            return Response({'error':'Invalid token for this user'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    @action(detail=True, methods=['get'], permission_classes=[permissions.IsAuthenticated])
+    def listings(self, request, **kwargs):
+        # used to get the listings posted by a specific customer.
+        customer = self.get_object()
+        user_listings = models.Listing.objects.filter(owner=customer)
+        serializer = serializers.ListingSerializer(many=True, instance=user_listings)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'], permission_classes=[permissions.IsAuthenticated])
+    def requests(self, request, **kwargs):
+        # used to get the listings posted by a specific customer.
+        customer = self.get_object()
+        user_requests = models.ListingRequest.objects.filter(owner=customer)
+        serializer = serializers.ListingRequestSerializer(many=True, instance=user_requests)
+        return Response(serializer.data)
+
 class CustomAuthToken(ObtainAuthToken):
     # Used to retrieve an auth token with a username and password
     def post(self, request, *args, **kwargs):
@@ -72,21 +103,6 @@ class CustomAuthToken(ObtainAuthToken):
             'token': token.key,
             'user_id': user.pk,
         })
-
-    @action(detail=False, methods=['get'], 
-        url_path='get-with-token', permission_classes=[permissions.IsAuthenticated])
-    def get_with_token(self, request):
-        customer = models.Customer.objects.get(user=request.user)
-        serializer = serializers.CustomerInfoSerializer(customer)
-        return Response(serializer.data)
-
-    @action(detail=True, methods=['get'], url_path='verify-user')
-    def verify_user(self, request, **kwargs):
-        # simply return their user information
-        if (request.user.pk == int(kwargs['pk'])):
-            return Response({'success':'User validated succesfully'})
-        else:
-            return Response({'error':'Invalid token for this user'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class ListingList(generics.ListCreateAPIView):
     queryset = models.Listing.objects.all()
@@ -146,6 +162,7 @@ class ListingRequestList(generics.ListCreateAPIView):
     def create(self, request, *args, **kwargs):
         cust = request.user.customer 
         serializer = self.get_serializer(data=request.data)
+        print(request.data)
         serializer.is_valid(raise_exception=True)
         d = serializer.validated_data
         listing = models.Listing.objects.get(pk=d['listing'].pk)
@@ -155,7 +172,7 @@ class ListingRequestList(generics.ListCreateAPIView):
         elif (len(models.ListingRequest.objects.filter(owner=cust, listing=d['listing']))):
             return Response({"error":
                 "You have already made a request for this listing." 
-                + "Please edit your old request or delete it before adding a new one."
+                + " Please edit your old request or delete it before adding a new one."
             }, status=status.HTTP_400_BAD_REQUEST)
         
         else:
@@ -172,9 +189,16 @@ class LocalListingList(generics.ListAPIView):
 
     def get_queryset(self):
         if self.request.user.is_anonymous:
+            base_set = models.Listing.objects.all()
             schoolId = self.request.query_params.get('schoolId', None)
+            bookId = self.request.query_params.get('bookId', None)
             if schoolId != None:
-                return models.Listing.objects.filter(owner__school=schoolId)
+                base_set = base_set.filter(owner__school=schoolId)
+            if bookId != None:
+                base_set = base_set.filter(book__pk=bookId)
+
+            return base_set
+                
 
         else:
             return models.Listing.objects.filter(owner__locality=self.request.user.locality)
@@ -250,6 +274,18 @@ class SchoolViewSet(viewsets.GenericViewSet):
     def list_basic(self, request):
         BSS = serializers.BasicSchoolSerializer
         return Response([BSS(school).data for school in self.get_queryset()])
+
+    @action(methods=['get'], detail=True)
+    def listings(self, request, **kwargs):
+        bookId = request.query_params.get('bookId', None)
+        school = self.get_object()
+        listings = school.listings
+
+        if bookId:
+            listings = listings.filter(book__pk=bookId)
+
+        l_s = serializers.ListingSerializer(many=True, instance=listings)
+        return Response(l_s.data)
 
 class TransactionList(generics.ListCreateAPIView):
     serializer_class = serializers.TransactionSerializer

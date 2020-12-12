@@ -123,9 +123,11 @@ class ListingSerializer(serializers.ModelSerializer):
     # We want to show the whole customer info, hence the CustomerSerializer
     owner = CustomerSerializer(read_only=True)
     book = serializers.PrimaryKeyRelatedField(queryset=models.Book.objects.all())
+    school = serializers.PrimaryKeyRelatedField(queryset=models.School.objects.all())
+
     class Meta:
         model = models.Listing
-        fields = ['id', 'owner', 'book', 'condition', 'purchase_price', 'rental_price']
+        fields = ['id', 'owner', 'school', 'book', 'condition', 'purchase_price', 'rental_price']
 
 class ListingRequestSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.user.username')

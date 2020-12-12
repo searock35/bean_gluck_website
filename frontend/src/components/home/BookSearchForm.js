@@ -63,8 +63,10 @@ function BookSearchForm(props) {
     }, [searchText])
 
     useEffect(() => {
+        console.log("Mounted!");
         GeneralAPI.getSchoolsBasic()
         .then(school_list => setSchools(school_list))
+        
         .catch(err => console.log(err))
     }, [])
         

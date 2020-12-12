@@ -30,11 +30,14 @@ class listingsAPI {
                 
     }
 
-    getLocalListings(book) {
+    getLocalListings(book, school) {
 
         return new Promise((resolve, reject) => {
-            axios.get(restURL + '/listings-local', {
-                params: { bookId: book }
+            axios.get(restURL + '/listings/local', {
+                params: { 
+                    bookId: book,
+                    schoolId: school 
+                }
             })
                 .then(listings => resolve(listings))
                 .catch(err => reject(err))

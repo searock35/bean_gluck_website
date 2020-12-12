@@ -27,7 +27,7 @@ class BooksAPI {
     getAutoComplete(searchString) {
 
         return new Promise((resolve, reject) => {
-            axios.get(restURL + '/book-search', {
+            axios.get(restURL + '/books/search', {
                 params: {
                     search: searchString
                 }

@@ -10,7 +10,7 @@ class cookiesAPI {
 
         const authToken = this.cookies.get("authToken");
 
-        if(authToken !== "undefined") {
+        if(authToken) {
             return authToken;
         } 
        

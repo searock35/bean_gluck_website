@@ -13,6 +13,7 @@ const SuccessAlert = (props) => {
         variant = "success";
         string = "Login successful!";
     } else if (props.success === "badCred") {
+        // TODO: First check to see if the servers are down
         variant = "warning";
         string = "Invalid username and/or password."
     }

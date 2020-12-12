@@ -18,9 +18,9 @@ class Auth {
     refreshUser() {
         /* try and get new user information based on current token) */
         return new Promise((resolve, reject) => {
-            if (this.authToken === "0") reject();
+            if (this.authToken === "0") return reject("No authtoken");
 
-            axios.get(restURL + "/get-user-with-token/", {
+            axios.get(restURL + "/customers/get-with-token/", {
                 headers: {
                     Authorization: "Token " + this.authToken
                 }
@@ -30,10 +30,11 @@ class Auth {
                         ...response.data,
                         isAuth: true
                     };
-                    resolve(data); 
+                    return resolve(data); 
                 })
                 .catch(err => {
-                    reject(err);
+                    this.authToken = "0";
+                    return reject(err);
                 })
 
         })
@@ -45,7 +46,7 @@ class Auth {
     checkUser() {
 
         return new Promise((resolve, reject) => {
-            axios.get(restURL + "/verify-user/" + this.userId, {
+            axios.get(restURL + "/customers/verify-user/" + this.userId, {
                 headers: {
                     Authorization: "Token " + this.authToken
                 }
@@ -57,7 +58,7 @@ class Auth {
 
     getNewAuthToken(username, password) {
         return new Promise((resolve, reject) => {
-            axios.post(restURL + "/get-auth-token/", {
+            axios.post(restURL + "/auth/", {
                 username: username,
                 password: password
             })
@@ -75,7 +76,7 @@ class Auth {
         })
     }
 
-    //Login will send new user through the callback function
+    //Login will send resulting user through the callback function
     login(cb, email, password) {
         this.getNewAuthToken(email, password)
             .then(() => {
@@ -91,31 +92,20 @@ class Auth {
             .catch(() => cb(getDefaultUser()))
     }
 
-    //Logs out user, by sending authtoken with proper request for the authtoken and associated user to be unvalidated
+    // Send new user through callback
     logout(cb) {
-        //call to API to change/remove authtoken validation for current user. Simply, send authtoken to API to have it de-registered
-
-        //API Call here: send authtoken, API should return whether it was succesful.
-        //THEN
-        this.authToken = "0"; //0 being null authtoken
+        this.authToken = "0"; // 0 being null authtoken
         cookiesAPI.setAuthTokenInCookies(this.authToken);
         
         cb(getDefaultUser);
     }
 
-    register(cb) {
-        //call to API to create a new user, with a return to make sure the registration info is valid.
-        //in the future, use API to figure out if user is successfully created then return true. Else, return false.
-        var didPass = true;
-
-        if(didPass) {
-            console.log("registered");
-            this.authToken = "01220420";
-            cookiesAPI.setAuthTokenInCookies(this.authToken);
-            cb(this.testUser);
-        } else {
-            return didPass;
-        }
+    // Send new user with callback
+    // Info: {user: {username, password, email, first_name, last_name}, school:<pk>, grad_year, locality: {city, state, zip_code}, majors: [<pk>]}
+    register(cb, info) {
+        axios.post(restURL + '/customers/', info)
+            .then((user) => cb(user))
+            .catch((err) => cb(err))
     }
 
     //Check to see if user is still authenticated, using server API in the future.
