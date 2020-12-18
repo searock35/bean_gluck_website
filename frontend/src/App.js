@@ -22,7 +22,6 @@ import UserContext from './tools/react/UserContext';
 import Error from './components/static/Error';
 import authAPI from './tools/api/authAPI';
 import { Container } from 'react-bootstrap';
-// import Test from './Test';
 
 
 function App() {
@@ -49,7 +48,6 @@ function App() {
 
         <Container fluid>
           <HomeNavbar />
-          {/* <Test /> */}
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/login" component={Login} />

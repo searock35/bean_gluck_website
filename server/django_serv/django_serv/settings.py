@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'rest_framework.authtoken',
     'django_filters',
@@ -96,14 +97,12 @@ EMAIL_HOST_PASSWORD = 'BCBAOUZalH159/l9/XMMYnZdHp+ObNyS9hVDTLZV6kwK'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'book_site',
-        'HOST': '', #localhost
-        'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': 'TurfM3l@nun562'
-        
-
+        # 'HOST': '', #localhost
+        # 'PORT': '3306',
+        # 'USER': 'root',
+        # 'PASSWORD': 'TurfM3l@nun562'
     }
 }
 
