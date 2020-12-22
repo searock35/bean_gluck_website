@@ -48,6 +48,9 @@ class CustomerInfoSerializer(serializers.Serializer):
     school_name = serializers.ReadOnlyField(source='school.name')
     school_primary_color = serializers.ReadOnlyField(source='school.primary_color')
     school_secondary_color = serializers.ReadOnlyField(source='school.secondary_color')
+    grad_year = serializers.ReadOnlyField()
+    home_city = serializers.ReadOnlyField(source='locality.city')
+    majors = serializers.StringRelatedField(source='major', many=True)
 
 class BookSearchSerializer(serializers.ModelSerializer):
     authors = serializers.StringRelatedField(many=True, read_only=True)
@@ -123,19 +126,25 @@ class ListingSerializer(serializers.ModelSerializer):
     # We want to show the whole customer info, hence the CustomerSerializer
     owner = CustomerSerializer(read_only=True)
     book = serializers.PrimaryKeyRelatedField(queryset=models.Book.objects.all())
-    school = serializers.PrimaryKeyRelatedField(queryset=models.School.objects.all())
+    school = serializers.PrimaryKeyRelatedField(queryset=models.School.objects.all(), write_only=True)
+    school_name = serializers.ReadOnlyField(source='school.name')
+    condition_display = serializers.ReadOnlyField(source='get_condition_display')
 
     class Meta:
         model = models.Listing
-        fields = ['id', 'owner', 'school', 'book', 'condition', 'purchase_price', 'rental_price']
+        fields = ['id', 'owner', 'school', 'school_name', 'book', 'condition','condition_display', 'purchase_price', 'rental_price']
 
 class ListingRequestSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.user.username')
-    listing = serializers.PrimaryKeyRelatedField(queryset=models.Listing.objects.all())
+    owner_id = serializers.ReadOnlyField(source='owner.user.username')
+    owner_first_name = serializers.ReadOnlyField(source='owner.user.first_name')
+    owner_last_name = serializers.ReadOnlyField(source='owner.user.last_name')
+    listing = serializers.PrimaryKeyRelatedField(write_only=True, queryset=models.Listing.objects.all())
+    listing_data = ListingSerializer(source='listing', read_only=True)
+
     
     class Meta:
         model = models.ListingRequest
-        fields = ['id', 'listing', 'owner', 'purchase_asking_price', 'rental_asking_price']
+        fields = ['id', 'listing', 'listing_data', 'owner_id', 'owner_first_name', 'owner_last_name', 'purchase_asking_price', 'rental_asking_price']
 
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:

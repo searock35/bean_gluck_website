@@ -57,9 +57,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://planetary-eclipse-345492.postman.co",
+]
+
+from corsheaders.defaults import default_headers
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    'postman-token',
+    'cache-control'
 ]
 
 ROOT_URLCONF = 'django_serv.urls'

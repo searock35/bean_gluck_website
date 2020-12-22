@@ -24,7 +24,14 @@ class listingRequestAPI {
         ]
     }
 
-    //requestInfo: action: ["buy" | "rent"], message: string, userId: string,
+    /**
+     * Post a listing request to the API. 
+     * Return the response directly. 
+     * 
+     * @param {string} listing_id The ID of the listing to be requested
+     * @param {string} buyOrRent Whether the user wants to buy or rent the book
+     * @param {string} asking_price A value indicating a desired price
+     */
     requestListing(listing_id, buyOrRent, asking_price) {
 
         let requestInfo = {
@@ -40,8 +47,11 @@ class listingRequestAPI {
                     Authorization: "Token " + authAPI.authToken
                 }
             })
-                .then((response) => resolve())
-                .catch((error) => reject(error))
+                .then((response) => resolve(response))
+                .catch((error) => {
+                    if (error.response) reject(error.response)
+                    else reject({status: 0})
+                })
         })
     }
 
@@ -50,8 +60,23 @@ class listingRequestAPI {
         return this.testRequestsByListing
     }
 
-    getRequestsByUser(userId) {
-        return this.testRequestsByUser
+    /**
+     * Return the requests owned by the logged in user. Returns a list of requests
+     * if successful, otherwise a stable error message.
+     */
+    getRequestsByUser() {
+        return new Promise((resolve, reject) => {
+            Axios.get(restURL + "/requests/", {
+                headers: {
+                    Authorization: "Token " + authAPI.authToken
+                }
+            })
+                .then((response) => resolve(response.data))
+                .catch((error) => {
+                    if (error.response) reject(error.response)
+                    else reject({status: 0})
+                })
+        })
     }
 }
 

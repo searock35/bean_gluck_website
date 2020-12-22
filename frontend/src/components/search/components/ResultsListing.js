@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import SuccessAlert from './SuccessAlert';
+import ResponseStatusAlert from '../../pieces/ResponseStatusAlert';
 import listingRequestAPI from '../../../tools/api/listingRequestAPI';
 import Listing from './Listing';
 
 const ResultsListing = (props) => {
-    const [success, setSuccess] = useState();
+    const [responseStatus, setResponseStatus] = useState();
     const [buyOrRent, setBuyOrRent] = useState("buy");
     const [requestCost, setRequestCost] = useState(props.listing.purchase_price);
     const [sliderVal, setSliderVal] = useState(100)
@@ -21,14 +21,11 @@ const ResultsListing = (props) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        setSuccess("...");
-        console.log(e.target);
         listingRequestAPI.requestListing(props.listing.id, buyOrRent, requestCost)
-            .then((response) => setSuccess("true"))
+            .then((response) => setResponseStatus(response.status))
             .catch((err) => {
-                if (err.response.status === 401)
-                    setSuccess("authError")
-                else setSuccess(err.response.data.error)
+                console.log(err)
+                setResponseStatus(err.status)
             })
     }
 
@@ -45,7 +42,7 @@ const ResultsListing = (props) => {
 
     return (
         <div className="results-listing">
-            <SuccessAlert success={success}></SuccessAlert>
+            <ResponseStatusAlert status={responseStatus}></ResponseStatusAlert>
             <Listing {...props.listing}/>
             <div className="listing-form">
                 <Form onSubmit={submitHandler}>

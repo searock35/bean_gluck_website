@@ -4,11 +4,16 @@ const defaultColorSecondary = '#75888f';
 const defaultUser = {
     username: 'Guest',
     email: '',
-    userId: '0',
-    schoolId: '01220420',
-    schoolName: 'Text Trader University',
-    schoolColorPrimary: defaultColorPrimary,
-    schoolColorSecondary: defaultColorSecondary,
+    majors: [
+        'Book Selling'
+    ],
+    grad_year: 2020,
+    home_city: "Book City",
+    user_id: 0,
+    school_id: 0,
+    school_name: 'Text Trader University',
+    school_primary_color: defaultColorPrimary,
+    school_secondary_color: defaultColorSecondary,
     isAuth: false
 };
 

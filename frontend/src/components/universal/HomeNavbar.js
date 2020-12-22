@@ -39,9 +39,9 @@ function HomeNavbar() {
     const currentUser = useContext(UserContext);
 
     function handleLogoutEvent() {
-        currentUser.changeUserContext(
-            auth.logout(() => history.push('/'))
-        )
+        currentUser.changeUserContext(auth.getDefaultUser())
+        auth.logout()
+        history.push('/')
     }
 
     function handleSelect(eventKey) {

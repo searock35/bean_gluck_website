@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, useHistory } from 'react-router-dom';
-import auth from '../api/authAPI';
+import UserContext from '../react/UserContext';
 
 
 function ProtectedRoute({children, ...rest}) {
 
     const history = useHistory();
+    const currentUser = useContext(UserContext);
 
 
-    if(auth.isAuth) { 
+    if (currentUser.isAuth) { 
         return (
             <Route 
                 {...rest} 

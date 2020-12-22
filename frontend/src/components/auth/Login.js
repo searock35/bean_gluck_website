@@ -1,30 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import authAPI from '../../tools/api/authAPI';
-import { Form, Button, Alert } from 'react-bootstrap';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import UserContext from '../../tools/react/UserContext';
-import getDefaultUser from '../../tools/getDefaultUser';
+import ResponseStatusAlert from '../pieces/ResponseStatusAlert';
 
 
-const SuccessAlert = (props) => {
-    let variant = "warning";
-    let string = ""
-    if(props.success === "success") {
-        variant = "success";
-        string = "Login successful!";
-    } else if (props.success === "badCred") {
-        // TODO: First check to see if the servers are down
-        variant = "warning";
-        string = "Invalid username and/or password."
-    }
-
-    if(typeof props.success === "string") {
-        return <Alert variant={variant}>{string}</Alert>
-    } else {
-        return null;
-    }
-
-}
 
 function Login(props) {
     const [fields, setFields] = useState({
@@ -33,23 +14,25 @@ function Login(props) {
     });
 
     const [loginState, setLoginState] = useState()
+    const [alertMessage, setAlertMessage] = useState()
 
     const history = useHistory();
     const currentUser = useContext(UserContext);
 
-    function loginCb(newUser) {
-        if (newUser.username === "Guest") {
-            setLoginState("badCred")
-        } else {
-            setLoginState("success")
-            currentUser.changeUserContext(newUser);
-            history.goBack();
-        }
-    }
-
     function handleLoginEvent(e) {
         e.preventDefault();
-        authAPI.login(loginCb, fields.username, fields.password);
+        authAPI.login(fields.username, fields.password)
+        .then(newUser => {
+            setLoginState("200")
+            currentUser.changeUserContext(newUser);
+            history.goBack();
+        })
+        .catch(response => {
+            setLoginState(response.status);
+            if(response.data && response.data.non_field_errors) {
+                setAlertMessage(response.data.non_field_errors[0])
+            }
+        })
     }
 
     const onChangeHandler = (e) => {
@@ -60,14 +43,16 @@ function Login(props) {
         })
     }
 
-    if(authAPI.isAuth()) {
-        if (currentUser.email === getDefaultUser().email) {
-            //for this case, usertoken is enabled but User is not actually logged in on client. This should never happen.
-            authAPI.logout();
-            currentUser.changeUserContext(getDefaultUser());
-        } else {
-            return <Redirect to="/" />
-    }}
+
+    useEffect(() => {
+        if(currentUser.isAuth) {
+            if (currentUser.email === authAPI.getDefaultUser().email) {
+                //for this case, usertoken is enabled but User is not actually logged in on client. This should never happen.
+                authAPI.logout();
+            } else {
+                history.push("/")
+        }}
+    }, [currentUser, history])
 
     return (
         <Form onSubmit={handleLoginEvent}>
@@ -89,9 +74,7 @@ function Login(props) {
             <Button variant="primary" type="submit">
                 Login
             </Button>
-            <SuccessAlert success={loginState}>
-                Success!
-            </SuccessAlert>
+            <ResponseStatusAlert status={loginState} message={alertMessage}/>
         </Form>
     )   
 }

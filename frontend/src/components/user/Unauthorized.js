@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import UserContext from '../../tools/react/UserContext';
 
 
-function Unauthorized() {
+function Unauthorized(props) {
 
     const currentUser = useContext(UserContext);
 

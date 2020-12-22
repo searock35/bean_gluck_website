@@ -6,6 +6,7 @@ import GeneralAPI from '../../tools/api/generalAPI'
 import "./BookSearchForm.css";
 import { useHistory } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
+import authAPI from '../../tools/api/authAPI';
 
 const defaultSearchString = 'Enter book ISBN, Title, Author';
 
@@ -21,7 +22,6 @@ function BookDropDown(props) {
     const createBook = () => history.push("/book-create/");
 
     if(props.searchString === "" || props.searchString === defaultSearchString) {
-        // console.log("empty");
         return null;
     }
     return(
@@ -39,7 +39,7 @@ function BookDropDown(props) {
 function BookSearchForm(props) {
 
     const [searchText, setSearchText] = useState(defaultSearchString); 
-    const [schoolId, setSchoolId] = useState();
+    const [schoolId, setSchoolId] = useState(authAPI.currentUser.school_id);
     const [schools, setSchools] = useState([{id: 0, name: 'Loading...'}]);
     const [bookList, setBookList] = useState([]);  
 
@@ -63,11 +63,13 @@ function BookSearchForm(props) {
     }, [searchText])
 
     useEffect(() => {
-        console.log("Mounted!");
+        let isMounted = true
         GeneralAPI.getSchoolsBasic()
-        .then(school_list => setSchools(school_list))
+        .then(school_list => isMounted && setSchools(school_list))
         
         .catch(err => console.log(err))
+
+        return (() => isMounted = false)
     }, [])
         
     function onChangeSearchText(e) {
@@ -80,13 +82,13 @@ function BookSearchForm(props) {
 
     function SchoolSelectOption(props) {
         let options = props.schools.map((school) => {
-            return <option value={school.id} key={school.id}>{school.name}</option>
+            return <option value={school.id} key={school.id} >{school.name}</option>
         })
 
         return (
             <Form.Group controlId="schoolSelect">
                 <Form.Label>Select your school: </Form.Label>
-                <Form.Control as="select" onChange={schoolChange}>
+                <Form.Control as="select" defaultValue={authAPI.currentUser.school_id} onChange={schoolChange}>
                     {options}
                 </Form.Control>
             </Form.Group>

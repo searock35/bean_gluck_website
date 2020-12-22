@@ -47,11 +47,11 @@ class CustomerViewSet(viewsets.GenericViewSet):
         cust = serializers.CustomerSerializer(data=request.data)
 
         if not l.is_valid():
-            return Response({'error':l.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail':l.errors}, status=status.HTTP_400_BAD_REQUEST)
         elif not u.is_valid():
-            return Response({'error':u.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail':u.errors}, status=status.HTTP_400_BAD_REQUEST)
         elif not cust.is_valid():
-            return Response({'error':cust.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'detail':cust.errors}, status=status.HTTP_400_BAD_REQUEST)
 
         locality = l.save()
         user = u.save()
@@ -72,7 +72,7 @@ class CustomerViewSet(viewsets.GenericViewSet):
         if (request.user.pk == int(kwargs['pk'])):
             return Response({'success':'User validated succesfully'})
         else:
-            return Response({'error':'Invalid token for this user'}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({'detail':'Invalid token for this user'}, status=status.HTTP_401_UNAUTHORIZED)
 
     @action(detail=True, methods=['get'], permission_classes=[permissions.IsAuthenticated])
     def listings(self, request, **kwargs):
@@ -109,18 +109,18 @@ class ListingList(generics.ListCreateAPIView):
     serializer_class = serializers.ListingSerializer
 
     def get_queryset(self):
-        user=self.request.user
-        if user.is_anonymous:
-            return None
+        userId = self.request.query_params.get('userId', "undefined")
+        if userId == "undefined":
+            return models.Listing.objects.all() 
         else:
-            return models.Listing.objects.filter(owner=self.request.user.customer)
+            return models.Listing.objects.filter(owner__pk=userId)
 
     def create(self, request, *args, **kwargs):
         # check for customer
         try:
             customer = models.Customer.objects.get(user=request.user)
         except models.Customer.DoesNotExist:
-            return Response({"error":"User has no customer attribute"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail":"User has no customer attribute"}, status=status.HTTP_400_BAD_REQUEST)
 
         override_status = request.data.pop('override', 'False')
         serializer = self.get_serializer(data=request.data)
@@ -130,7 +130,7 @@ class ListingList(generics.ListCreateAPIView):
             listing_matches = models.Listing.objects.filter(book=d['book'], owner=customer)
             if len(listing_matches) > 0:
                 # don't save, just respond
-                return Response({"error":"A partial match to this listing exists"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"detail":"A partial match to this listing exists"}, status=status.HTTP_400_BAD_REQUEST)
 
         self.perform_create(serializer, customer)
         
@@ -139,38 +139,44 @@ class ListingList(generics.ListCreateAPIView):
     def perform_create(self, serializer, customer):
         serializer.save(owner=customer)
 
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 class ListingRequestList(generics.ListCreateAPIView):
     queryset = models.ListingRequest.objects.all()
     serializer_class = serializers.ListingRequestSerializer
 
     def get_queryset(self):
-        base_set = models.ListingRequest.objects.all()
-        
-        if not self.request.user.is_anonymous:
-            userId = self.request.query_params.get('userId', None)
-            listingId = self.request.query_params.get('listingId', None)
+        # Can only view requests on your listings or your own requests
+        listingId = self.request.query_params.get('listingId', "undefined")
 
-            if  userId == str(self.request.user.pk):
-                base_set = base_set.filter(owner=self.request.user.customer)
-            if listingId != None:
-                base_set = base_set.filter(listing__pk=listingId)
+        base_set = models.ListingRequest.objects.all()
+
+        if listingId != "undefined":
+            # filter for requests where you own the listing
+            base_set = base_set.filter(listing__owner__pk=self.request.user.pk)
+            # then filter for the specific listing
+            base_set = base_set.filter(listing__pk=listingId)
+        
+        else:
+            base_set = base_set.filter(owner__pk=self.request.user.pk)
+
+
 
         return base_set 
 
     def create(self, request, *args, **kwargs):
         cust = request.user.customer 
         serializer = self.get_serializer(data=request.data)
-        print(request.data)
         serializer.is_valid(raise_exception=True)
+        print("Made it")
+        print(serializer.validated_data)
         d = serializer.validated_data
         listing = models.Listing.objects.get(pk=d['listing'].pk)
         if (cust.pk == listing.owner.pk):
-            return Response({"error":"Cannot create a request for one's own listing"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail":"Cannot create a request for one's own listing"}, status=status.HTTP_400_BAD_REQUEST)
 
         elif (len(models.ListingRequest.objects.filter(owner=cust, listing=d['listing']))):
-            return Response({"error":
+            return Response({"detail":
                 "You have already made a request for this listing." 
                 + " Please edit your old request or delete it before adding a new one."
             }, status=status.HTTP_400_BAD_REQUEST)
@@ -190,18 +196,18 @@ class LocalListingList(generics.ListAPIView):
     def get_queryset(self):
         if self.request.user.is_anonymous:
             base_set = models.Listing.objects.all()
-            schoolId = self.request.query_params.get('schoolId', None)
-            bookId = self.request.query_params.get('bookId', None)
-            if schoolId != None:
+            schoolId = self.request.query_params.get('schoolId', "undefined")
+            bookId = self.request.query_params.get('bookId', "undefined")
+            if schoolId != "undefined":
                 base_set = base_set.filter(owner__school=schoolId)
-            if bookId != None:
+            if bookId != "undefined":
                 base_set = base_set.filter(book__pk=bookId)
 
             return base_set
                 
 
         else:
-            return models.Listing.objects.filter(owner__locality=self.request.user.locality)
+            return models.Listing.objects.filter(owner__locality=self.request.user.locality).exclude(school)
 
         return models.Listing.objects.all()
 
@@ -239,7 +245,7 @@ class RequestMessageList(viewsets.GenericViewSet):
             return Response(serializer.data)
         
         else:
-            return Response({"error":"You can't post a message on this request"})
+            return Response({"detail":"You can't post a message on this request"})
 
     def perform_create(self, serializer, is_seller):
         serializer.save(is_seller=is_seller)
@@ -250,15 +256,14 @@ class SchoolListingList(generics.ListAPIView):
 
     def get_queryset(self):
         base_set = models.Listing.objects.all()
-        schoolId = self.request.query_params.get('schoolId', None)
-        print(schoolId)
-        bookId = self.request.query_params.get('bookId', None)
+        schoolId = self.request.query_params.get('schoolId', "undefined")
+        bookId = self.request.query_params.get('bookId', "undefined")
         
-        if bookId != None:
+        if bookId != "undefined":
             base_set = base_set.filter(book=bookId)
             
-        if schoolId != None:
-            base_set = base_set.filter(owner__school=schoolId)
+        if schoolId != "undefined":
+            base_set = base_set.filter(school=schoolId)
 
         return base_set 
 
@@ -301,7 +306,7 @@ class TransactionList(generics.ListCreateAPIView):
             return Response(serializer.data)
         else:
             return Response(
-                {"error":"Can't fulfill a request for another user's listing"}, 
+                {"detail":"Can't fulfill a request for another user's listing"}, 
                 status=status.HTTP_400_BAD_REQUEST
                 )
 

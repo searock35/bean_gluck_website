@@ -31,6 +31,7 @@ function App() {
     authAPI.refreshUser()
 
       .then((user) => {
+        console.log(user)
         setUserState(user) 
       })
       .catch((err) => {
@@ -55,7 +56,7 @@ function App() {
             <Route path="/listings" component={ListingsSearch} />
             <Route path="/book-create/" component={NewBookCreator} />
             <Route path="/donate" component={Donate} />
-            <ProtectedRoute path="/user/:username/" component={UserRouter} />
+            <ProtectedRoute path="/user/:username/"><UserRouter/></ProtectedRoute>  
             <Route path="/" component={Error} />
           </Switch>
 
