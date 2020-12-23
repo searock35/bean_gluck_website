@@ -1,40 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Book from '../pieces/Book';
-
-import BooksAPI from '../../tools/api/booksAPI'
-import GeneralAPI from '../../tools/api/generalAPI'
+import BooksAPI from '../../tools/api/booksAPI';
+import GeneralAPI from '../../tools/api/generalAPI';
 import "./BookSearchForm.css";
-import { useHistory } from 'react-router-dom';
-import { Form } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
+import SchoolSelectOption from '../pieces/SchoolSelectOption';
+import BookDropDown from './components/BookDropDown';
 import authAPI from '../../tools/api/authAPI';
 
 const defaultSearchString = 'Enter book ISBN, Title, Author';
-
-function BookDropDown(props) {
-
-    const allBooks = props.books.map( (book) => 
-    <li className="book-drop-down-entry" key={book.isbn}>
-        <Book bookInfo={book} schoolId={props.schoolId} clickable="true" />
-    </li>
-    )
-
-    const history = useHistory();
-    const createBook = () => history.push("/book-create/");
-
-    if(props.searchString === "" || props.searchString === defaultSearchString) {
-        return null;
-    }
-    return(
-        <div className="form-group bookDropDown">
-            <ul>
-                {allBooks}
-                <li className='new-book-creator' onClick={createBook}>
-                    Create a new listing.
-                </li> 
-            </ul>
-        </div>
-    );
-}
 
 function BookSearchForm(props) {
 
@@ -42,9 +15,10 @@ function BookSearchForm(props) {
     const [schoolId, setSchoolId] = useState(authAPI.currentUser.school_id);
     const [schools, setSchools] = useState([{id: 0, name: 'Loading...'}]);
     const [bookList, setBookList] = useState([]);  
+    const [noSchoolAlert, setNoSchoolAlert] = useState(false);
 
     const onSearchSubmit = (e) => {
-        console.log("form submitted");
+        if (!schoolId) setNoSchoolAlert(true);
         e.preventDefault();
     }
 
@@ -80,20 +54,7 @@ function BookSearchForm(props) {
         setSchoolId(e.target.value);
     }
 
-    function SchoolSelectOption(props) {
-        let options = props.schools.map((school) => {
-            return <option value={school.id} key={school.id} >{school.name}</option>
-        })
-
-        return (
-            <Form.Group controlId="schoolSelect">
-                <Form.Label>Select your school: </Form.Label>
-                <Form.Control as="select" defaultValue={authAPI.currentUser.school_id} onChange={schoolChange}>
-                    {options}
-                </Form.Control>
-            </Form.Group>
-        )
-    }     
+    console.log("School ID Changed to ", schoolId)
  
     return (
         <form onSubmit={onSearchSubmit}>
@@ -107,10 +68,11 @@ function BookSearchForm(props) {
                     onClick={(e) => (e.target.value===defaultSearchString) && setSearchText("")}
                     onChange={onChangeSearchText}
                 />
-                <BookDropDown books={bookList} schoolId={schoolId} searchString={searchText}/>
+                <BookDropDown books={bookList} schoolId={schoolId}/> 
             </div>
-            <SchoolSelectOption schools={schools}/>
+            <SchoolSelectOption schools={schools} onChangeCB={schoolChange}/>
             <br /><input id="form-submission" type="submit" value="Search" />
+            {noSchoolAlert && (<Alert variant="warning">Please select a school.</Alert>)}
        </form>
     )
 }

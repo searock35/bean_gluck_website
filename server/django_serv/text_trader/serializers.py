@@ -120,7 +120,7 @@ class BookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Book
-        fields = ['id', 'title', 'subtitle', 'isbn', 'authors', 'edition', 'creator', 'course']
+        fields = ['id', 'title', 'subtitle', 'isbn', 'authors', 'edition', 'creator', 'course', 'is_custom']
 
 class ListingSerializer(serializers.ModelSerializer):
     # We want to show the whole customer info, hence the CustomerSerializer

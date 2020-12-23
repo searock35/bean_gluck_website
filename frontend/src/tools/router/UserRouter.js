@@ -1,43 +1,54 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 //Tools
-import { Route, Switch, useRouteMatch, useParams } from 'react-router-dom';
-import ProtectedRoute from './ProtectedRoute';
-import UserContext from '../react/UserContext';
+import { Route, Switch, useParams } from "react-router-dom";
+import UserContext from "../react/UserContext";
 //Components
-import UserListings from '../../components/user/UserListings';
-import Dashboard from '../../components/user/dashboard/Dashboard';
-import EditUserProfile from'../../components/user/EditUserProfile';
-import Unauthorized from '../../components/user/Unauthorized';
+import UserListings from "../../components/user/UserListings";
+import Dashboard from "../../components/user/dashboard/Dashboard";
+import EditUserProfile from "../../components/user/EditUserProfile";
+import Unauthorized from "../../components/user/Unauthorized";
+import UserViewer from "../../components/user/UserViewer";
 
 /**
  * This route will be used for all locations starting with ./user/:username, and will redirect accordingly.
  * Should deny access to user routes if the :username parameter doesn't match the authorized username.
  */
- function UserRouter() {
-
-    let { url } = useRouteMatch();
+function UserRouter(props) {
+    const currentUser = useContext(UserContext);
     const { username } = useParams();
-    
-    return (
-        
-        <Switch>
-            <ProtectedRoute path={url + '/my-listings'}>
-                <UserListings/>
-            </ProtectedRoute>
+    console.log(username);
 
-            <ProtectedRoute path={url + '/edit'}>
-                <EditUserProfile/>
-            </ProtectedRoute>
+    if (props.userLoading) {
+        return <h1>Loading user info...</h1>;
+    } else if (currentUser.username !== username) {
+        console.log(username);
+        return (
+            <Switch>
+                <Route exact path={"/user/:username/"}>
+                    <UserViewer />
+                </Route>
 
-            <ProtectedRoute exact path={url}>
-                <Dashboard/>
-            </ProtectedRoute>
+                <Route component={Unauthorized} />
+            </Switch>
+        );
+    } else {
+        console.log(username);
+        return (
+            <Switch>
+                <Route path={"/user/:username/my-listings"}>
+                    <UserListings />
+                </Route>
 
-            <Route path="/user/unauthorized" component={Unauthorized} />
+                <Route path={"/user/:username/edit"}>
+                    <EditUserProfile />
+                </Route>
 
-        </Switch>
-    )
+                <Route exact path="/user/:username/">
+                    <Dashboard />
+                </Route>
+            </Switch>
+        );
+    }
 }
-
 
 export default UserRouter;

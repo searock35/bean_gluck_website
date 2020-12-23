@@ -29,8 +29,9 @@ class BookViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin, mixins.ListM
     def search(self, request, **kwargs):
         queryset = self.get_queryset()
         queryset = filters.SearchFilter().filter_queryset(request, queryset, self)
-        BSS = serializers.BookSearchSerializer
-        return Response([BSS(book).data for book in queryset])
+        serializer = self.get_serializer(many=True, instance=queryset)
+        # BSS = serializers.BookSearchSerializer
+        return Response(serializer.data)
 
 class CourseList(generics.ListCreateAPIView):
     queryset = models.Course.objects.all()
@@ -277,8 +278,8 @@ class SchoolViewSet(viewsets.GenericViewSet):
 
     @action(methods=['get'], detail=False, url_path='basic')
     def list_basic(self, request):
-        BSS = serializers.BasicSchoolSerializer
-        return Response([BSS(school).data for school in self.get_queryset()])
+        serializer = serializers.BasicSchoolSerializer(many=True, instance=self.get_queryset())
+        return Response(serializer.data)
 
     @action(methods=['get'], detail=True)
     def listings(self, request, **kwargs):

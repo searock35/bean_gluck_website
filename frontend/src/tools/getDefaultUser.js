@@ -14,7 +14,7 @@ const defaultUser = {
     school_name: 'Text Trader University',
     school_primary_color: defaultColorPrimary,
     school_secondary_color: defaultColorSecondary,
-    isAuth: false
+    isAuth: false,
 };
 
 const getDefaultUser = () => defaultUser;
