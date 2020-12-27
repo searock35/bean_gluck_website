@@ -54,7 +54,6 @@ function BookSearchForm(props) {
         setSchoolId(e.target.value);
     }
 
-    console.log("School ID Changed to ", schoolId)
  
     return (
         <form onSubmit={onSearchSubmit}>

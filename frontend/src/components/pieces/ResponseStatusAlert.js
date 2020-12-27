@@ -5,7 +5,8 @@ import { Alert } from "react-bootstrap";
  * An alert designed to give feedback based on API calls. Can be given a status and a message.
  * If given a status of 0, no response was given. Notify user they are offline.
  *
- * @param {*} props
+ * @param {String} message An optional message to override the default message.
+ * @param {Number} status The HTTP status to base the info off of
  */
 const ResponseStatusAlert = (props) => {
     // props.status

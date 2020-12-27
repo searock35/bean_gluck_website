@@ -1,30 +1,74 @@
 import React, { useEffect, useState } from "react";
-import { Form, Button, Col } from "react-bootstrap";
+import {
+    Form,
+    Button,
+    ButtonGroup,
+    ToggleButton,
+    Col,
+    InputGroup,
+    Alert,
+} from "react-bootstrap";
 import * as yup from "yup";
+import booksAPI from "../../tools/api/booksAPI";
+import ResponseStatusAlert from "../pieces/ResponseStatusAlert";
 import "./NewBookCreator.css";
 
+let authorSchema = yup.object().shape({
+    first_name: yup.string().required().max(30),
+    middle_initial: yup.string().max(1),
+    last_name: yup.string().required().max(30),
+});
+
 let bookSchema = yup.object().shape({
-    title: yup.string().required().min(1).max(30),
-    subtitle: yup.string().required().min(1).max(50),
-    author_first: yup.string().required().max(30),
-    author_middle: yup.string().max(1),
-    author_last: yup.string().required().max(30),
+    title: yup.string().required().min(1).max(100),
+    subtitle: yup.string().max(100),
+    authors: yup.array().of(authorSchema),
     edition: yup.number().integer().lessThan(20).moreThan(0),
     isbn: yup.string().matches(/^((\d{10})|(\d{13}))$/),
+    is_custom: yup.bool().required(),
 });
 
 function NewBookCreator() {
     const [bookData, setBookData] = useState({
         title: "",
         subtitle: "",
-        authors: [{ first_name: "", middle_initial: "", last_name: "" }],
-        edition: "",
+        edition: "1",
         isbn: "",
-        has_isbn: "",
     });
 
+    const [bookAuthors, setBookAuthors] = useState([
+        { first_name: "", middle_initial: "", last_name: "" },
+    ]);
     const [disableAddAuthor, setDisableAddAuthor] = useState(false);
     const [disableRemoveAuthor, setDisableRemoveAuthor] = useState(true);
+    const [editionSuffix, setEditionSuffix] = useState("st");
+    const [isCustom, setIsCustom] = useState(false);
+    const [postSuccess, setPostSuccess] = useState();
+    const [postMessage, setPostMessage] = useState();
+    const [validationMessage, setValidationMessage] = useState("");
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        let all_data = {
+            ...bookData,
+            authors: bookAuthors,
+            is_custom: isCustom,
+        };
+        if (isCustom) delete all_data.isbn;
+        console.log(all_data);
+        bookSchema
+            .validate(all_data)
+            .then((book) => {
+                setValidationMessage("");
+                booksAPI
+                    .postBook(all_data)
+                    .then((response) => {setPostSuccess(response.status)})
+                    .catch((err) => {setPostMessage(Object.entries(err.data)[0][1][0]); setPostSuccess(err.status)});
+            })
+            .catch((err) => {
+                setValidationMessage(err.message);
+            });
+    };
 
     const onChangeHandler = (e) => {
         e.preventDefault();
@@ -35,107 +79,104 @@ function NewBookCreator() {
         });
     };
 
+    const updateAuthorData = (e, index) => {
+        e.preventDefault();
+        const { id, value } = e.target;
+        const newAuthors = bookAuthors.concat();
+        newAuthors[index] = { ...newAuthors[index], [id]: value };
+        setBookAuthors(newAuthors);
+    };
+
     useEffect(() => {
-        if (bookData.authors.length === 1) {
+        switch (bookData.edition) {
+            case "":
+                setEditionSuffix("");
+                break;
+            case "1":
+                setEditionSuffix("st");
+                break;
+            case "2":
+                setEditionSuffix("nd");
+                break;
+            case "3":
+                setEditionSuffix("rd");
+                break;
+            default:
+                setEditionSuffix("th");
+        }
+        console.log("rerendered");
+    }, [bookData.edition]);
+
+    useEffect(() => {
+        if (bookAuthors.length === 1) {
             setDisableRemoveAuthor(true);
-        } else if (bookData.authors.length === 3) {
+        } else if (bookAuthors.length === 3) {
             setDisableAddAuthor(true);
         } else {
             setDisableAddAuthor(false);
             setDisableRemoveAuthor(false);
         }
-    }, [bookData]);
+    }, [bookAuthors]);
 
     const addAuthor = () => {
-        if (bookData.authors.length < 3) {
-            bookData.authors.push({
-                first_name: "",
-                middle_initial: "",
-                last_name: "",
-            });
-        }
-
-        if (bookData.authors.length === 3) {
-            setDisableAddAuthor(true);
-        } else {
-            setDisableAddAuthor(false);
-        }
-
-        setBookData({ ...bookData });
+        if (bookAuthors.length < 3)
+            setBookAuthors(
+                bookAuthors.concat({
+                    first_name: "",
+                    middle_initial: "",
+                    last_name: "",
+                })
+            );
     };
 
     const removeAuthor = () => {
-        if (bookData.authors.length > 1) {
-            bookData.authors.pop();
-        }
-        if (bookData.authors.length === 1) {
-            setDisableRemoveAuthor(true);
-        } else {
-            setDisableRemoveAuthor(false);
-        }
-
-        setBookData({ ...bookData });
+        if (bookAuthors.length > 1) setBookAuthors(bookAuthors.slice(0, -1));
     };
 
-    const submitHandler = (e) => {
-        e.preventDefault();
-        bookSchema
-            .validate(bookData)
-            .then((book) => {
-                console.log(book);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
-        //some API call here
-    };
-
-    const AuthorForms = bookData.authors.map((author, index) => {
+    const AuthorForms = bookAuthors.map((author, index) => {
         return (
-            <Form.Group controlId={`author${index}`} key={index}>
+            <div key={index} className="author-option">
                 <Form.Label>Author {index + 1}</Form.Label>
                 <Form.Row>
-                    <Col>
+                    <Col xs={4} lg={3}>
                         <Form.Group controlId="first_name">
                             <Form.Control
                                 type="name"
                                 placeholder="First name"
-                                value={bookData.authors[index].first_name}
-                                onChange={onChangeHandler}
+                                value={bookAuthors[index].first_name}
+                                onChange={(e) => updateAuthorData(e, index)}
                             />
                         </Form.Group>
                     </Col>
-                    <Col>
+                    <Col xs={2} lg={1}>
                         <Form.Group controlId="middle_initial">
                             <Form.Control
                                 type="name"
                                 placeholder="Middle Initial"
-                                value={bookData.authors[index].middle_initial}
-                                onChange={onChangeHandler}
+                                value={bookAuthors[index].middle_initial}
+                                onChange={(e) => updateAuthorData(e, index)}
                             />
-                            .
                         </Form.Group>
                     </Col>
-                    <Col>
+                    <Col xs={4} lg={3}>
                         <Form.Group controlId="last_name">
                             <Form.Control
                                 type="name"
                                 placeholder="Last name"
-                                value={bookData.authors[index].last_name}
-                                onChange={onChangeHandler}
+                                value={bookAuthors[index].last_name}
+                                onChange={(e) => updateAuthorData(e, index)}
                             />
                         </Form.Group>
                     </Col>
                 </Form.Row>
-            </Form.Group>
+            </div>
         );
     });
 
     return (
         <div className="new-book-creator">
             <Form onSubmit={submitHandler} className="new-book-form">
-                <h1>Create Public Book</h1>
+                <h1>Create Listable Resource</h1>
                 <Form.Group controlId="title">
                     <Form.Label>Book Title</Form.Label>
                     <Form.Control
@@ -152,46 +193,81 @@ function NewBookCreator() {
                         onChange={onChangeHandler}
                     />
                 </Form.Group>
-                <Form.Label>Authors</Form.Label>
-                {AuthorForms}
-                <Form.Text className="text-muted">
-                    Add up to 3 authors.
-                </Form.Text>
-                <Button
-                    id="add-author-button"
-                    variant="outline-primary"
-                    onClick={addAuthor}
-                    disabled={disableAddAuthor}
-                >
-                    Add Author
-                </Button>
-                <Button
-                    id="remove-author-button"
-                    variant="danger"
-                    onClick={removeAuthor}
-                    disabled={disableRemoveAuthor}
-                >
-                    Remove Author
-                </Button>
+                <Form.Group>
+                    {AuthorForms}
+                    <Button
+                        id="add-author-button"
+                        variant="outline-primary"
+                        onClick={addAuthor}
+                        disabled={disableAddAuthor}
+                    >
+                        Add Author
+                    </Button>
+                    <Button
+                        id="remove-author-button"
+                        variant="danger"
+                        onClick={removeAuthor}
+                        disabled={disableRemoveAuthor}
+                    >
+                        Remove Author
+                    </Button>
+                    <Form.Text className="text-muted">
+                        Add up to 3 authors.
+                    </Form.Text>
+                </Form.Group>
                 <Form.Group controlId="edition">
                     <Form.Label>Enter the edition number here</Form.Label>
-                    <Form.Control
-                        placeholder="1"
-                        value={bookData.edition}
-                        onChange={onChangeHandler}
-                    />
+                    <Col xs={4} sm={3} md={2} xl={1}>
+                        <InputGroup>
+                            <Form.Control
+                                value={bookData.edition}
+                                onChange={onChangeHandler}
+                            />
+                            <InputGroup.Append>
+                                <InputGroup.Text>
+                                    {editionSuffix}
+                                </InputGroup.Text>
+                            </InputGroup.Append>
+                        </InputGroup>
+                    </Col>
                 </Form.Group>
-                <Form.Group controlId="isbn">
-                    <Form.Label>Enter ISBN, if applicable.</Form.Label>
-                    <Form.Control
-                        value={bookData.isbn}
-                        onChange={onChangeHandler}
-                    />
-                </Form.Group>
+                <Form.Label>Enter ISBN, if applicable.</Form.Label>
+                <Form.Row>
+                    <Col>
+                        <Form.Group controlId="isbn">
+                            <Form.Control
+                                value={bookData.isbn}
+                                onChange={onChangeHandler}
+                                disabled={isCustom}
+                            />
+                        </Form.Group>
+                        <Form.Text className="text-muted">
+                            Please use the 13-digit ISBN-13, if possible.
+                        </Form.Text>
+                    </Col>
+                    <Col>
+                        <ButtonGroup toggle>
+                            <ToggleButton
+                                id="toggle-isbn-button"
+                                type="checkbox"
+                                variant="outline-success"
+                                value="1"
+                                checked={isCustom}
+                                onChange={() => setIsCustom(!isCustom)}
+                            >
+                                No ISBN
+                            </ToggleButton>
+                        </ButtonGroup>
+                    </Col>
+                </Form.Row>
 
                 <Button id="reg-submit-button" variant="primary" type="submit">
                     Submit
                 </Button>
+                <Alert variant="warning" show={!!validationMessage}>
+                    {validationMessage}
+                </Alert>
+                <ResponseStatusAlert status={postSuccess} message={postMessage} />
             </Form>
         </div>
     );
