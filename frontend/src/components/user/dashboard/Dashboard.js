@@ -30,6 +30,7 @@ function RequestsBox(props) {
     if (props.requests && !props.requests.status) {
         userRequests = props.requests.map((request) => (<li key={request.id}><DetailedRequest {...request} /></li>));
     }
+    console.log(props.requests)
 
 
     return (

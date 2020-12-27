@@ -132,10 +132,10 @@ class ListingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Listing
-        fields = ['id', 'owner', 'school', 'school_name', 'book', 'condition','condition_display', 'purchase_price', 'rental_price']
+        fields = ['id', 'owner', 'school', 'school_name', 'negotiable', 'book', 'condition','condition_display', 'purchase_price', 'rental_price']
 
 class ListingRequestSerializer(serializers.ModelSerializer):
-    owner_id = serializers.ReadOnlyField(source='owner.user.username')
+    owner_id = serializers.ReadOnlyField(source='owner.pk')
     owner_first_name = serializers.ReadOnlyField(source='owner.user.first_name')
     owner_last_name = serializers.ReadOnlyField(source='owner.user.last_name')
     listing = serializers.PrimaryKeyRelatedField(write_only=True, queryset=models.Listing.objects.all())

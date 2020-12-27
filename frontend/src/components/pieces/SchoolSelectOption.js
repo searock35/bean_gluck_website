@@ -3,8 +3,10 @@ import authAPI from '../../tools/api/authAPI';
 import { Form } from 'react-bootstrap';
 
 /**
- * A prop that renders a select box with schools. 
- * @param {props} props Should be given a list of basic schools ({id, name}) and an onChangeCB function
+ * A prop that renders a select box with schools, as a Form Group. Control Id is "school" 
+ * @param {Object} schools Should be given a list of basic schools ({id, name}) 
+ * @param {Function} onChanceCB a function to be called when the selection changes
+ * @param {String} label a description for the dropdown
  */
 function SchoolSelectOption(props) {
     let options = props.schools.map((school) => {
@@ -16,10 +18,11 @@ function SchoolSelectOption(props) {
     });
 
     return (
-        <Form.Group controlId="schoolSelect">
-            <Form.Label>Select your school: </Form.Label>
+        <Form.Group controlId="school">
+            <Form.Label>{props.label}</Form.Label>
             <Form.Control
                 as="select"
+                value={props.value}
                 defaultValue={authAPI.currentUser.school_id}
                 onChange={props.onChangeCB}
             >

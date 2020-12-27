@@ -21,6 +21,7 @@ import NewBookCreator from "./components/create/NewBookCreator";
 import UserContext from "./tools/react/UserContext";
 import Error from "./components/static/Error";
 import authAPI from "./tools/api/authAPI";
+import ListingCreator from "./components/create/ListingCreator";
 import { Container } from "react-bootstrap";
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
                         <Route path="/login" component={Login} />
                         <Route path="/register" component={Register} />
                         <Route path="/listings" component={ListingsSearch} />
+                        <Route path="/create-listing" component={ListingCreator} />
                         <Route
                             path="/book-create/"
                             component={NewBookCreator}

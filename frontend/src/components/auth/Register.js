@@ -111,9 +111,8 @@ function Register() {
             </Form.Group>
 
             <Form.Group controlId="username">
-                <Form.Label>username</Form.Label>
+                <Form.Label>Username</Form.Label>
                 <Form.Control
-                    type="email"
                     placeholder="Enter username"
                     value={user.username}
                     onChange={onChangeHandler}

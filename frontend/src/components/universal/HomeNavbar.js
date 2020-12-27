@@ -32,8 +32,8 @@ function UserNavDropdown(props) {
     } else {
         return (
             <NavDropdown title="Hello, Guest!">
-                <NavDropdown.Item onClick={()=>props.setModalVisible(true)}>Login</NavDropdown.Item> {/*eventKey="/login"*/}
-                <NavDropdown.Item eventKey="/register">
+                <NavDropdown.Item onClick={()=>props.setModalMode("login")}>Login</NavDropdown.Item> {/*eventKey="/login"*/}
+                <NavDropdown.Item onClick={()=>props.setModalMode("register")}>
                     Register
                 </NavDropdown.Item>
             </NavDropdown>
@@ -44,7 +44,8 @@ function UserNavDropdown(props) {
 function HomeNavbar() {
     const history = useHistory();
     const currentUser = useContext(UserContext);
-    const [modalVisible, setModalVisible] = useState(false);
+    const [modalMode, setModalMode] = useState("hide");
+
 
     function handleLogoutEvent() {
         currentUser.changeUserContext(auth.getDefaultUser());
@@ -56,10 +57,6 @@ function HomeNavbar() {
         eventKey === "/logout" ? handleLogoutEvent() : history.push(eventKey);
     }
 
-    function loginHideHandler(e) {
-        setModalVisible(false);
-    }
-
     return (
         <>
             <Navbar bg="dark" variant="dark" expand="lg">
@@ -67,10 +64,10 @@ function HomeNavbar() {
                 <Nav className="mr-auto" onSelect={handleSelect}>
                     <Nav.Link eventKey="/">Home</Nav.Link>
                     <Nav.Link eventKey="/donate">Donate</Nav.Link>
-                    <UserNavDropdown setModalVisible={setModalVisible}/>
+                    <UserNavDropdown setModalMode={setModalMode}/>
                 </Nav>
             </Navbar>
-            <AuthModal show={modalVisible} onHideHandler={loginHideHandler}/>
+            <AuthModal mode={modalMode} setMode={setModalMode}/>
         </>
     );
 }

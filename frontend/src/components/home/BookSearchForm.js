@@ -69,7 +69,7 @@ function BookSearchForm(props) {
                 />
                 <BookDropDown books={bookList} schoolId={schoolId}/> 
             </div>
-            <SchoolSelectOption schools={schools} onChangeCB={schoolChange}/>
+            <SchoolSelectOption schools={schools} onChangeCB={schoolChange} label="Select your school" value={schoolId}/>
             <br /><input id="form-submission" type="submit" value="Search" />
             {noSchoolAlert && (<Alert variant="warning">Please select a school.</Alert>)}
        </form>

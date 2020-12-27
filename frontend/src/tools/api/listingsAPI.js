@@ -1,10 +1,10 @@
 //Use search string to gather listings from database.
-import axios from 'axios';
-import restURL from './restURL'
+import axios from "axios";
+import authAPI from "./authAPI";
+import restURL from "./restURL";
 //Listing information to be listed: { firstName, lastName, condition, rentalPrice, sellingPrice }
 
 class listingsAPI {
-
     //create fake listings to simulate API
     // constructor() {
     //     // this.testListingsSchool = [
@@ -19,48 +19,59 @@ class listingsAPI {
     getSchoolListings(book, school) {
         //Use bookId to gather local listings from the database. Return a table with 10 of the listings
         return new Promise((resolve, reject) => {
-            axios.get(restURL + '/listings/school', {
-                params: {bookId: book,
-                schoolId: school}
-            })
-                .then(listings => resolve(listings))
-                .catch(err => reject(err))
+            axios
+                .get(restURL + "/listings/school", {
+                    params: { bookId: book, schoolId: school },
+                })
+                .then((listings) => resolve(listings))
+                .catch((err) => reject(err));
+        });
+    }
 
-        })
-                
+    postListing(listing) {
+        return new Promise((resolve, reject) => {
+            axios
+                .post(restURL + "/listings/", listing, {
+                    headers: { Authorization: "Token " + authAPI.authToken },
+                })
+                .then((response) => resolve(response.data))
+                .catch((err) => {
+                    if (err.response) reject(err.response);
+                    else reject({ status: 0 });
+                });
+        });
     }
 
     getLocalListings(book, school) {
-
         return new Promise((resolve, reject) => {
-            axios.get(restURL + '/listings/local', {
-                params: { 
-                    bookId: book,
-                    schoolId: school 
-                }
-            })
-                .then(listings => resolve(listings))
-                .catch(err => reject(err))
-
-        })
+            axios
+                .get(restURL + "/listings/local", {
+                    params: {
+                        bookId: book,
+                        schoolId: school,
+                    },
+                })
+                .then((listings) => resolve(listings))
+                .catch((err) => reject(err));
+        });
     }
 
     /**
-     * Return all the listings posted by an individual user. 
-     * @param {number} userId 
+     * Return all the listings posted by an individual user.
+     * @param {number} userId
      */
     getListingsByUser(userId) {
         return new Promise((resolve, reject) => {
             axios
                 .get(restURL + "/listings/", {
-                    params: {userId: userId},
+                    params: { userId: userId },
                 })
                 .then((response) => {
                     return resolve(response.data);
                 })
                 .catch((err) => {
                     if (err.response) reject(err.response);
-                    else reject({status: 0})
+                    else reject({ status: 0 });
                 });
         });
     }

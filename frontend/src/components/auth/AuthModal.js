@@ -1,38 +1,43 @@
-import React, { useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
-import Login from './Login';
-import Register from './Register';
+import React, { } from "react";
+import { Modal } from "react-bootstrap";
+import Login from "./Login";
+import Register from "./Register";
 
 /**
  * A modal which includes the login props.
- * @param {bool} show Show or hide the modal
- * @param {Function} onHideHandler Function to be called onHide 
- * @param {String} defaultMode The default auth mode showed upon opening, "register" or "login"
+ * @param {Function} setMode A CB to the prop that controls the mode and visibility of the modal.
+ * @param {String} mode The mode the modal will be in.
+ * Options are "register", "login", or "hide"
  */
 const AuthModal = (props) => {
-    const defaultMode = (props.defaultMode) ? props.defaultMode : "login"
-    const [mode, setMode] = useState(defaultMode)
-
     return (
         <div>
-            <Modal show={props.show} onHide={props.onHideHandler}>
+            <Modal
+                show={props.mode !== "hide"}
+                onHide={() => props.setMode("hide")}
+            >
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        <button onClick={()=>setMode("login")}>Login</button> / <button onClick={()=>setMode("register")}>Register</button>
+                        <button onClick={() => props.setMode("login")}>
+                            Login
+                        </button>{" "}
+                        /{" "}
+                        <button onClick={() => props.setMode("register")}>
+                            Register
+                        </button>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {mode==="login" ? <Login/> : <Register/>}
+                    {props.mode === "login" ? <Login /> : <Register />}
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button onClick={()=>console.log("Clicked")}>
+                {/* <Modal.Footer>
+                    <Button onClick={() => console.log("Clicked")}>
                         Click me!
                     </Button>
-
-                </Modal.Footer>
+                </Modal.Footer> */}
             </Modal>
         </div>
     );
-}
+};
 
 export default AuthModal;

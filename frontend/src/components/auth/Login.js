@@ -25,7 +25,6 @@ function Login(props) {
         .then(newUser => {
             setLoginState("200")
             currentUser.changeUserContext(newUser);
-            history.goBack();
         })
         .catch(response => {
             setLoginState(response.status);
