@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Alert, Form, Col, Button } from "react-bootstrap";
-import { Redirect, useHistory } from "react-router-dom";
 import authAPI from "../../tools/api/authAPI";
 import * as yup from "yup";
 
@@ -20,7 +19,6 @@ let regSchema = yup.object().shape({
 });
 
 function Register() {
-    const history = useHistory();
     const [user, setUser] = useState({
         first_name: "",
         last_name: "",
@@ -42,7 +40,7 @@ function Register() {
             .then((regInfo) => {
                 authAPI
                     .register(regInfo)
-                    .then((response) => history.goBack())
+                    .then((response) => console.log(response))
                     .catch((err) => setError(err.data));
             })
             .catch(function (err) {
@@ -60,10 +58,6 @@ function Register() {
             [id]: value,
         }));
     };
-
-    if (authAPI.isAuth()) {
-        return <Redirect to="/" />;
-    }
 
     return (
         <Form noValidate onSubmit={submitHandler}>

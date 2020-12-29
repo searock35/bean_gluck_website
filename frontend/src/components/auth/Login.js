@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import authAPI from '../../tools/api/authAPI';
 import { Form, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
 import UserContext from '../../tools/react/UserContext';
 import ResponseStatusAlert from '../pieces/ResponseStatusAlert';
 
@@ -16,14 +15,13 @@ function Login(props) {
     const [loginState, setLoginState] = useState()
     const [alertMessage, setAlertMessage] = useState()
 
-    const history = useHistory();
     const currentUser = useContext(UserContext);
 
     function handleLoginEvent(e) {
         e.preventDefault();
         authAPI.login(fields.username, fields.password)
         .then(newUser => {
-            setLoginState("200")
+            setLoginState(200)
             currentUser.changeUserContext(newUser);
         })
         .catch(response => {
@@ -48,10 +46,8 @@ function Login(props) {
             if (currentUser.email === authAPI.getDefaultUser().email) {
                 //for this case, usertoken is enabled but User is not actually logged in on client. This should never happen.
                 authAPI.logout();
-            } else {
-                history.push("/")
         }}
-    }, [currentUser, history])
+    }, [currentUser])
 
     return (
         <Form onSubmit={handleLoginEvent}>

@@ -8,7 +8,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 
 from django.contrib.auth.models import User
-from text_trader.permissions import IsOwnerOrReadOnly, IsOwner
+from text_trader.permissions import IsOwnerOrReadOnly, IsOwner, IsAssociatedWithMessage
 from text_trader import models
 from text_trader import serializers
 
@@ -105,7 +105,7 @@ class CustomAuthToken(ObtainAuthToken):
             'user_id': user.pk,
         })
 
-class ListingList(generics.ListCreateAPIView):
+class ListingViewSet(viewsets.GenericViewSet, mixins.ListModelMixin):
     queryset = models.Listing.objects.all()
     serializer_class = serializers.ListingSerializer
 
@@ -137,6 +137,12 @@ class ListingList(generics.ListCreateAPIView):
         
         return Response(serializer.data)
 
+    @action(methods=['get'], permission_classes=[IsOwner], detail=True)
+    def requests(self, request, **kwargs):
+        requests = models.ListingRequest.objects.filter(listing=self.get_object())
+        serializer = serializers.ListingRequestSerializer(many=True, instance=requests)
+        return Response(serializer.data)
+
     def perform_create(self, serializer, customer):
         serializer.save(owner=customer)
 
@@ -161,16 +167,12 @@ class ListingRequestList(generics.ListCreateAPIView):
         else:
             base_set = base_set.filter(owner__pk=self.request.user.pk)
 
-
-
         return base_set 
 
     def create(self, request, *args, **kwargs):
         cust = request.user.customer 
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        print("Made it")
-        print(serializer.validated_data)
         d = serializer.validated_data
         listing = models.Listing.objects.get(pk=d['listing'].pk)
         if (cust.pk == listing.owner.pk):
@@ -191,30 +193,83 @@ class ListingRequestList(generics.ListCreateAPIView):
 
     permission_classes = [permissions.IsAuthenticated]
 
-class LocalListingList(generics.ListAPIView):
-    serializer_class = serializers.ListingSerializer
+# class LocalListingList(generics.ListAPIView):
+#     serializer_class = serializers.ListingSerializer
 
-    def get_queryset(self):
-        if self.request.user.is_anonymous:
-            base_set = models.Listing.objects.all()
-            schoolId = self.request.query_params.get('schoolId', "undefined")
-            bookId = self.request.query_params.get('bookId', "undefined")
-            if schoolId != "undefined":
-                base_set = base_set.filter(owner__school=schoolId)
-            if bookId != "undefined":
-                base_set = base_set.filter(book__pk=bookId)
+#     def get_queryset(self):
+#         if self.request.user.is_anonymous:
+#             base_set = models.Listing.objects.all()
+#             schoolId = self.request.query_params.get('schoolId', "undefined")
+#             bookId = self.request.query_params.get('bookId', "undefined")
+#             if schoolId != "undefined":
+#                 base_set = base_set.filter(owner__school=schoolId)
+#             if bookId != "undefined":
+#                 base_set = base_set.filter(book__pk=bookId)
 
-            return base_set
+#             return base_set
                 
 
+#         else:
+#             return models.Listing.objects.filter(owner__locality=self.request.user.locality).exclude(school)
+
+#         return models.Listing.objects.all()
+
+#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class RequestViewSet(viewsets.GenericViewSet):
+    queryset = models.ListingRequest.objects.all()
+    serializer_class = serializers.ListingRequestSerializer
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset().filter(owner__pk=request.user.pk)
+        serializer = self.get_serializer(many=True, instance=queryset)
+        return Response(data=serializer.data) 
+
+    def create(self, request, *args, **kwargs):
+        cust = request.user.customer 
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        d = serializer.validated_data
+        listing = models.Listing.objects.get(pk=d['listing'].pk)
+        if (cust.pk == listing.owner.pk):
+            return Response({"detail":"Cannot create a request for one's own listing"}, status=status.HTTP_400_BAD_REQUEST)
+
+        elif (len(models.ListingRequest.objects.filter(owner=cust, listing=d['listing']))):
+            return Response({"detail":
+                "You have already made a request for this listing." 
+                + " Please edit your old request or delete it before adding a new one."
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
         else:
-            return models.Listing.objects.filter(owner__locality=self.request.user.locality).exclude(school)
+            self.perform_create(serializer, cust)
+            return Response(serializer.data)
 
-        return models.Listing.objects.all()
+    @action(methods=['get', 'post'], detail=True, permission_classes=[IsAssociatedWithMessage])
+    def messages(self, request, **kwargs):
+        if (request.method == 'GET'):
+            messages = models.RequestMessage.objects.filter(request=self.get_object())
+            print(messages)
+            serializer = serializers.MessageSerializer(many=True, instance=messages)
+            return Response(data=serializer.data)
 
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+        elif (request.method == 'POST'):
+            data = request.data
+            data['request'] = self.get_object().pk
+            serializer = serializers.MessageSerializer(data=data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save(owner=request.user.customer)
+            return Response(data=serializer.data)
+            
 
-class RequestMessageList(viewsets.GenericViewSet):
+        return Response()
+
+    def perform_create(self, serializer, customer):
+        serializer.save(owner=customer)
+
+
+    permission_classes = [permissions.IsAuthenticated]
+
+class RequestMessageViewSet(viewsets.GenericViewSet):
     serializer_class = serializers.MessageSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -249,24 +304,7 @@ class RequestMessageList(viewsets.GenericViewSet):
             return Response({"detail":"You can't post a message on this request"})
 
     def perform_create(self, serializer, is_seller):
-        serializer.save(is_seller=is_seller)
-
-class SchoolListingList(generics.ListAPIView):
-    queryset = models.Listing.objects.all()
-    serializer_class = serializers.ListingSerializer
-
-    def get_queryset(self):
-        base_set = models.Listing.objects.all()
-        schoolId = self.request.query_params.get('schoolId', "undefined")
-        bookId = self.request.query_params.get('bookId', "undefined")
-        
-        if bookId != "undefined":
-            base_set = base_set.filter(book=bookId)
-            
-        if schoolId != "undefined":
-            base_set = base_set.filter(school=schoolId)
-
-        return base_set 
+        serializer.save(is_seller=is_seller, owner=self.request.user.customer)
 
 class SchoolViewSet(viewsets.GenericViewSet):
     queryset = models.School.objects.all()

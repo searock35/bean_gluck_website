@@ -19,7 +19,7 @@ function BookDropDown(props) {
 
     const createBook = () => history.push("/book-create/");
 
-    if (!props.books[0]) {
+    if (props.hide) {
         return null;
     }
 

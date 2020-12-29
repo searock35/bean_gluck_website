@@ -28,7 +28,8 @@ const AuthModal = (props) => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {props.mode === "login" ? <Login /> : <Register />}
+                    {props.mode === "login" ? <Login /> : <></>}
+                    {props.mode === "register" ? <Register /> : <></>}
                 </Modal.Body>
                 {/* <Modal.Footer>
                     <Button onClick={() => console.log("Clicked")}>

@@ -34,6 +34,7 @@ class listingRequestAPI {
      */
     requestListing(listing_id, buyOrRent, asking_price) {
 
+
         let requestInfo = {
             listing: `${listing_id}`,
         }
@@ -42,6 +43,7 @@ class listingRequestAPI {
         else requestInfo['rental_asking_price'] = asking_price;
 
         return new Promise((resolve, reject) => {
+            if (authAPI.authToken === "0") return reject({status: 401})
             Axios.post(restURL + "/requests/", requestInfo, {
                 headers: {
                     Authorization: "Token " + authAPI.authToken

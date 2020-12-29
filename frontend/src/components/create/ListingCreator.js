@@ -8,6 +8,8 @@ import listingAPI from "../../tools/api/listingsAPI";
 import Book from "../pieces/Book";
 import SchoolSelectOption from "../pieces/SchoolSelectOption";
 import * as yup from "yup";
+import ResponseStatusAlert from "../pieces/ResponseStatusAlert";
+import AuthModalWithContext from "../auth/AuthModalWithContext";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -31,6 +33,7 @@ const ListingCreator = () => {
 
     const [book, setBook] = useState({ state: "loading" });
     const [schools, setSchools] = useState([]);
+    const [responseStatus, setResponseStatus] = useState();
     const [listing, setListing] = useState({
         book: bookId,
         purchase_price: undefined,
@@ -58,8 +61,11 @@ const ListingCreator = () => {
             .then(() => {
                 listingAPI
                     .postListing(listing)
-                    .then((response) => console.log("Success"))
-                    .catch((err) => console.log(err));
+                    .then((response) => {
+                        setResponseStatus(response.status);
+                        console.log(response.status);
+                    })
+                    .catch((err) => setResponseStatus(err.status));
             })
             .catch((err) => console.log(err));
     };
@@ -67,11 +73,11 @@ const ListingCreator = () => {
     const onChangeHandler = (e) => {
         let { id, value } = e.target;
         setListing({ ...listing, [id]: value });
-        console.log(listing);
     };
 
     return (
         <div>
+            <AuthModalWithContext />
             Creating a listing for:
             <Book bookInfo={book} />
             <Form>
@@ -152,6 +158,7 @@ const ListingCreator = () => {
                     </ButtonGroup>
                 </Form.Group>
                 <Button onClick={submitHandler}>Create Listing</Button>
+                <ResponseStatusAlert status={responseStatus} />
             </Form>
         </div>
     );

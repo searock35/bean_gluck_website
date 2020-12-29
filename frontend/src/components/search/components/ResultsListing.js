@@ -6,6 +6,7 @@ import Listing from "./Listing";
 
 const ResultsListing = (props) => {
     const [responseStatus, setResponseStatus] = useState();
+    const [responseMessage, setResponseMessage] = useState();
     const [buyOrRent, setBuyOrRent] = useState("buy");
     const [requestCost, setRequestCost] = useState(
         props.listing.purchase_price
@@ -28,10 +29,14 @@ const ResultsListing = (props) => {
         e.preventDefault();
         listingRequestAPI
             .requestListing(props.listing.id, buyOrRent, requestCost)
-            .then((response) => setResponseStatus(response.status))
+            .then((response) => {
+                setResponseMessage();
+                setResponseStatus(response.status)
+            })
             .catch((err) => {
                 console.log(err);
                 setResponseStatus(err.status);
+                if (err.data) setResponseMessage(err.data.detail)
             });
     };
 
@@ -39,19 +44,14 @@ const ResultsListing = (props) => {
         setSliderVal(e.target.value);
     };
 
-    const radioHandler = (e) => {
-        const { id } = e.target;
-        setBuyOrRent(id);
-    };
-
     return (
         <div className="results-listing">
-            <ResponseStatusAlert status={responseStatus}></ResponseStatusAlert>
+            <ResponseStatusAlert status={responseStatus} message={responseMessage}></ResponseStatusAlert>
             <Listing {...props.listing} />
             <div className="listing-form">
                 <Form onSubmit={submitHandler}>
                     {props.listing.negotiable ? (
-                        <Form.Group controlId="request.asking_price">
+                        <Form.Group>
                             <Form.Label>Asking price (optional):</Form.Label>
                             <Form.Control
                                 type="range"
@@ -67,19 +67,17 @@ const ResultsListing = (props) => {
                             inline
                             label="Rent"
                             type="radio"
-                            id="rent"
                             name="buyOrSell"
                             checked={buyOrRent === "rent"}
-                            onChange={radioHandler}
+                            onChange={() => setBuyOrRent("rent")}
                         />
                         <Form.Check
                             inline
                             label="Buy"
                             type="radio"
-                            id="buy"
                             name="buyOrSell"
                             checked={buyOrRent === "buy"}
-                            onChange={radioHandler}
+                            onChange={() => setBuyOrRent("buy")}
                         />
                         <Button id={props.id} variant="primary" type="submit">
                             Request to {buyOrRent} for ${requestCost}

@@ -4,6 +4,8 @@ const defaultColorSecondary = '#75888f';
 const defaultUser = {
     username: 'Guest',
     email: '',
+    first_name: "Text",
+    last_name: "Trader",
     majors: [
         'Book Selling'
     ],

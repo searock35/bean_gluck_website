@@ -28,7 +28,6 @@ class Customer(models.Model):
     def __str__(self):
         return self.user.first_name + " " + self.user.last_name + " from " + self.school.name
 
-
 class Book(models.Model):
     # A title for the book, a string
     title = models.CharField(
@@ -40,7 +39,7 @@ class Book(models.Model):
 
     # The book's isbn. Not necessary only if there is no ISBN. Book needs either ISBN or is_custom is true.
     isbn = models.CharField(max_length=13, help_text="Enter the 13 number ISBN, if applicable", blank=True,
-                            null=True, unique=True, error_messages={"unique": "A book with this ISBN already exists"})
+                            null=True, unique=True, error_messages={"unique": "A book with this ISBN already exists."})
 
     # Sets whether the book has an ISBN. Used to enable users to add custom binder pages/class packets
     is_custom = models.BooleanField(default=False)
@@ -71,7 +70,6 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
-
 class Author(models.Model):
     # first name for the author
     first_name = models.CharField(max_length=25)
@@ -93,7 +91,6 @@ class Author(models.Model):
 
         return self.first_name + middle_string + self.last_name
 
-
 class Locality(models.Model):
     # A locality references a city, state and zip code
 
@@ -107,7 +104,6 @@ class Locality(models.Model):
 
     def __str__(self):
         return self.city + ", " + self.state
-
 
 class School(models.Model):
     # A school is a university where sales and purchases will be made.
@@ -134,6 +130,14 @@ class School(models.Model):
     def __str__(self):
         return self.name
 
+class ListingSearch(models.Model):
+    ''' Used to keep track of which listings a user has searched for. Useful for
+    user recommendations.'''
+    customer = models.ForeignKey("Customer", on_delete=models.CASCADE)
+    book = models.ForeignKey("Book", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.customer.user.username} search for {self.book.title}'
 
 class Listing(models.Model):
     CONDITIONS = (
@@ -182,7 +186,6 @@ class Listing(models.Model):
     def __str__(self):
         return (f'Book: {self.book}, Owner: {self.owner}')
 
-
 class ListingRequest(models.Model):
     # Listing Requests are user requests for a specific user-posted listing. The request MUST include
     # the target listing and the owner who made the request
@@ -205,13 +208,11 @@ class ListingRequest(models.Model):
     def __str__(self):
         return f'Request for {self.listing.book.title} owned by {self.listing.owner.user.first_name}'
 
-
 class Major(models.Model):
     major_name = models.CharField(max_length=25, null=False)
 
     def __str__(self):
         return self.major_name
-
 
 class Transaction(models.Model):
     # the corresponding listing request this transaction fulfills.
@@ -231,14 +232,12 @@ class Transaction(models.Model):
     school_location = models.ForeignKey(
         'SchoolLocation', on_delete=models.SET_NULL, null=True)
 
-
 class SchoolLocation(models.Model):
     # A short and unique identifier
     title = models.CharField(max_length=25)
 
     # A description of the location.
     description = models.CharField(max_length=150, null=True)
-
 
 class Course(models.Model):
     # This is a class, used largely to suggest books to users based on major/classes
@@ -278,10 +277,23 @@ class RequestMessage(models.Model):
     request = models.ForeignKey('ListingRequest', on_delete=models.CASCADE)
 
     # The message contents
-    message = models.CharField(max_length=150, blank=False, null=False)
+    content = models.CharField(max_length=150, blank=False, null=False)
 
     # the date and time the message was sent
     datetime = models.DateTimeField(auto_now=True)
 
-    # is the message sender the seller or buyer of the book?
-    is_seller = models.BooleanField(default=False, null=False, blank=True)
+    # # is the message sender the seller or buyer of the book?
+    # is_seller = models.BooleanField(default=False, null=False, blank=True)
+
+    # the customer posting the message
+    owner = models.ForeignKey('Customer', on_delete=models.CASCADE)
+
+    def _get_is_seller(self):
+        print(self.owner, self.request.owner)
+        return not (self.owner == self.request.owner)
+
+    is_seller = property(_get_is_seller)
+
+    
+    def __str__(self):
+        return f'"{self.content}", for request: {self.request.pk}'

@@ -27,4 +27,17 @@ class IsOwner(permissions.BasePermission):
         if isinstance(obj, User):
             return obj == request.user
 
-        return obj.owner == request.user
+        return obj.owner.pk == request.user.pk
+
+class IsAssociatedWithMessage(permissions.BasePermission):
+    """
+    Custom permission to only allow a person to GET or POST a message
+    if they are either the owner of the request or the owner of the listing
+    associated with that message.
+    """
+
+    def has_object_permission(self, request, veiw, obj):
+        if obj.owner.pk == request.user.pk or obj.listing.owner.pk == request.user.pk:
+            return True
+
+        return False

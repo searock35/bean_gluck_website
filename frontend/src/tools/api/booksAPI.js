@@ -99,6 +99,10 @@ class BooksAPI {
         });
     }
 
+    /**
+     * Post a book based on its information. Returns the direct response if success, if not returns a stable error
+     * @param {Object} bookInfo {title: String, subtitle: String, authors: [{first_name: String, middle_initial: Char, last_name: String}], isbn: String, is_custom: Bool}
+     */
     postBook(bookInfo) {
         return new Promise((resolve, reject) => {
             axios
@@ -107,7 +111,7 @@ class BooksAPI {
                         Authorization: "Token " + authAPI.authToken,
                     },
                 })
-                .then((response) => resolve(response.data))
+                .then((response) => resolve(response))
                 .catch((err) => {
                     if (err.response) reject(err.response);
                     else reject({ status: 0 });

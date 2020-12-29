@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
     Form,
     Button,
@@ -8,8 +8,11 @@ import {
     InputGroup,
     Alert,
 } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import * as yup from "yup";
 import booksAPI from "../../tools/api/booksAPI";
+import UserContext from "../../tools/react/UserContext";
+import AuthModalWithContext from "../auth/AuthModalWithContext";
 import ResponseStatusAlert from "../pieces/ResponseStatusAlert";
 import "./NewBookCreator.css";
 
@@ -24,11 +27,19 @@ let bookSchema = yup.object().shape({
     subtitle: yup.string().max(100),
     authors: yup.array().of(authorSchema),
     edition: yup.number().integer().lessThan(20).moreThan(0),
-    isbn: yup.string().matches(/^((\d{10})|(\d{13}))$/),
+    isbn: yup
+        .string()
+        .matches(/^((\d{10})|(\d{13}))$/, {
+            message:
+                "Please omit any extra characters and make sure the ISBN is 10 or 13 digits long. If there is none, select 'No ISBN'",
+        }),
     is_custom: yup.bool().required(),
 });
 
 function NewBookCreator() {
+    let history = useHistory();
+    let currentUser = useContext(UserContext);
+
     const [bookData, setBookData] = useState({
         title: "",
         subtitle: "",
@@ -43,7 +54,7 @@ function NewBookCreator() {
     const [disableRemoveAuthor, setDisableRemoveAuthor] = useState(true);
     const [editionSuffix, setEditionSuffix] = useState("st");
     const [isCustom, setIsCustom] = useState(false);
-    const [postSuccess, setPostSuccess] = useState();
+    const [postStatus, setPostStatus] = useState();
     const [postMessage, setPostMessage] = useState();
     const [validationMessage, setValidationMessage] = useState("");
 
@@ -55,15 +66,27 @@ function NewBookCreator() {
             is_custom: isCustom,
         };
         if (isCustom) delete all_data.isbn;
-        console.log(all_data);
         bookSchema
             .validate(all_data)
             .then((book) => {
                 setValidationMessage("");
                 booksAPI
                     .postBook(all_data)
-                    .then((response) => {setPostSuccess(response.status)})
-                    .catch((err) => {setPostMessage(Object.entries(err.data)[0][1][0]); setPostSuccess(err.status)});
+                    .then((response) => {
+                        console.log(response.data)
+                        console.log(response.status)
+                        setPostStatus(response.status);
+                        history.push(`/create-listing?bookId=${response.data.id}&schoolId=${currentUser.school_id}`);
+                    })
+                    .catch((err) => {
+                        try {
+                            setPostMessage(Object.entries(err.data)[0][1][0]);
+                        }
+                        catch(e) {
+                            if (err.data) console.log(err.data)
+                        }
+                        setPostStatus(err.status);
+                    });
             })
             .catch((err) => {
                 setValidationMessage(err.message);
@@ -175,6 +198,7 @@ function NewBookCreator() {
 
     return (
         <div className="new-book-creator">
+            <AuthModalWithContext />
             <Form onSubmit={submitHandler} className="new-book-form">
                 <h1>Create Listable Resource</h1>
                 <Form.Group controlId="title">
@@ -186,7 +210,7 @@ function NewBookCreator() {
                     />
                 </Form.Group>
                 <Form.Group controlId="subtitle">
-                    <Form.Label>Subtitle</Form.Label>
+                    <Form.Label>Subtitle (optional)</Form.Label>
                     <Form.Control
                         placeholder="e.g. 'A Journey from Beyond'"
                         value={bookData.subtitle}
@@ -216,7 +240,7 @@ function NewBookCreator() {
                     </Form.Text>
                 </Form.Group>
                 <Form.Group controlId="edition">
-                    <Form.Label>Enter the edition number here</Form.Label>
+                    <Form.Label>Edition</Form.Label>
                     <Col xs={4} sm={3} md={2} xl={1}>
                         <InputGroup>
                             <Form.Control
@@ -230,6 +254,9 @@ function NewBookCreator() {
                             </InputGroup.Append>
                         </InputGroup>
                     </Col>
+                    <Form.Text className="text-muted">
+                        Enter "1st" if not listed
+                    </Form.Text>
                 </Form.Group>
                 <Form.Label>Enter ISBN, if applicable.</Form.Label>
                 <Form.Row>
@@ -267,7 +294,10 @@ function NewBookCreator() {
                 <Alert variant="warning" show={!!validationMessage}>
                     {validationMessage}
                 </Alert>
-                <ResponseStatusAlert status={postSuccess} message={postMessage} />
+                <ResponseStatusAlert
+                    status={postStatus}
+                    message={postMessage}
+                />
             </Form>
         </div>
     );

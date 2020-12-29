@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -22,7 +22,7 @@ function UserNavDropdown(props) {
                 id="user-nav-dropdown"
             >
                 <NavDropdown.Item eventKey={"/user/" + currentUser.username}>
-                    My Profile Page
+                    My Dashboard
                 </NavDropdown.Item>
 
                 <NavDropdown.Divider />
@@ -31,13 +31,13 @@ function UserNavDropdown(props) {
         );
     } else {
         return (
-            <NavDropdown title="Hello, Guest!">
-                <NavDropdown.Item onClick={()=>props.setModalMode("login")}>Login</NavDropdown.Item> {/*eventKey="/login"*/}
-                <NavDropdown.Item onClick={()=>props.setModalMode("register")}>
+            <>
+                <Nav.Link id="navbar-login-button" onClick={()=>props.setModalMode("login")}>Login</Nav.Link> {/*eventKey="/login"*/}
+                <Nav.Link id="navbar-register-button" onClick={()=>props.setModalMode("register")}>
                     Register
-                </NavDropdown.Item>
-            </NavDropdown>
-        );
+                </Nav.Link>
+            </>
+       );
     }
 }
 
@@ -57,13 +57,18 @@ function HomeNavbar() {
         eventKey === "/logout" ? handleLogoutEvent() : history.push(eventKey);
     }
 
+    useEffect(() => {
+        if (currentUser.isAuth) {
+            setModalMode("hide")
+        }
+    }, [currentUser.isAuth])
+
     return (
         <>
             <Navbar bg="dark" variant="dark" expand="lg">
                 <Navbar.Brand>TextTrader</Navbar.Brand>
                 <Nav className="mr-auto" onSelect={handleSelect}>
                     <Nav.Link eventKey="/">Home</Nav.Link>
-                    <Nav.Link eventKey="/donate">Donate</Nav.Link>
                     <UserNavDropdown setModalMode={setModalMode}/>
                 </Nav>
             </Navbar>

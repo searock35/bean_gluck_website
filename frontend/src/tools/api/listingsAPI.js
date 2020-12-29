@@ -20,27 +20,32 @@ class listingsAPI {
         //Use bookId to gather local listings from the database. Return a table with 10 of the listings
         return new Promise((resolve, reject) => {
             axios
-                .get(restURL + "/listings/school", {
-                    params: { bookId: book, schoolId: school },
+                .get(restURL + `/schools/${school}/listings`, {
+                    params: { bookId: book },
                 })
                 .then((listings) => resolve(listings))
                 .catch((err) => reject(err));
         });
     }
 
+    /**
+     * Post a listing based on listing data. Returns the direct response on success, and a stable error on failure.
+     */
     postListing(listing) {
         return new Promise((resolve, reject) => {
             axios
                 .post(restURL + "/listings/", listing, {
                     headers: { Authorization: "Token " + authAPI.authToken },
                 })
-                .then((response) => resolve(response.data))
+                .then((response) => resolve(response))
                 .catch((err) => {
                     if (err.response) reject(err.response);
                     else reject({ status: 0 });
                 });
         });
     }
+
+
 
     getLocalListings(book, school) {
         return new Promise((resolve, reject) => {

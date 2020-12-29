@@ -47,6 +47,7 @@ function UserInfo() {
     const history = useHistory();
     const userInfo = useContext(UserContext);
     const editRedirect = () => history.push("./" + userInfo.username + "/edit");
+    console.log(userInfo)
 
     return (
         <div className="user-info">

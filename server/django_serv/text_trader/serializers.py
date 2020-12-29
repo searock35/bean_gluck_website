@@ -43,6 +43,8 @@ class CustomerSerializer(serializers.ModelSerializer):
 class CustomerInfoSerializer(serializers.Serializer):
     username = serializers.ReadOnlyField(source='user.username')
     email = serializers.ReadOnlyField(source='user.email')
+    first_name = serializers.ReadOnlyField(source='user.first_name')
+    last_name = serializers.ReadOnlyField(source='user.last_name')
     user_id = serializers.ReadOnlyField(source='user.id')
     school_id = serializers.ReadOnlyField(source='school.id')
     school_name = serializers.ReadOnlyField(source='school.name')
@@ -187,9 +189,9 @@ class BasicSchoolSerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 class MessageSerializer(serializers.ModelSerializer):
-    request = serializers.PrimaryKeyRelatedField(write_only=True, queryset=models.ListingRequest.objects.all())
-    datetime = serializers.ReadOnlyField(source='datetime')
+    request = serializers.PrimaryKeyRelatedField(queryset=models.ListingRequest.objects.all())
+    owner = BasicUserSerializer(read_only=True, source='owner.user')
 
     class Meta:
         model = models.RequestMessage
-        fields = ['request','message','datetime']
+        fields = ['request', 'owner', 'datetime', 'content', 'is_seller']
