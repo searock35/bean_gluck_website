@@ -33,7 +33,7 @@ class CustomerSerializer(serializers.ModelSerializer):
     user = BasicUserSerializer(read_only=True)
     school = serializers.PrimaryKeyRelatedField(queryset=models.School.objects.all())
     locality = serializers.PrimaryKeyRelatedField(read_only=True)
-    major = serializers.PrimaryKeyRelatedField(many=True, queryset=models.Major.objects.all())
+    major = serializers.PrimaryKeyRelatedField(many=True, queryset=models.Major.objects.all(), required=False)
 
     class Meta:
         model = models.Customer 

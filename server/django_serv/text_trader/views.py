@@ -43,8 +43,12 @@ class CustomerViewSet(viewsets.GenericViewSet):
 
     def create(self, request):
         # request should include locality, user info, customer
-        l = serializers.LocalitySerializer(data=request.data.pop('locality'))
-        u = serializers.UserSerializer(data=request.data.pop('user'))
+        try:
+            l = serializers.LocalitySerializer(data=request.data.pop('locality'))
+            u = serializers.UserSerializer(data=request.data.pop('user'))
+        except KeyError as err:
+            console.log(err)
+            return Response(data={detail: "bad data"}, status=status.HTTP_400_BAD_REQUEST)
         cust = serializers.CustomerSerializer(data=request.data)
 
         if not l.is_valid():

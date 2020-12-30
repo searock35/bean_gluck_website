@@ -5,7 +5,7 @@ import { Form } from 'react-bootstrap';
 /**
  * A prop that renders a select box with schools, as a Form Group. Control Id is "school" 
  * @param {Object} schools Should be given a list of basic schools ({id, name}) 
- * @param {Function} onChanceCB a function to be called when the selection changes
+ * @param {Function} onChangeCB a function to be called when the selection changes
  * @param {String} label a description for the dropdown
  */
 function SchoolSelectOption(props) {
@@ -29,6 +29,7 @@ function SchoolSelectOption(props) {
                 <option value={0} key={0}>Select your school...</option>
                 {options}
             </Form.Control>
+            <Form.Text className="text-muted">{props.label_muted}</Form.Text>
         </Form.Group>
     );
 }

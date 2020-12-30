@@ -1,51 +1,101 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Alert, Form, Col, Button } from "react-bootstrap";
 import authAPI from "../../tools/api/authAPI";
+import generalAPI from "../../tools/api/generalAPI";
 import * as yup from "yup";
+import ResponseStatusAlert from "../pieces/ResponseStatusAlert";
+import UserContext from "../../tools/react/UserContext";
+import SchoolSelectOption from "../pieces/SchoolSelectOption";
 
-let regSchema = yup.object().shape({
-    first_name: yup.string().required(),
-    last_name: yup.string().required(),
-    username: yup.string().required().min(5).max(32),
-    email: yup.string().email(),
+const localitySchema = yup.object().shape({
+    city: yup.string().required(),
+    state: yup.string().required().length(2),
+    zip_code: yup.string().required().length(5),
+});
+
+const name_message = "Please enter your first and last name.";
+const userSchema = yup.object().shape({
+    first_name: yup.string().required(name_message),
+    last_name: yup.string().required(name_message),
+    username: yup.string().required("Username is required.").min(5).max(32),
+    email: yup.string().email().required("Please enter your email."),
+    // locality: localitySchema,
     password: yup
         .string()
-        .required()
-        .matches(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-        )
+        .required("Password is required.")
+        // .matches(
+        //     /^(?=.*[a-z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[a-za-z\d@$!%*?&]{8,}$/,
+        //     {message: "password must have at least 1 letter, l number, 1 special character, and must be at least 8 characters long."}
+        // )
         .min(8)
         .max(32),
 });
 
+const customerSchema = yup.object().shape({
+    school: yup.number().required().min(1, "Please select a school."),
+    grad_year: yup.number().min(1980).max(2028),
+    locality: localitySchema,
+    user: userSchema,
+});
+
 function Register() {
+    const currentUser = useContext(UserContext);
+
     const [user, setUser] = useState({
         first_name: "",
         last_name: "",
         username: "",
         password: "",
         email: "",
-        school: "",
+        school: "0",
     });
 
-    const [errorString, setError] = useState("");
-    const [show, setShow] = useState(false);
+    const [locality, setLocality] = useState({
+        city: "",
+        state: "",
+        zip_code: "",
+    });
+
+    const [customer, setCustomer] = useState({
+        school: "0",
+        grad_year: "",
+    });
+
+    const [responseStatus, setResponseStatus] = useState();
+    const [responseMessage, setResponseMessage] = useState();
+    const [validationError, setValidationError] = useState("");
+    const [schoolOptions, setSchoolOptions] = useState([]);
+
+    useEffect(() => {
+        generalAPI
+            .getSchoolsBasic()
+            .then((schools) => {
+                setSchoolOptions(schools);
+            })
+            .catch((err) => {
+                setResponseStatus(err.status);
+            });
+    }, []);
 
     const submitHandler = (e) => {
         e.preventDefault();
+        setResponseStatus();
+        setValidationError("");
 
         // check validity
-        regSchema
-            .validate(user)
-            .then((regInfo) => {
+        customerSchema
+            .validate({ ...customer, locality: locality, user: user })
+            .then((valUser) => {
                 authAPI
-                    .register(regInfo)
-                    .then((response) => console.log(response))
-                    .catch((err) => setError(err.data));
+                    .register(valUser)
+                    .then((newUser) => currentUser.changeUserContext(newUser))
+                    .catch((err) => {
+                        setResponseStatus(err.status);
+                        console.log(err.data);
+                    });
             })
-            .catch(function (err) {
-                setError(err.errors);
-                setShow(true);
+            .catch((err) => {
+                setValidationError(err.message);
             });
     };
 
@@ -53,11 +103,31 @@ function Register() {
         e.preventDefault();
         const { id, value } = e.target;
 
-        setUser((user) => ({
+        setUser({
             ...user,
             [id]: value,
-        }));
+        });
     };
+
+    const changeCustomer = (e) => {
+        e.preventDefault();
+        const { id, value } = e.target;
+        setCustomer({
+            ...customer,
+            [id]: value,
+        })
+    }
+
+    const changeLocality = (e) => {
+        e.preventDefault();
+        const { id, value } = e.target;
+        if (id === "zip_code" && value.length > 5) return;
+        else if (id === "state" && value.length > 2) return;
+        setLocality({
+            ...locality,
+            [id]: value,
+        })
+    }
 
     return (
         <Form noValidate onSubmit={submitHandler}>
@@ -130,23 +200,60 @@ function Register() {
                     uppercase and lowercase, a number and a special character.{" "}
                 </Form.Text>
             </Form.Group>
-            <Form.Group controlId="school">
-                <Form.Label>School</Form.Label>
-                <Form.Control
-                    type="school"
-                    placeholder="Search for your school"
-                    value={user.school}
-                    onChange={onChangeHandler}
-                />
-                <Form.Text className="text-muted">
-                    This is where you expect to be buying and selling books.{" "}
-                </Form.Text>
-            </Form.Group>
+            <Form.Row>
+                <Col>
+                    <SchoolSelectOption
+                        schools={schoolOptions}
+                        onChangeCB={changeCustomer}
+                        label="School"
+                        label_muted="This is where you expect to be buying and selling books."
+
+                    />
+                </Col>
+                <Col>
+                    <Form.Group controlId="grad_year">
+                        <Form.Label>Grad Year</Form.Label>
+                        <Form.Control
+                            placeholder="e.g. 2021"
+                            value={customer.grad_year}
+                            onChange={changeCustomer}
+                        />
+                        <Form.Text className="text-muted">
+                            We use the grad year to help make recommendations to you.
+                        </Form.Text>
+                    </Form.Group>
+                </Col>
+            </Form.Row>
+            <Form.Row>
+                <Col>
+                    <Form.Group controlId="city">
+                        <Form.Label>City</Form.Label>
+                        <Form.Control placeholder="City" value={locality.city} onChange={changeLocality} />
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Form.Group controlId="state">
+                        <Form.Label>State</Form.Label>
+                        <Form.Control placeholder='e.g. "PA"' value={locality.state} onChange={changeLocality} />
+                    </Form.Group>
+                </Col>
+                <Col>
+                    <Form.Group controlId="zip_code">
+                        <Form.Label>Zip Code </Form.Label>
+                        <Form.Control placeholder="Zip" value={locality.zip_code} onChange={changeLocality} />
+                    </Form.Group>
+                </Col>
+            </Form.Row>
+
             <Button id="reg-submit-button" variant="primary" type="submit">
                 Submit
             </Button>
-            <Alert variant="warning" show={show}>
-                {errorString}
+            <ResponseStatusAlert
+                status={responseStatus}
+                message={responseMessage}
+            />
+            <Alert variant="warning" show={!!validationError}>
+                {validationError}
             </Alert>
         </Form>
     );

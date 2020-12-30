@@ -2,6 +2,11 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import Book from "../../pieces/Book";
 
+/**
+ * Renders a book with clickable links to get and create listings.
+ * @param {Number} schoolId The ID for which to create the "get listings" link.
+ * @param {Object} bookInfo The book data from the API response
+ */
 const SearchResultBook = (props) => {
     const history = useHistory();
     const schoolId = props.schoolId;
@@ -23,7 +28,7 @@ const SearchResultBook = (props) => {
             <Book {...props} />
 
             <ul className="clickable-items">
-                {schoolId !== "0" ? (
+                {schoolId !== 0 ? (
                     <li
                         className="get-book-listings"
                         onClick={getListingsHandler}
