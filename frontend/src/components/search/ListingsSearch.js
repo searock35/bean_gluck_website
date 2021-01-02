@@ -15,21 +15,15 @@ const SchoolListings = (props) => {
     if (props.listings === "loading") {
         return (<p className="school-listings-loading">Loading...</p>)
     }
+    else if (props.listings.length === 0) {
+        return (<h2>It appears there are no listings for this book at this school. Check again later.</h2>)
+    }
     const bookList = props.listings.map((listing) => (<li key={listing.id}><ResultsListing listing={listing} /></li>));
     return (<ul className="school-listings">
         {bookList}
     </ul>);
 }
 
-// const LocalListings = (props) => {
-//     if (props.listings === "loading") 
-//         return (<p className="local-listings-loading">Loading...</p>)
-    
-//     const bookList = props.listings.map((listing) => (<li key={listing.id}><ResultsListing listing={listing} /></li>));
-//     return (<ul className="local-listings">
-//         {bookList}
-//     </ul>);
-// }
 
 const BookResults = () => {
 
@@ -38,7 +32,6 @@ const BookResults = () => {
     const schoolId = query.get("schoolId");
 
     const [bookInfo, setBookInfo] = useState({state: "loading"});
-    // const [localListingsResults, setLocalListingsResults] = useState("loading")
     const [schoolListingsResults, setSchoolListingsResults] = useState("loading")
 
 
@@ -46,9 +39,6 @@ const BookResults = () => {
         booksAPI.getBookFromId(bookId)
             .then((response) => setBookInfo({...response, state: "good"}))
             .catch((err) => setBookInfo({state: "error"}))
-        // listingsAPI.getLocalListings(bookId, schoolId)
-        //     .then(response => setLocalListingsResults(response.data))
-        //     .catch(err => console.log(err))
         listingsAPI.getSchoolListings(bookId, schoolId)
             .then(response => setSchoolListingsResults(response.data))
             .catch(err => console.log(err))
@@ -61,11 +51,7 @@ const BookResults = () => {
                 <h1>Listings for: </h1>
                 <Book bookInfo={bookInfo}></Book>
             </div>
-
-            {/* <h1>School Listings:</h1> */}
             <SchoolListings listings={schoolListingsResults}/>
-            {/* <h1>Local Listings:</h1> */}
-            {/* <LocalListings listings={localListingsResults}/> */}
         </div>
     );
 }
