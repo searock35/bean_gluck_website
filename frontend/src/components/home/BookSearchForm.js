@@ -12,7 +12,7 @@ const defaultSearchString = "Enter book ISBN, Title, Author";
 function BookSearchForm(props) {
     const [searchText, setSearchText] = useState(defaultSearchString);
     const [schoolId, setSchoolId] = useState(authAPI.currentUser.school_id);
-    const [schools, setSchools] = useState([{ id: 0, name: "Loading..." }]);
+    const [schools, setSchools] = useState([{ id: 99, name: "Loading..." }]);
     const [bookList, setBookList] = useState([]);
     const [hideDropDown, setHideDropDown] = useState(false);
     const [noSchoolAlert, setNoSchoolAlert] = useState(false);

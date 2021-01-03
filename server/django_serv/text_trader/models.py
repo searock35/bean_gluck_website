@@ -38,8 +38,10 @@ class Book(models.Model):
         max_length=100, help_text="Enter a subtitle, if applicable", null=True, blank=True)
 
     # The book's isbn. Not necessary only if there is no ISBN. Book needs either ISBN or is_custom is true.
-    isbn = models.CharField(max_length=13, help_text="Enter the 13 number ISBN, if applicable", blank=True,
+    isbn = models.CharField(max_length=13, help_text="Enter the 10 number ISBN, if applicable", blank=True,
                             null=True, unique=True, error_messages={"unique": "A book with this ISBN already exists."})
+    
+    isbn13 = models.CharField(max_length=13, blank=True, null=True, unique=True, error_messages={"unique": "A book with this ISBN already exists."})
 
     # Sets whether the book has an ISBN. Used to enable users to add custom binder pages/class packets
     is_custom = models.BooleanField(default=False)
@@ -60,12 +62,6 @@ class Book(models.Model):
 
     # Used to relate books to courses
     course = models.ManyToManyField('Course', through='CourseBook')
-
-    def save(self, *args, **kwargs):
-        if (not self.is_custom) and (self.isbn == None):
-            return  # The book needs an ISBN unless it is custom
-        else:
-            super().save(*args, **kwargs)  # Call the "real" save() method.
 
     def __str__(self):
         return self.title
@@ -145,6 +141,7 @@ class ListingSearch(models.Model):
             return f'Anonymous search for {self.book.title}.'
 
 class Listing(models.Model):
+
     CONDITIONS = (
         ('f', 'Like New'),
         ('nf', 'Near Fine'),

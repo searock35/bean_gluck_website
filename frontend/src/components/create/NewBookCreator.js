@@ -201,6 +201,7 @@ function NewBookCreator() {
             <AuthModalWithContext />
             <Form onSubmit={submitHandler} className="new-book-form">
                 <h1>Create Listable Resource</h1>
+                <h3>You and others can use this resource to create easy to find listings.</h3>
                 <Form.Group controlId="title">
                     <Form.Label>Book Title</Form.Label>
                     <Form.Control
