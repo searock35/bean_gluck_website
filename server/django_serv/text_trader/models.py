@@ -133,11 +133,16 @@ class School(models.Model):
 class ListingSearch(models.Model):
     ''' Used to keep track of which listings a user has searched for. Useful for
     user recommendations.'''
-    customer = models.ForeignKey("Customer", on_delete=models.CASCADE)
+    owner = models.ForeignKey("Customer", on_delete=models.SET_NULL, null=True)
     book = models.ForeignKey("Book", on_delete=models.CASCADE)
+    requested = models.BooleanField(default=False, blank=True)
+    date_created = models.DateField(auto_now=True)
 
     def __str__(self):
-        return f'{self.customer.user.username} search for {self.book.title}'
+        if self.owner:
+            return f'{self.owner.user.username} search for {self.book.title}'
+        else: 
+            return f'Anonymous search for {self.book.title}.'
 
 class Listing(models.Model):
     CONDITIONS = (
@@ -165,6 +170,8 @@ class Listing(models.Model):
         null=True,
         blank=True
     )
+
+    date_created = models.DateField(auto_now=True)
 
     # The user can provide a purchase price, rental price or both. They need to set negotiable to true
     #  to be able to set both to zero.
@@ -254,7 +261,6 @@ class Course(models.Model):
 
     school = models.ForeignKey('School', on_delete=models.CASCADE)
 
-
 class CourseBook(models.Model):
     # This table represents a many to many relationship between books
     # and the courses they are used in.
@@ -269,7 +275,6 @@ class CourseBook(models.Model):
     course = models.ForeignKey('Course', on_delete=models.CASCADE)
     year = models.PositiveIntegerField()
     semester = models.CharField(max_length=1, choices=SEMESTERS)
-
 
 class RequestMessage(models.Model):
 

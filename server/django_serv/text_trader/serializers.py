@@ -134,7 +134,7 @@ class ListingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Listing
-        fields = ['id', 'owner', 'school', 'school_name', 'negotiable', 'book', 'condition','condition_display', 'purchase_price', 'rental_price']
+        fields = ['id', 'owner', 'school', 'school_name', 'negotiable', 'book', 'condition','condition_display', 'purchase_price', 'rental_price', 'date_created']
 
 class ListingRequestSerializer(serializers.ModelSerializer):
     owner_id = serializers.ReadOnlyField(source='owner.pk')
@@ -147,6 +147,14 @@ class ListingRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.ListingRequest
         fields = ['id', 'listing', 'listing_data', 'owner_id', 'owner_first_name', 'owner_last_name', 'purchase_asking_price', 'rental_asking_price']
+
+class ListingSearchSerializer(serializers.ModelSerializer):
+    owner = serializers.PrimaryKeyRelatedField(required=False, queryset=models.Customer.objects.all())
+    book = serializers.PrimaryKeyRelatedField(queryset=models.Book.objects.all())
+
+    class Meta:
+        model = models.ListingSearch
+        fields = ['owner', 'book', 'requested']
 
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:

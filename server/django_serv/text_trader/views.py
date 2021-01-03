@@ -197,29 +197,6 @@ class ListingRequestList(generics.ListCreateAPIView):
 
     permission_classes = [permissions.IsAuthenticated]
 
-# class LocalListingList(generics.ListAPIView):
-#     serializer_class = serializers.ListingSerializer
-
-#     def get_queryset(self):
-#         if self.request.user.is_anonymous:
-#             base_set = models.Listing.objects.all()
-#             schoolId = self.request.query_params.get('schoolId', "undefined")
-#             bookId = self.request.query_params.get('bookId', "undefined")
-#             if schoolId != "undefined":
-#                 base_set = base_set.filter(owner__school=schoolId)
-#             if bookId != "undefined":
-#                 base_set = base_set.filter(book__pk=bookId)
-
-#             return base_set
-                
-
-#         else:
-#             return models.Listing.objects.filter(owner__locality=self.request.user.locality).exclude(school)
-
-#         return models.Listing.objects.all()
-
-#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
 class RequestViewSet(viewsets.GenericViewSet):
     queryset = models.ListingRequest.objects.all()
     serializer_class = serializers.ListingRequestSerializer
@@ -352,4 +329,19 @@ class TransactionList(generics.ListCreateAPIView):
                 {"detail":"Can't fulfill a request for another user's listing"}, 
                 status=status.HTTP_400_BAD_REQUEST
                 )
+
+class ListingSearchList(generics.ListCreateAPIView):
+    serializer_class = serializers.ListingSearchSerializer
+    queryset = models.ListingSearch.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        if (request.user.is_anonymous):
+            serializer.save()
+        else:
+            serializer.save(owner=request.user.customer)
+
+        return Response(serializer.data)
 
