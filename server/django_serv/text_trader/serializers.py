@@ -97,14 +97,28 @@ class BookSerializer(serializers.ModelSerializer):
         required=False
     )
 
+    def validate(self, data):
+        custom = data.get('is_custom', 'false').lower()
+        isbn = data.pop('isbn', '')
+        if custom != 'true':
+            if (len(isbn) == 13):
+                data['isbn13'] = isbn
+            elif (len(isbn) == 10):
+                data['isbn'] = isbn
+            else:
+                raise serializers.ValidationError({'detail':'Invalid ISBN length.'})
+
+        return data
+
     def create(self, validated_data):
         if len(validated_data['authors']) > 3:
             raise serializers.ValidationError({'detail':'Max 3 Authors Allowed'})
 
         authors_data = validated_data.pop('authors', None)
-
         # first save book to avoid saving unused authors
+        print("validated data:", validated_data)
         book = models.Book.objects.create(**validated_data)
+        print("book: ", book.id)
 
         # save each author
         for author_data in authors_data:
@@ -122,7 +136,7 @@ class BookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Book
-        fields = ['id', 'title', 'subtitle', 'isbn', 'authors', 'edition', 'creator', 'course', 'is_custom']
+        fields = ['id', 'title', 'subtitle', 'isbn', 'isbn13', 'authors', 'edition', 'creator', 'course', 'is_custom']
 
 class ListingSerializer(serializers.ModelSerializer):
     # We want to show the whole customer info, hence the CustomerSerializer

@@ -2,7 +2,7 @@
     background-color: black;
     color: rgb(0, 0, 0);
     font-family: Arial;
-    height: 200px;
+    height: 300px;
     margin: 0px;
     overflow: scroll;
     padding: 1px;
@@ -55,7 +55,7 @@
 .book-search-bar {
     margin-bottom: 0px;
     margin-top: 0px;
-    height: 300px;
+    height: 400px;
 }
 
 #mainSearch {
