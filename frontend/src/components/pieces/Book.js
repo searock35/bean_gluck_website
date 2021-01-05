@@ -17,20 +17,18 @@ function Book(props) {
 
     if (!bookInfo) return <p>Loading...</p>;
 
-    let idMessage = "";
-    if (bookInfo.is_custom) {
-        idMessage = "ID: " + bookInfo.id;
-    } else {
-        idMessage = "ISBN: " + bookInfo.isbn;
-    }
 
     let author = "Not Listed";
     if (bookInfo.authors[0]) {
         author = bookInfo.authors[0];
     }
 
+    let isbn = bookInfo.isbn;
+    if (!bookInfo.isbn && bookInfo.isbn13) isbn = bookInfo.isbn13.substring(3);
+
     return (
         <ul className="book-info">
+            <li><img src={`http://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`} alt={`Book Cover for ${bookInfo.title}`}></img></li>
             <li className="book-title">Title: {bookInfo.title}</li>
             {bookInfo.subtitle ? (
                 <li className="book-subtitle">Subtitle: {bookInfo.subtitle}</li>
@@ -42,7 +40,8 @@ function Book(props) {
                 Book Author: {author.first_name} {author.middle_initial}.{" "}
                 {author.last_name}
             </li>
-            <li className="book-id">{idMessage}</li>
+            <li className="book-isbn">ISBN: {isbn || "N/A"}</li>
+            <li className="book-isbn13">ISBN-13: {bookInfo.isbn13 || "N/A"}</li>
         </ul>
     );
 }

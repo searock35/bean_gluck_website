@@ -2,20 +2,8 @@
 import axios from "axios";
 import authAPI from "./authAPI";
 import restURL from "./restURL";
-//Listing information to be listed: { firstName, lastName, condition, rentalPrice, sellingPrice }
 
 class listingsAPI {
-    //create fake listings to simulate API
-    // constructor() {
-    //     // this.testListingsSchool = [
-    //     //     {owner: { first_name: "Corey", last_name: "Bean" }, condition: "Good", rentalPrice: "20$", purchase_price: "30$", id: "1"},
-    //     //     {owner: { first_name: "Corey", last_name: "Bean" }, condition: "Terrible", rentalPrice: "5$", purchase_price: "12$", id: "2"},
-    //     //     {owner: { first_name: "Corey", last_name: "Bean" }, condition: "Great", rentalPrice: "30$", purchase_price: "60$", id: "3"},
-    //     //     {owner: { first_name: "Corey", last_name: "Bean" }, condition: "OK", rentalPrice: "20$", purchase_price: "30$", id: "4"},
-    //     //     {owner: { first_name: "Corey", last_name: "Bean" }, condition: "Brand New", rentalPrice: "50$", purchase_price: "90$", id: "5"},
-    //     // ]
-    // }
-
     getSchoolListings(book, school) {
         //Use bookId to gather local listings from the database. Return a table with 10 of the listings
         return new Promise((resolve, reject) => {
@@ -24,7 +12,10 @@ class listingsAPI {
                     params: { bookId: book },
                 })
                 .then((listings) => resolve(listings))
-                .catch((err) => reject(err));
+                .catch((err) => {
+                    if (err.response) reject(err.response);
+                    else reject({ status: 0 });
+                });
         });
     }
 
@@ -34,9 +25,7 @@ class listingsAPI {
     postListing(listing) {
         return new Promise((resolve, reject) => {
             axios
-                .post(restURL + "/listings/", listing, {
-                    headers: { Authorization: "Token " + authAPI.authToken },
-                })
+                .post(restURL + "/listings/", listing, authAPI.getAuthHeader())
                 .then((response) => resolve(response))
                 .catch((err) => {
                     if (err.response) reject(err.response);
@@ -45,6 +34,28 @@ class listingsAPI {
         });
     }
 
+    /**
+     * Post a listing search for the book. If user is authenticated, will post the user Id with the data as well.
+     * Returns the direct response on success, returns a stable error on failure.
+     * @param {Number} bookId The ID of the book the search was for
+     * @param {Number} schoolId the ID of the school related to the search
+     */
+    postListingSearch(bookId, schoolId) {
+
+        return new Promise((resolve, reject) => {
+            axios
+                .post(
+                    restURL + "/listing-search/",
+                    { book: bookId, school: schoolId },
+                    authAPI.getAuthHeader()
+                )
+                .then((response) => resolve(response))
+                .catch((err) => {
+                    if (err.response) reject(err.response);
+                    else reject({ status: 0 });
+                });
+        });
+    }
 
 
     getLocalListings(book, school) {
@@ -57,7 +68,10 @@ class listingsAPI {
                     },
                 })
                 .then((listings) => resolve(listings))
-                .catch((err) => reject(err));
+                .catch((err) => {
+                    if (err.response) reject(err.response);
+                    else reject({ status: 0 });
+                });
         });
     }
 

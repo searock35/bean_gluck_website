@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Book from "../../pieces/Book";
+import listingAPI from "../../../tools/api/listingsAPI";
 
 /**
  * Renders a book with clickable links to get and create listings.
@@ -18,10 +19,22 @@ const SearchResultBook = (props) => {
                 "&schoolId=" +
                 schoolId
         );
-    const getListingsHandler = () =>
-        history.push(
-            "/listings?bookId=" + props.bookInfo.id + "&schoolId=" + schoolId
-        );
+    const getListingsHandler = () => {
+        listingAPI.postListingSearch(props.bookInfo.id, schoolId)
+            .then(response => {
+                console.log(response);
+                history.push(
+                    `/listings?bookId=${props.bookInfo.id}&schoolId=${schoolId}&searchId=${response.data.id}`
+                );
+            })
+            .catch(err => console.log(err))
+
+            history.push(
+                "/listings?bookId=" + props.bookInfo.id + "&schoolId=" + schoolId
+            );
+            
+
+    }
 
     return (
         <div>

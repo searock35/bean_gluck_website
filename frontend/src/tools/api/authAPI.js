@@ -26,6 +26,14 @@ class Auth {
         return this.currentUser.isAuth;
     }
 
+    getAuthHeader() {
+        if (this.isAuth()) {
+            return { headers: { Authorization: "Token " + this.authToken } }
+        } else {
+            return {}
+        }
+    }
+
     /**
      * Get user information based on cookies that are set in browser.
      * Sets the current user in the auth API to the returned user if success.

@@ -165,10 +165,11 @@ class ListingRequestSerializer(serializers.ModelSerializer):
 class ListingSearchSerializer(serializers.ModelSerializer):
     owner = serializers.PrimaryKeyRelatedField(required=False, queryset=models.Customer.objects.all())
     book = serializers.PrimaryKeyRelatedField(queryset=models.Book.objects.all())
+    school = serializers.PrimaryKeyRelatedField(queryset=models.School.objects.all())
 
     class Meta:
         model = models.ListingSearch
-        fields = ['owner', 'book', 'requested']
+        fields = ['id', 'owner', 'book','school', 'requested']
 
 class TransactionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -217,3 +218,9 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.RequestMessage
         fields = ['request', 'owner', 'datetime', 'content', 'is_seller']
+
+class NotificationRequestSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.NotificationRequest
+        fields = ('__all__')

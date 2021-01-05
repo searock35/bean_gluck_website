@@ -9,8 +9,6 @@ import { Alert, Button } from "react-bootstrap";
  * @param {Number} status The HTTP status to base the info off of
  */
 const ResponseStatusAlert = (props) => {
-    // props.status
-    // props.message
 
     let variant = "warning";
     let message = "An unknown error occurred";
@@ -51,7 +49,7 @@ const ResponseStatusAlert = (props) => {
     if (!!props.message) message = props.message;
     if (typeof message === "string") message = <div>{message}</div>
 
-    if (props.status) {
+    if (typeof props.status === "number") {
         return <Alert variant={variant}>{message}</Alert>;
     } else {
         return null;

@@ -16,12 +16,10 @@ import UserViewer from "../../components/user/UserViewer";
 function UserRouter(props) {
     const currentUser = useContext(UserContext);
     const { username } = useParams();
-    console.log(username);
 
     if (props.userLoading) {
         return <h1>Loading user info...</h1>;
     } else if (currentUser.username !== username) {
-        console.log(username);
         return (
             <Switch>
                 <Route exact path={"/user/:username/"}>
@@ -32,7 +30,6 @@ function UserRouter(props) {
             </Switch>
         );
     } else {
-        console.log(username);
         return (
             <Switch>
                 <Route path={"/user/:username/my-listings"}>

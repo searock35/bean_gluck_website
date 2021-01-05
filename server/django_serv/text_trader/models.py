@@ -129,10 +129,21 @@ class School(models.Model):
 class ListingSearch(models.Model):
     ''' Used to keep track of which listings a user has searched for. Useful for
     user recommendations.'''
+    # The owner searching for the book. 
     owner = models.ForeignKey("Customer", on_delete=models.SET_NULL, null=True)
+    
+    # The book that is being searched for
     book = models.ForeignKey("Book", on_delete=models.CASCADE)
+
+    # School to keep track of which school the search is for.
+    school = models.ForeignKey("School", on_delete=models.SET_NULL, null=True)
+    
+    # Has the user signaled that they are looking to buy this book?
     requested = models.BooleanField(default=False, blank=True)
+
+    # The date this instance was created
     date_created = models.DateField(auto_now=True)
+
 
     def __str__(self):
         if self.owner:
@@ -299,3 +310,18 @@ class RequestMessage(models.Model):
     
     def __str__(self):
         return f'"{self.content}", for request: {self.request.pk}'
+
+class NotificationRequest(models.Model):
+    '''
+    This will be used by a user to express interest in a book that is 
+    not available at the moment.
+    '''
+    owner = models.ForeignKey('Customer', on_delete=models.CASCADE, blank=True)
+
+    date_created = models.DateField(auto_now=True)
+
+    satisfied = models.BooleanField(default=False)
+
+    school = models.ForeignKey('School', on_delete=models.CASCADE)
+
+    book = models.ForeignKey('Book', related_name='notification_request_set', on_delete=models.CASCADE)

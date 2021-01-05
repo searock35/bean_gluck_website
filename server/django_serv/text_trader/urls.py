@@ -9,6 +9,7 @@ router.register(r'schools', views.SchoolViewSet)
 router.register(r'books', views.BookViewSet)
 router.register(r'requests', views.RequestViewSet)
 router.register(r'listings', views.ListingViewSet)
+router.register(r'notification-requests', views.NotificationRequestViewSet)
 # router.register(r'requests/messages', views.RequestMessageViewSet)
 
 urlpatterns = [
