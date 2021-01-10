@@ -105,7 +105,7 @@ function NewBookCreator() {
     const updateAuthorData = (e, index) => {
         e.preventDefault();
         const { id, value } = e.target;
-        const newAuthors = bookAuthors.concat();
+        const newAuthors = bookAuthors.concat(); // Copies array
         newAuthors[index] = { ...newAuthors[index], [id]: value };
         setBookAuthors(newAuthors);
     };

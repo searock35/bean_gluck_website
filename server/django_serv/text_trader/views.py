@@ -8,8 +8,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 
 from django.contrib.auth.models import User
-from django.db.models import Count
-from text_trader.permissions import IsOwnerOrReadOnly, IsOwner, IsAssociatedWithMessage
+from django.db.models import Count, Q
+from text_trader.permissions import IsOwnerOrReadOnly, IsOwner, IsAssociatedWithRequest, IsSelf
 from text_trader import models
 from text_trader import serializers
 
@@ -95,14 +95,30 @@ class CustomerViewSet(viewsets.GenericViewSet):
             many=True, instance=user_listings)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['get'], permission_classes=[permissions.IsAuthenticated])
+    @action(detail=True, methods=['get'], permission_classes=[IsSelf])
     def requests(self, request, **kwargs):
         # used to get the listings posted by a specific customer.
         customer = self.get_object()
         user_requests = models.ListingRequest.objects.filter(owner=customer)
+
         serializer = serializers.ListingRequestSerializer(
             many=True, instance=user_requests)
+
         return Response(serializer.data)
+
+    @action(detail=True, methods=['get'], permission_classes=[IsSelf], url_path="unread-notifications")
+    def unread_notifications(self, request, **kwargs):
+        owner = self.request.user.customer
+        listings = models.Listing.objects.filter(owner=owner)
+        requests = models.ListingRequest.objects.filter(Q(owner=owner) | Q(listing__in=listings))
+        requests = requests.values('id').annotate(unread_messages=Count('requestmessage', filter=Q(requestmessage__seen=False)))
+        data = {} 
+        for request in requests:
+            data[request['id']] = request['unread_messages']
+
+
+        # return Response(data=serializers.ListingRequestSerializer(instance=requests, many=True).data)
+        return Response(data=data)
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -212,15 +228,18 @@ class ListingRequestList(generics.ListCreateAPIView):
 
     permission_classes = [permissions.IsAuthenticated]
 
+# class FakePerm(permissions.BasePermission):
+#     def has_permissions
 
 class RequestViewSet(viewsets.GenericViewSet):
     queryset = models.ListingRequest.objects.all()
     serializer_class = serializers.ListingRequestSerializer
+    permission_classes = [IsAssociatedWithRequest]
 
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset().filter(owner__pk=request.user.pk)
-        serializer = self.get_serializer(many=True, instance=queryset)
-        return Response(data=serializer.data)
+    # def list(self, request, *args, **kwargs):
+    #     queryset = self.get_queryset().filter(owner__pk=request.user.pk)
+    #     serializer = self.get_serializer(many=True, instance=queryset)
+    #     return Response(data=serializer.data)
 
     def create(self, request, *args, **kwargs):
         cust = request.user.customer
@@ -241,7 +260,7 @@ class RequestViewSet(viewsets.GenericViewSet):
             self.perform_create(serializer, cust)
             return Response(serializer.data)
 
-    @action(methods=['get', 'post'], detail=True, permission_classes=[IsAssociatedWithMessage])
+    @action(methods=['get', 'post'], detail=True, permission_classes=[IsAssociatedWithRequest])
     def messages(self, request, **kwargs):
         if (request.method == 'GET'):
             messages = models.RequestMessage.objects.filter(
@@ -261,10 +280,20 @@ class RequestViewSet(viewsets.GenericViewSet):
 
         return Response()
 
+    @action(methods=['patch'], detail=True, permission_classes=[IsAssociatedWithRequest], url_path="update-read-receipts")
+    def update_read_receipts(self, request, **kwargs):
+        user = self.request.user.customer
+        messages = models.RequestMessage.objects.filter(request=self.get_object(), seen=False)
+        other_messages = messages.exclude(owner=user)
+        for message in other_messages:
+            message.seen = True
+            
+        models.RequestMessage.objects.bulk_update(other_messages, ['seen'])
+
+        return Response(data=serializers.MessageSerializer(other_messages, many=True).data)
+
     def perform_create(self, serializer, customer):
         serializer.save(owner=customer)
-
-    permission_classes = [permissions.IsAuthenticated]
 
 
 class RequestMessageViewSet(viewsets.GenericViewSet):

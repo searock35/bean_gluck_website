@@ -7,28 +7,21 @@ import Listing from "./Listing";
 const ResultsListing = (props) => {
     const [responseStatus, setResponseStatus] = useState();
     const [responseMessage, setResponseMessage] = useState();
-    const [buyOrRent, setBuyOrRent] = useState("buy");
     const [requestCost, setRequestCost] = useState(
-        props.listing.purchase_price
+        props.listing.price
     );
     const [sliderVal, setSliderVal] = useState(100);
 
     useEffect(() => {
-        if (buyOrRent === "buy") {
-            setRequestCost(
-                ((sliderVal / 100) * props.listing.purchase_price).toFixed(2)
-            );
-        } else {
-            setRequestCost(
-                ((sliderVal / 100) * props.listing.rental_price).toFixed(2)
-            );
-        }
-    }, [buyOrRent, sliderVal, props]);
+        setRequestCost(
+            ((sliderVal / 100) * props.listing.price).toFixed(2)
+        );
+    }, [sliderVal, props]);
 
     const submitHandler = (e) => {
         e.preventDefault();
         listingRequestAPI
-            .requestListing(props.listing.id, buyOrRent, requestCost)
+            .requestListing(props.listing.id, requestCost)
             .then((response) => {
                 setResponseMessage();
                 setResponseStatus(response.status)
@@ -43,6 +36,8 @@ const ResultsListing = (props) => {
     const priceRangeHandler = (e) => {
         setSliderVal(e.target.value);
     };
+
+    const buyOrRent = props.listing.is_for_rent ? "rent":"buy"
 
     return (
         <div className="results-listing">
@@ -63,22 +58,6 @@ const ResultsListing = (props) => {
                         <p>Non-negotiable</p>
                     )}
                     <Form.Group>
-                        <Form.Check
-                            inline
-                            label="Rent"
-                            type="radio"
-                            name="buyOrSell"
-                            checked={buyOrRent === "rent"}
-                            onChange={() => setBuyOrRent("rent")}
-                        />
-                        <Form.Check
-                            inline
-                            label="Buy"
-                            type="radio"
-                            name="buyOrSell"
-                            checked={buyOrRent === "buy"}
-                            onChange={() => setBuyOrRent("buy")}
-                        />
                         <Button id={props.id} variant="primary" type="submit">
                             Request to {buyOrRent} for ${requestCost}
                         </Button>

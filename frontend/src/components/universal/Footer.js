@@ -3,7 +3,7 @@ import "./Footer.css"
 
 function Footer () {
     return(
-        <div className="universal-footer">
+        <div className="footer">
             <footer>
                 Created by Jared Gluck and Corey Bean
             </footer>

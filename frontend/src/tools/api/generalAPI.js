@@ -30,6 +30,19 @@ class generalAPI {
                 });
         });
     }
+
+    getEditionSting(edition) {
+        switch (edition) {
+            case 1:
+                return ("1st") 
+            case 2:
+                return "2nd"
+            case 3:
+                return "3rd";
+            default:
+                return `${edition}th`
+        }
+    }
 }
 
 export default new generalAPI();

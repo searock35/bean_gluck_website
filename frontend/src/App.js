@@ -42,6 +42,28 @@ function App() {
             });
     }, []);
 
+    const HomeRouter = (props) => {
+
+        return (
+            <Router>
+                <Switch>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/login" component={Login} />
+                    <Route path="/register" component={Register} />
+                    <Route path="/listings" component={ListingsSearch} />
+                    <Route path="/create-listing" component={ListingCreator} />
+                    <Route
+                        path="/book-create/"
+                        component={NewBookCreator}
+                    />
+                    <Route path="/donate" component={Donate} />
+                    <Footer />
+                </Switch>
+            </Router>
+
+        )
+    }
+
     return (
         <Router>
             <UserContext.Provider
@@ -50,27 +72,19 @@ function App() {
                     changeUserContext: (newUser) => setUserState(newUser),
                 }}
             >
-                <Container fluid>
-                    <HomeNavbar />
+                <HomeNavbar />
+                <div className="content">
                     <Switch>
-                        <Route path="/" exact component={Home} />
-                        <Route path="/login" component={Login} />
-                        <Route path="/register" component={Register} />
-                        <Route path="/listings" component={ListingsSearch} />
-                        <Route path="/create-listing" component={ListingCreator} />
-                        <Route
-                            path="/book-create/"
-                            component={NewBookCreator}
-                        />
-                        <Route path="/donate" component={Donate} />
                         <ProtectedRoute path="/user/:username/" userLoading={userLoading}>
                             <UserRouter/>
                         </ProtectedRoute>
+                        <Route path="/">
+                            <HomeRouter/>
+                        </Route>
                         <Route path="/" component={Error} />
                     </Switch>
+                </div>
 
-                    <Footer />
-                </Container>
             </UserContext.Provider>
         </Router>
     );

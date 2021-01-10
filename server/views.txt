@@ -1,0 +1,18 @@
+views
+
+CREATE VIEW "Book View" AS SELECT text_trader_book.id, title, subtitle, first_name, middle_initial, last_name, isbn FROM text_trader_book
+	JOIN text_trader_book_authors ON text_trader_book_authors.book_id = text_trader_book.id
+	JOIN text_trader_author ON text_trader_author.id = text_trader_book_authors.author_id
+
+CREATE VIEW "Listing View" AS SELECT text_trader_listing.id, first_name, last_name, condition, title, subtitle, purchase_price, rental_price, negotiable, name, text_trader_listing.date_created  from text_trader_listing
+	JOIN text_trader_book ON text_trader_book.id = text_trader_listing.book_id
+	JOIN text_trader_school ON text_trader_school.id = text_trader_listing.school_id
+	JOIN text_trader_customer ON text_trader_customer.user_id = text_trader_listing.owner_id
+	JOIN auth_user ON auth_user.id = text_trader_customer.user_id
+
+CREATE VIEW "User View" AS SELECT user_id, first_name, last_name, username, email, date_created, grad_year, is_superuser, city, state, zip_code, major_name FROM text_trader_customer
+	JOIN auth_user ON auth_user.id = text_trader_customer.user_id
+	JOIN text_trader_locality ON text_trader_customer.locality_id = text_trader_locality.id
+	JOIN text_trader_customer_major ON text_trader_customer_major.customer_id = text_trader_customer.user_id
+	JOIN text_trader_major ON text_trader_major.id = text_trader_customer_major.major_id
+	JOIN text_trader_school ON text_trader_customer.school_id = text_trader_school.id

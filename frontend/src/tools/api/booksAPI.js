@@ -90,7 +90,7 @@ class BooksAPI {
     getBookFromId(id) {
         return new Promise((resolve, reject) => {
             axios
-                .get(restURL + "/books/" + id)
+                .get(`${restURL}/books/${id}/`)
                 .then((response) => resolve(response.data))
                 .catch((err) => {
                     if (err.response) reject(err.response);

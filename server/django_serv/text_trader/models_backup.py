@@ -37,8 +37,6 @@ class Book(models.Model):
     subtitle = models.CharField(
         max_length=100, help_text="Enter a subtitle, if applicable", null=True, blank=True)
 
-    cover_link = models.URLField(null=True, blank=True)
-
     # The book's isbn. Not necessary only if there is no ISBN. Book needs either ISBN or is_custom is true.
     isbn = models.CharField(max_length=13, help_text="Enter the 10 number ISBN, if applicable", blank=True,
                             null=True, unique=True, error_messages={"unique": "A book with this ISBN already exists."})
@@ -183,18 +181,23 @@ class Listing(models.Model):
 
     date_created = models.DateField(auto_now=True)
 
-    # Listing can be for rent or for purchase. Is assumed to be for purchase if this is false.
-    is_for_rent = models.BooleanField(default=False)
-
     # The user can provide a purchase price, rental price or both. They need to set negotiable to true
     #  to be able to set both to zero.
-    price = models.DecimalField(
+    price = models.DecimalField(max_digits=5, decimal_places=2, null=False, blank=False, default=15.55)
+    purchase_price = models.DecimalField(
         max_digits=5, decimal_places=2, null=True, blank=True)
-
+    rental_price = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True)
     negotiable = models.BooleanField(default=False)
 
     # has this listing been purchased?
     fulfilled = models.BooleanField(default=False, blank=True)
+
+    def save(self, *args, **kwargs):
+        if (self.purchase_price == None) and (self.rental_price == None) and (not self.negotiable):
+            return  # The listing needs at least one or the other
+        else:
+            super().save(*args, **kwargs)  # Call the "real" save() method.
 
     def __str__(self):
         return (f'Book: {self.book}, Owner: {self.owner}')
@@ -210,8 +213,12 @@ class ListingRequest(models.Model):
     owner = models.ForeignKey(
         'Customer', related_name='listingRequests', on_delete=models.CASCADE)
 
+    # an optional rental price that is different from the advertised cost
+    rental_asking_price = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True)
+
     # an optional asking price that is different from the advertised cost
-    asking_price = models.DecimalField(
+    purchase_asking_price = models.DecimalField(
         max_digits=5, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
@@ -289,23 +296,21 @@ class RequestMessage(models.Model):
     # the date and time the message was sent
     datetime = models.DateTimeField(auto_now=True)
 
-    # Whether or not the message has been seen by the other user
-    seen = models.BooleanField(default=False)
+    # # is the message sender the seller or buyer of the book?
+    # is_seller = models.BooleanField(default=False, null=False, blank=True)
 
     # the customer posting the message
     owner = models.ForeignKey('Customer', on_delete=models.CASCADE)
 
     def _get_is_seller(self):
+        print(self.owner, self.request.owner)
         return not (self.owner == self.request.owner)
 
     is_seller = property(_get_is_seller)
 
     
     def __str__(self):
-        seen = "Unread."
-        if(self.seen):
-            seen = "Read."
-        return f'"{self.content}", for request: {self.request.pk}. {seen}'
+        return f'"{self.content}", for request: {self.request.pk}'
 
 class NotificationRequest(models.Model):
     '''

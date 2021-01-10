@@ -6,41 +6,20 @@ import restURL from "./restURL";
 
 class listingRequestAPI {
 
-    constructor() {
-        this.testRequestsByListing = [
-            {action: "buy", message: "Please let me buy this!", firstName: "Corey", lastName: "Bean", gradYear: "2021", userId: "01220420"},
-            {action: "rent", message: "i need this, can you do 15?", firstName: "Scoops", lastName: "Remy", gradYear: "2019", userId: "01220421"},
-            {action: "rent", message: "There is no profanity filter, fucker", firstName: "Badly", lastName: "Person", gradYear: "2023", userId: "01220425"},
-            {action: "buy", message: "Shut this place down.", firstName: "Cop", lastName: "Bad", gradYear: "2025", userId: "01220333"},
-
-
-            this.testRequestsByUser = [
-                {action: "buy", rentalPrice: "20", sellingPrice: "30", requestId: "0", condition: "Bad", title: "Hunger bores", bookId: "1", firstName: "Corey", lastName: "Bean", gradYear: "2021", userId: "01220420"},
-                {action: "rent", rentalPrice: "20", sellingPrice: "30", requestId: "1", condition: "Bad", title: "Hunger bores", bookId: "1", firstName: "Scoops", lastName: "Remy", gradYear: "2019", userId: "01220421"},
-                {action: "rent", rentalPrice: "20", sellingPrice: "30", requestId: "2", condition: "Bad", title: "Hunger bores", bookId: "1", firstName: "Badly", lastName: "Person", gradYear: "2023", userId: "01220425"},
-                {action: "buy", rentalPrice: "20", sellingPrice: "30", requestId: "3", condition: "Bad", title: "Hunger bores", bookId: "1", firstName: "Cop", lastName: "Bad", gradYear: "2025", userId: "01220333"},
-    
-            ]
-        ]
-    }
-
     /**
      * Post a listing request to the API. 
      * Return the response directly. 
      * 
      * @param {string} listing_id The ID of the listing to be requested
-     * @param {string} buyOrRent Whether the user wants to buy or rent the book
      * @param {string} asking_price A value indicating a desired price
      */
-    requestListing(listing_id, buyOrRent, asking_price) {
+    requestListing(listing_id, asking_price) {
 
 
         let requestInfo = {
             listing: `${listing_id}`,
+            asking_price: asking_price
         }
-
-        if (buyOrRent === "buy") requestInfo['purchase_asking_price'] = asking_price;
-        else requestInfo['rental_asking_price'] = asking_price;
 
         return new Promise((resolve, reject) => {
             if (authAPI.authToken === "0") return reject({status: 401})
@@ -57,9 +36,20 @@ class listingRequestAPI {
         })
     }
 
+    /**
+     * Get all the requests associated with a listing. Must be the owner of the listing.
+     * @param {Number} listingId Determines the listing from which the requests will be retrieved from.
+     */
     getRequestsByListing(listingId) {
 
-        return this.testRequestsByListing
+        return new Promise((resolve, reject) => {
+            Axios.get(`${restURL}/listings/${listingId}/requests/`, authAPI.getAuthHeader)
+                .then(resolve)
+                .catch(err => {
+                    if (err.response) reject(err.response)
+                    else reject({status: 0})
+                })
+        })
     }
 
     /**
@@ -68,7 +58,7 @@ class listingRequestAPI {
      */
     getRequestsByUser() {
         return new Promise((resolve, reject) => {
-            Axios.get(restURL + "/requests/", {
+            Axios.get(`${restURL}/customers/${authAPI.userId}/requests/`, {
                 headers: {
                     Authorization: "Token " + authAPI.authToken
                 }
@@ -79,6 +69,44 @@ class listingRequestAPI {
                     else reject({status: 0})
                 })
         })
+    }
+
+    /**
+     * Post a message to a given request.
+     * @param {Number} requestId The Id of the requests that the message is associated with.
+     * @param {String} content The string of text for the message.
+     * 
+     * Returns the direct response, which holds the created message in the data. On failure,
+     * returns a stable error.
+     */
+    postMessage(requestId, content) {
+        return new Promise((resolve, reject) => {
+            Axios.post(`${restURL}/requests/${requestId}/messages/`, {content: content}, authAPI.getAuthHeader())
+            .then(resolve)
+            .catch(err => {
+                if (err.response) reject(err.response);
+                else reject ({status: 0})
+            })
+        })
+    }
+
+    /**
+     * Get the messages for a given request.
+     * @param {Number} requestId The Id of the request from which the messages will be retrieved from.
+     * 
+     * Returns the response, which holds in the data the messages. On failure,
+     * returns a stable error.
+     */
+    getMessages(requestId) {
+        return new Promise((resolve, reject) => {
+            Axios.get(`${restURL}/requests/${requestId}/messages/`, authAPI.getAuthHeader())
+            .then(resolve)
+            .catch(err => {
+                if (err.response) reject(err.response);
+                else reject ({status: 0})
+            })
+        })
+
     }
 }
 

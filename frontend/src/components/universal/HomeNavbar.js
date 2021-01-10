@@ -65,7 +65,7 @@ function HomeNavbar() {
 
     return (
         <>
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar className="header" bg="dark" variant="dark" expand="lg">
                 <Navbar.Brand>TextTrader</Navbar.Brand>
                 <Nav className="mr-auto" onSelect={handleSelect}>
                     <Nav.Link eventKey="/">Home</Nav.Link>

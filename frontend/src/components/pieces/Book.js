@@ -28,7 +28,6 @@ function Book(props) {
 
     return (
         <ul className="book-info">
-            <li><img src={`http://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`} alt={`Book Cover for ${bookInfo.title}`}></img></li>
             <li className="book-title">Title: {bookInfo.title}</li>
             {bookInfo.subtitle ? (
                 <li className="book-subtitle">Subtitle: {bookInfo.subtitle}</li>

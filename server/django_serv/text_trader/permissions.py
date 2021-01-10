@@ -16,6 +16,17 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         # Write permissions are only allowed to the owner of the snippet.
         return obj.owner == request.user
 
+class IsSelf(permissions.IsAuthenticated):
+    """
+    Custom permission that only lets the user access detail information about themself.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        if not request.user.is_anonymous:
+            return obj.user.pk == request.user.pk
+
+        return False
+
 class IsOwner(permissions.BasePermission):
     """
     Custom permission to only allow owners of an object to edit it.
@@ -29,14 +40,14 @@ class IsOwner(permissions.BasePermission):
 
         return obj.owner.pk == request.user.pk
 
-class IsAssociatedWithMessage(permissions.BasePermission):
+class IsAssociatedWithRequest(permissions.IsAuthenticated):
     """
     Custom permission to only allow a person to GET or POST a message
     if they are either the owner of the request or the owner of the listing
-    associated with that message.
+    associated with that request.
     """
-
-    def has_object_permission(self, request, veiw, obj):
+    def has_object_permission(self, request, view, obj):
+        print("Checking object permissions")
         if obj.owner.pk == request.user.pk or obj.listing.owner.pk == request.user.pk:
             return True
 
