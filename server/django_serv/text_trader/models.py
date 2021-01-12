@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Max
 import datetime
 
 
@@ -188,13 +189,33 @@ class Listing(models.Model):
 
     # The user can provide a purchase price, rental price or both. They need to set negotiable to true
     #  to be able to set both to zero.
+    # If negotiable, then this price acts as a base starting price for the bid.
     price = models.DecimalField(
         max_digits=5, decimal_places=2, null=True, blank=True)
 
+    # Opens up a listing for a bid. A bid will last a set amount of time.
     negotiable = models.BooleanField(default=False)
 
     # has this listing been purchased?
     fulfilled = models.BooleanField(default=False, blank=True)
+
+    # Gets the request that has the leading bid, if one exists.
+    def _get_leading_bid(self):
+
+        if (self.negotiable):
+
+            requests = ListingRequest.objects.filter(listing=self) # .aggregate(ret=Max('asking_price'))
+
+            try: 
+                return requests.order_by('asking_price')[0]
+
+            except IndexError as err:
+                return None
+
+        else:
+            return(None)
+
+    leading_bid = property(_get_leading_bid)
 
     def __str__(self):
         return (f'Book: {self.book}, Owner: {self.owner}')
@@ -210,7 +231,8 @@ class ListingRequest(models.Model):
     owner = models.ForeignKey(
         'Customer', related_name='listingRequests', on_delete=models.CASCADE)
 
-    # an optional asking price that is different from the advertised cost
+    # an optional asking price that is different from the advertised cost. Only applies to
+    # negotiable items.
     asking_price = models.DecimalField(
         max_digits=5, decimal_places=2, null=True, blank=True)
 

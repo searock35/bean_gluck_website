@@ -159,7 +159,12 @@ class BookSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'subtitle', 'isbn', 'isbn13',
                   'authors', 'edition', 'creator', 'course', 'is_custom']
 
+class BasicRequestSerializer(serializers.ModelSerializer):
+    owner = CustomerSerializer(read_only=True)
 
+    class Meta:
+        model = models.ListingRequest
+        fields = ['id', 'owner', 'asking_price']
 class ListingSerializer(serializers.ModelSerializer):
     # We want to show the whole customer info, hence the CustomerSerializer
     owner = CustomerSerializer(read_only=True)
@@ -170,6 +175,7 @@ class ListingSerializer(serializers.ModelSerializer):
     school_name = serializers.ReadOnlyField(source='school.name')
     condition_display = serializers.ReadOnlyField(
         source='get_condition_display')
+    leading_bid = BasicRequestSerializer(read_only=True)
 
     def validate(self, data):
         # Check to make sure negotiable is true if price is null
@@ -183,7 +189,7 @@ class ListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Listing
         fields = ['id', 'owner', 'school', 'school_name', 'negotiable', 'book',
-                  'condition', 'condition_display', 'is_for_rent', 'price', 'date_created']
+                  'condition', 'condition_display', 'is_for_rent', 'price', 'leading_bid', 'date_created']
 
 
 class ListingRequestSerializer(serializers.ModelSerializer):
