@@ -1,0 +1,1830 @@
+
+<code><span style="color: rgb(173, 229, 252);">.w-layout-grid</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-grid;
+  <span style="color: rgb(255, 255, 170);">display</span>: grid;
+  <span style="color: rgb(255, 255, 170);">grid-auto-columns</span>: <span style="color: rgb(211, 99, 99);">1</span>fr;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-columns</span>: <span style="color: rgb(211, 99, 99);">1</span>fr <span style="color: rgb(211, 99, 99);">1</span>fr;
+  <span style="color: rgb(255, 255, 170);">grid-template-columns</span>: <span style="color: rgb(211, 99, 99);">1</span>fr <span style="color: rgb(211, 99, 99);">1</span>fr;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-rows</span>: auto auto;
+  <span style="color: rgb(255, 255, 170);">grid-template-rows</span>: auto auto;
+  <span style="color: rgb(255, 255, 170);">grid-row-gap</span>: <span style="color: rgb(211, 99, 99);">16px</span>;
+  <span style="color: rgb(255, 255, 170);">grid-column-gap</span>: <span style="color: rgb(211, 99, 99);">16px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.navbar</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: fixed;
+  <span style="color: rgb(255, 255, 170);">z-index</span>: <span style="color: rgb(211, 99, 99);">10</span>;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100vw</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">70px</span>;
+  <span style="color: rgb(255, 255, 170);">border-bottom</span>: <span style="color: rgb(211, 99, 99);">3px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#f4f4f4</span>;
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: none;
+}
+
+<span style="color: rgb(173, 229, 252);">.body</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">background-image</span>: <span style="color: rgb(255, 255, 170);">-webkit-gradient</span>(linear, left top, left bottom, from(hsla(0, 0%, 83.3%, 0.26)), <span style="color: rgb(255, 255, 170);">to</span>(hsla(0, 0%, 83.3%, 0.26)));
+  <span style="color: rgb(255, 255, 170);">background-image</span>: <span style="color: rgb(255, 255, 170);">linear-gradient</span>(180deg, hsla(0, 0%, 83.3%, 0.26), <span style="color: rgb(255, 255, 170);">hsla</span>(0, 0%, 83.3%, 0.26));
+  <span style="color: rgb(255, 255, 170);">background-position</span>: <span style="color: rgb(211, 99, 99);">0px</span> <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">font-family</span>: Merriweather, serif;
+}
+
+<span style="color: rgb(173, 229, 252);">.dash-container</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">700px</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#fff</span>;
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">9px</span> <span style="color: rgb(211, 99, 99);">2px</span> <span style="color: rgb(255, 255, 170);">rgba</span>(88, 88, 88, 0.63);
+}
+
+<span style="color: rgb(173, 229, 252);">.dash-container</span><span style="color: rgb(173, 229, 252);">.profile-container</span> {
+  <span style="color: rgb(255, 255, 170);">padding-bottom</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.list</span> {
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">215px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">12px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">list-style-type</span>: none;
+}
+
+<span style="color: rgb(173, 229, 252);">.user-listing</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">69px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">4px</span>;
+  <span style="color: rgb(255, 255, 170);">border-style</span>: solid none;
+  <span style="color: rgb(255, 255, 170);">border-width</span>: <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">3px</span>;
+  <span style="color: rgb(255, 255, 170);">border-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(255, 255, 170);">hsla</span>(235, 0%, 92%, 0);
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: none;
+}
+
+<span style="color: rgb(173, 229, 252);">.grid</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">1460px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">grid-column-gap</span>: <span style="color: rgb(211, 99, 99);">21px</span>;
+  <span style="color: rgb(255, 255, 170);">grid-row-gap</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-rows</span>: <span style="color: rgb(211, 99, 99);">2.25</span>fr <span style="color: rgb(211, 99, 99);">1</span>fr <span style="color: rgb(211, 99, 99);">2.5</span>fr;
+  <span style="color: rgb(255, 255, 170);">grid-template-rows</span>: <span style="color: rgb(211, 99, 99);">2.25</span>fr <span style="color: rgb(211, 99, 99);">1</span>fr <span style="color: rgb(211, 99, 99);">2.5</span>fr;
+}
+
+<span style="color: rgb(173, 229, 252);">.heading</span> {
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-bottom</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">font-family</span>: Aleo, sans-serif;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#fff</span>;
+  <span style="color: rgb(255, 255, 170);">font-weight</span>: <span style="color: rgb(211, 99, 99);">400</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">text-shadow</span>: <span style="color: rgb(211, 99, 99);">2px</span> <span style="color: rgb(211, 99, 99);">2px</span> <span style="color: rgb(211, 99, 99);">2px</span> <span style="color: rgb(255, 255, 170);">rgba</span>(0, 0, 0, 0.34);
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-header</span> {
+  <span style="color: rgb(255, 255, 170);">font-family</span>: Merriweather, serif;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">16px</span>;
+  <span style="color: rgb(255, 255, 170);">font-weight</span>: <span style="color: rgb(211, 99, 99);">700</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: right;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-value</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">top</span>: -<span style="color: rgb(211, 99, 99);">3px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">font-family</span>: Lato, sans-serif;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: right;
+}
+
+<span style="color: rgb(173, 229, 252);">.column</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">4px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">border-right</span>: <span style="color: rgb(211, 99, 99);">2px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.condition-color</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">33%</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">border-style</span>: solid;
+  <span style="color: rgb(255, 255, 170);">border-width</span>: <span style="color: rgb(211, 99, 99);">1px</span>;
+  <span style="color: rgb(255, 255, 170);">border-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#5efd6e</span>;
+  <span style="color: rgb(255, 255, 170);">-o-object-fit</span>: fill;
+  <span style="color: rgb(255, 255, 170);">object-fit</span>: fill;
+}
+
+<span style="color: rgb(173, 229, 252);">.list-2</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">overflow</span>: hidden;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100.00008%</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: space-around;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: distribute;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: space-around;
+}
+
+<span style="color: rgb(173, 229, 252);">.column-2</span> {
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">2px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.columns</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.column-3</span> {
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.columns-2</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">right</span>: -<span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">margin-right</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.column-4</span> {
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.list-3</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding</span>: <span style="color: rgb(211, 99, 99);">0px</span> <span style="color: rgb(211, 99, 99);">5px</span> <span style="color: rgb(211, 99, 99);">0px</span> <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: space-around;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: distribute;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: space-around;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-align</span>: end;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-items</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-align</span>: end;
+  <span style="color: rgb(255, 255, 170);">align-items</span>: flex-end;
+}
+
+<span style="color: rgb(173, 229, 252);">.image</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">left</span>: <span style="color: rgb(211, 99, 99);">6px</span>;
+  <span style="color: rgb(255, 255, 170);">top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">15px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-transform</span>: <span style="color: rgb(255, 255, 170);">rotate</span>(180deg);
+  <span style="color: rgb(255, 255, 170);">-ms-transform</span>: <span style="color: rgb(255, 255, 170);">rotate</span>(180deg);
+  <span style="color: rgb(255, 255, 170);">transform</span>: <span style="color: rgb(255, 255, 170);">rotate</span>(180deg);
+}
+
+<span style="color: rgb(173, 229, 252);">.list-item</span> {
+  <span style="color: rgb(255, 255, 170);">overflow</span>: hidden;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">33%</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">border-right</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">border-bottom</span>: <span style="color: rgb(211, 99, 99);">2px</span> none <span style="color: rgb(211, 99, 99);">#000</span>;
+  <span style="color: rgb(255, 255, 170);">border-left</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.list-item-2</span> {
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">33%</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">border-right</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">border-left</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.container</span> {
+  <span style="color: rgb(255, 255, 170);">overflow</span>: visible;
+  <span style="color: rgb(255, 255, 170);">max-width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">69px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.list-4</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">margin-right</span>: -<span style="color: rgb(211, 99, 99);">7px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: space-around;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: distribute;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: space-around;
+}
+
+<span style="color: rgb(173, 229, 252);">.column-5</span> {
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-info</span> {
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">16px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.image-2</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">left</span>: <span style="color: rgb(211, 99, 99);">1px</span>;
+  <span style="color: rgb(255, 255, 170);">top</span>: -<span style="color: rgb(211, 99, 99);">1px</span>;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">89%</span>;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">8px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-book</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">border-style</span>: none none none solid;
+  <span style="color: rgb(255, 255, 170);">border-width</span>: <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">2px</span>;
+  <span style="color: rgb(255, 255, 170);">border-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.column-7</span> {
+  <span style="color: rgb(255, 255, 170);">right</span>: -<span style="color: rgb(211, 99, 99);">1px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-edit</span><span style="color: rgb(173, 229, 252);">.listing-button</span> {
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">15px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-button</span> {
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">8px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">8px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-button</span><span style="color: rgb(173, 229, 252);">.listing-edit</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">50%</span>;
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">7px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">border-style</span>: none none solid solid;
+  <span style="color: rgb(255, 255, 170);">border-width</span>: <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">2px</span>;
+  <span style="color: rgb(255, 255, 170);">border-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#3898ec</span>;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#38373a</span>;
+  <span style="color: rgb(255, 255, 170);">font-weight</span>: <span style="color: rgb(211, 99, 99);">700</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-button</span><span style="color: rgb(173, 229, 252);">.listing-edit</span><span>:hover</span> {
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#1e85df</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-button</span><span style="color: rgb(173, 229, 252);">.listing-edit</span><span>:active</span> {
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: inset <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">#000</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-button</span><span style="color: rgb(173, 229, 252);">.listing-edit</span><span style="color: rgb(173, 229, 252);">.inactive</span> {
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#b8b8b8</span>;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#7e7e7e</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-button</span><span style="color: rgb(173, 229, 252);">.listing-delete</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">50%</span>;
+  <span style="color: rgb(255, 255, 170);">padding</span>: <span style="color: rgb(211, 99, 99);">6px</span> <span style="color: rgb(211, 99, 99);">8px</span> <span style="color: rgb(211, 99, 99);">0px</span> <span style="color: rgb(211, 99, 99);">4px</span>;
+  <span style="color: rgb(255, 255, 170);">border-style</span>: solid none none solid;
+  <span style="color: rgb(255, 255, 170);">border-width</span>: <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">2px</span>;
+  <span style="color: rgb(255, 255, 170);">border-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#ff5353</span>;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#38373a</span>;
+  <span style="color: rgb(255, 255, 170);">font-weight</span>: <span style="color: rgb(211, 99, 99);">700</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-button</span><span style="color: rgb(173, 229, 252);">.listing-delete</span><span>:hover</span> {
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#fa3131</span>;
+  <span style="color: rgb(255, 255, 170);">opacity</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-button</span><span style="color: rgb(173, 229, 252);">.listing-delete</span><span>:active</span> {
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: inset <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">#000</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.dash-container-header</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: space-around;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: distribute;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: space-around;
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">2px</span> <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(255, 255, 170);">rgba</span>(0, 0, 0, 0.73);
+}
+
+<span style="color: rgb(173, 229, 252);">.dash-container-header</span><span style="color: rgb(173, 229, 252);">.profile-container-header</span> {
+  <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: center;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.scroll-listing-button</span> {
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">16px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">11px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">14px</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: transparent;
+  <span style="color: rgb(255, 255, 170);">font-family</span>: <span style="color: rgb(162, 252, 162);">'Red Hat Display'</span>, sans-serif;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#f8f8f8</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">50px</span>;
+  <span style="color: rgb(255, 255, 170);">font-weight</span>: <span style="color: rgb(211, 99, 99);">700</span>;
+  <span style="color: rgb(255, 255, 170);">text-shadow</span>: <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">#0e0d0d</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.scroll-listing-button</span><span>:active</span> {
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#646464</span>;
+  <span style="color: rgb(255, 255, 170);">text-shadow</span>: none;
+}
+
+<span style="color: rgb(173, 229, 252);">.school-select</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">overflow</span>: visible;
+  <span style="color: rgb(255, 255, 170);">width</span>: auto;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">8px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-right</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">8px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: horizontal;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: row;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: row;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: row;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: space-around;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: distribute;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: space-around;
+  <span style="color: rgb(255, 255, 170);">border</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#000</span>;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#fff</span>;
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: inset <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">#000</span>;
+  <span style="color: rgb(255, 255, 170);">cursor</span>: pointer;
+}
+
+<span style="color: rgb(173, 229, 252);">.school-select</span><span>:hover</span> {
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#e2e2e2</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.navbar-search</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.navbar-school-logo</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">z-index</span>: auto;
+  <span style="color: rgb(255, 255, 170);">display</span>: block;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">50px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-row-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">border</span>: <span style="color: rgb(211, 99, 99);">2px</span> none <span style="color: rgb(211, 99, 99);">#000</span>;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">9px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.navbar-link</span> {
+  <span style="color: rgb(255, 255, 170);">margin-right</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-row-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#383838</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">24px</span>;
+  <span style="color: rgb(255, 255, 170);">font-weight</span>: <span style="color: rgb(211, 99, 99);">400</span>;
+  <span style="color: rgb(255, 255, 170);">cursor</span>: pointer;
+}
+
+<span style="color: rgb(173, 229, 252);">.navbar-link</span><span style="color: rgb(173, 229, 252);">.main-logo</span> {
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">2px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">6px</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">36px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.navbar-link</span><span style="color: rgb(173, 229, 252);">.change-link</span> {
+  <span style="color: rgb(255, 255, 170);">margin-right</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">16px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.navbar-link</span><span style="color: rgb(173, 229, 252);">.large-only</span> {
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">2px</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.navbar-user-settings</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: end;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: end;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-ordinal-group</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-order</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-order</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+  <span style="color: rgb(255, 255, 170);">order</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.navbar-profile-pic</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">45px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">45px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-row-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">22px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.burger-list</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: block;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">60px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">60px</span>;
+  <span style="color: rgb(255, 255, 170);">margin</span>: <span style="color: rgb(211, 99, 99);">2px</span> <span style="color: rgb(211, 99, 99);">5px</span> <span style="color: rgb(211, 99, 99);">5px</span> <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: space-around;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: distribute;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: space-around;
+  <span style="color: rgb(255, 255, 170);">border</span>: <span style="color: rgb(211, 99, 99);">3px</span> none <span style="color: rgb(211, 99, 99);">#000</span>;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">30px</span>;
+  <span style="color: rgb(255, 255, 170);">cursor</span>: pointer;
+  <span style="color: rgb(255, 255, 170);">-o-object-fit</span>: fill;
+  <span style="color: rgb(255, 255, 170);">object-fit</span>: fill;
+}
+
+<span style="color: rgb(173, 229, 252);">.burger-list</span><span>:hover</span> {
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(255, 255, 170);">hsla</span>(0, 0%, 100%, 0.24);
+}
+
+<span style="color: rgb(173, 229, 252);">.burger-list</span><span>:active</span> {
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: inset <span style="color: rgb(211, 99, 99);">2px</span> <span style="color: rgb(211, 99, 99);">2px</span> <span style="color: rgb(211, 99, 99);">5px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">#a3a3a3</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.burger-slice</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">40px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-right</span>: auto;
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: auto;
+  <span style="color: rgb(255, 255, 170);">border-style</span>: solid;
+  <span style="color: rgb(255, 255, 170);">border-width</span>: <span style="color: rgb(211, 99, 99);">2px</span>;
+  <span style="color: rgb(255, 255, 170);">border-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.form-block</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.form</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-row-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.navbar-search-field</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">80%</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">38px</span>;
+  <span style="color: rgb(255, 255, 170);">max-width</span>: <span style="color: rgb(211, 99, 99);">375px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">0px</span> <span style="color: rgb(211, 99, 99);">10px</span> <span style="color: rgb(211, 99, 99);">10px</span> <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: none;
+}
+
+<span style="color: rgb(173, 229, 252);">.image-6</span> {
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.navbar-search-button</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">z-index</span>: <span style="color: rgb(211, 99, 99);">6</span>;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">overflow</span>: visible;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">40px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">38px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-right</span>: -<span style="color: rgb(211, 99, 99);">2px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: center;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">border-top-left-radius</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">border-bottom-left-radius</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">4px</span> -<span style="color: rgb(211, 99, 99);">4px</span> <span style="color: rgb(211, 99, 99);">#000</span>;
+  <span style="color: rgb(255, 255, 170);">cursor</span>: pointer;
+}
+
+<span style="color: rgb(173, 229, 252);">.navbar-search-button</span><span>:active</span> {
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: inset <span style="color: rgb(211, 99, 99);">4px</span> <span style="color: rgb(211, 99, 99);">4px</span> <span style="color: rgb(211, 99, 99);">4px</span> -<span style="color: rgb(211, 99, 99);">2px</span> <span style="color: rgb(211, 99, 99);">#000</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.image-7</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">50%</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">50%</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.book-info</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#000</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.book-title</span> {
+  <span style="color: rgb(255, 255, 170);">margin-right</span>: <span style="color: rgb(211, 99, 99);">11px</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">line-height</span>: <span style="color: rgb(211, 99, 99);">12px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.book-subtitle</span> {
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">8px</span>;
+  <span style="color: rgb(255, 255, 170);">line-height</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.book-id</span> {
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">8px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.container-page-tracker</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">left</span>: -<span style="color: rgb(211, 99, 99);">18px</span>;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#929292</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: right;
+}
+
+<span style="color: rgb(173, 229, 252);">.profile-edit-button</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">right</span>: -<span style="color: rgb(211, 99, 99);">17px</span>;
+  <span style="color: rgb(255, 255, 170);">bottom</span>: -<span style="color: rgb(211, 99, 99);">2px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">30px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-row-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">8px</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#f4f4f4</span>;
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">#000</span>;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">18px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.dash-container-body</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+}
+
+<span style="color: rgb(173, 229, 252);">.profile-user-image</span> {
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">8px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">2px</span>;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">40px</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: left;
+}
+
+<span style="color: rgb(173, 229, 252);">.user-summary</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-items</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.course-summary</span> {
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.course-summary-header</span> {
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: left;
+}
+
+<span style="color: rgb(173, 229, 252);">.course-list</span> {
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.course</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: space-around;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: distribute;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: space-around;
+  <span style="color: rgb(255, 255, 170);">border-top</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#000</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.course</span><span style="color: rgb(173, 229, 252);">.list-header</span> {
+  <span style="color: rgb(255, 255, 170);">border-top-style</span>: none;
+  <span style="color: rgb(255, 255, 170);">font-weight</span>: <span style="color: rgb(211, 99, 99);">700</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.course-name</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">50%</span>;
+  <span style="color: rgb(255, 255, 170);">margin-right</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">border-right</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#000</span>;
+  <span style="color: rgb(255, 255, 170);">border-left</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#000</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.course-id</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">15%</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">border-bottom</span>: <span style="color: rgb(211, 99, 99);">1px</span> none <span style="color: rgb(211, 99, 99);">#000</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.course-id</span><span style="color: rgb(173, 229, 252);">.course-instructor</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">35%</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-bid-count</span> {
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: -<span style="color: rgb(211, 99, 99);">4px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: end;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: right;
+}
+
+<span style="color: rgb(173, 229, 252);">.link</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: block;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">660px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">69px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: horizontal;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: row;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: row;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: row;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: justify;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: space-between;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: justify;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: space-between;
+  <span style="color: rgb(255, 255, 170);">border-top</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">border-bottom</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-column</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">60px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-column</span><span style="color: rgb(173, 229, 252);">.listing-book</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">170px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-column</span><span style="color: rgb(173, 229, 252);">.listing-info</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">350px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+}
+
+<span style="color: rgb(173, 229, 252);">.listing-column</span><span style="color: rgb(173, 229, 252);">.listing-price</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">110px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.listings-info</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">340px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.text-block</span> {
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: -<span style="color: rgb(211, 99, 99);">11px</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: right;
+}
+
+<span style="color: rgb(173, 229, 252);">.meetup-list</span> {
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">160px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.meetup</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">660px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">69px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">border-top</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">border-bottom</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.messenger-container</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: absolute;
+  <span style="color: rgb(255, 255, 170);">left</span>: <span style="color: rgb(211, 99, 99);">352px</span>;
+  <span style="color: rgb(255, 255, 170);">bottom</span>: -<span style="color: rgb(211, 99, 99);">1px</span>;
+  <span style="color: rgb(255, 255, 170);">display</span>: none;
+  <span style="color: rgb(255, 255, 170);">overflow</span>: visible;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">308px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">350px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: justify;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: space-between;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: justify;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: space-between;
+  <span style="color: rgb(255, 255, 170);">border-style</span>: none none solid;
+  <span style="color: rgb(255, 255, 170);">border-width</span>: <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">1px</span>;
+  <span style="color: rgb(255, 255, 170);">border-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#fff</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.image-8</span> {
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-row-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">border-style</span>: solid;
+  <span style="color: rgb(255, 255, 170);">border-width</span>: <span style="color: rgb(211, 99, 99);">3px</span>;
+  <span style="color: rgb(255, 255, 170);">border-color</span>: <span style="color: rgb(211, 99, 99);">#58729b</span>;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">30px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.messenger-header</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">border-style</span>: solid;
+  <span style="color: rgb(255, 255, 170);">border-width</span>: <span style="color: rgb(211, 99, 99);">3px</span>;
+  <span style="color: rgb(255, 255, 170);">border-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">border-top-left-radius</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">border-top-right-radius</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.messenger-body</span> {
+  <span style="color: rgb(255, 255, 170);">overflow</span>: auto;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">border-right</span>: <span style="color: rgb(211, 99, 99);">3px</span> solid <span style="color: rgb(211, 99, 99);">#000</span>;
+  <span style="color: rgb(255, 255, 170);">border-left</span>: <span style="color: rgb(211, 99, 99);">3px</span> solid <span style="color: rgb(211, 99, 99);">#000</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.messenger-footer</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">68px</span>;
+  <span style="color: rgb(255, 255, 170);">border-top</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">border-right</span>: <span style="color: rgb(211, 99, 99);">3px</span> solid <span style="color: rgb(211, 99, 99);">#000</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.message</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: block;
+  <span style="color: rgb(255, 255, 170);">margin</span>: <span style="color: rgb(211, 99, 99);">5px</span> <span style="color: rgb(211, 99, 99);">6px</span>;
+  <span style="color: rgb(255, 255, 170);">padding</span>: <span style="color: rgb(211, 99, 99);">6px</span> <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: flex-start;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: start;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: flex-start;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">12px</span>;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#f4f4f4</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.message</span><span style="color: rgb(173, 229, 252);">.sent-message</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: inline-block;
+  <span style="color: rgb(255, 255, 170);">max-width</span>: none;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#1a3d61</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.message</span><span style="color: rgb(173, 229, 252);">.sent-message</span><span>:hover</span> {
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(255, 255, 170);">rgba</span>(26, 61, 97, 0.84);
+}
+
+<span style="color: rgb(173, 229, 252);">.message</span><span style="color: rgb(173, 229, 252);">.received-message</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: inline-block;
+  <span style="color: rgb(255, 255, 170);">max-width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">min-height</span>: auto;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: end;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.message</span><span style="color: rgb(173, 229, 252);">.received-message</span><span>:hover</span> {
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(255, 255, 170);">rgba</span>(89, 88, 92, 0.9);
+}
+
+<span style="color: rgb(173, 229, 252);">.list-5</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+}
+
+<span style="color: rgb(173, 229, 252);">.heading-2</span> {
+  <span style="color: rgb(255, 255, 170);">overflow</span>: visible;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: right;
+}
+
+<span style="color: rgb(173, 229, 252);">.button</span> {
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">12px</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: transparent;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">font-weight</span>: <span style="color: rgb(211, 99, 99);">700</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.messenger-open-button</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">250px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">33px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-right</span>: <span style="color: rgb(211, 99, 99);">15px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">15px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: end;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: end;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">12px</span>;
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">#000</span>;
+  <span style="color: rgb(255, 255, 170);">cursor</span>: pointer;
+}
+
+<span style="color: rgb(173, 229, 252);">.messenger-open-button</span><span>:hover</span> {
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#2c5279</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.messenger-open-button</span><span>:active</span> {
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: none;
+}
+
+<span style="color: rgb(173, 229, 252);">.small-arrow</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">left</span>: -<span style="color: rgb(211, 99, 99);">12px</span>;
+  <span style="color: rgb(255, 255, 170);">top</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">19px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">19px</span>;
+  <span style="color: rgb(255, 255, 170);">border-top</span>: <span style="color: rgb(211, 99, 99);">4px</span> solid <span style="color: rgb(211, 99, 99);">#000</span>;
+  <span style="color: rgb(255, 255, 170);">border-right</span>: <span style="color: rgb(211, 99, 99);">4px</span> solid <span style="color: rgb(211, 99, 99);">#000</span>;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">3px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-transform</span>: <span style="color: rgb(255, 255, 170);">rotate</span>(-45deg);
+  <span style="color: rgb(255, 255, 170);">-ms-transform</span>: <span style="color: rgb(255, 255, 170);">rotate</span>(-45deg);
+  <span style="color: rgb(255, 255, 170);">transform</span>: <span style="color: rgb(255, 255, 170);">rotate</span>(-45deg);
+}
+
+<span style="color: rgb(173, 229, 252);">.text-block-2</span> {
+  <span style="color: rgb(255, 255, 170);">overflow</span>: hidden;
+  <span style="color: rgb(255, 255, 170);">margin-right</span>: <span style="color: rgb(211, 99, 99);">22px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">13px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-row-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#f4f4f4</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">14px</span>;
+  <span style="color: rgb(255, 255, 170);">font-weight</span>: <span style="color: rgb(211, 99, 99);">300</span>;
+  <span style="color: rgb(255, 255, 170);">white-space</span>: nowrap;
+}
+
+<span style="color: rgb(173, 229, 252);">.meetup-descriptor</span> {
+  <span style="color: rgb(255, 255, 170);">text-align</span>: right;
+}
+
+<span style="color: rgb(173, 229, 252);">.meetup-descriptor</span><span style="color: rgb(173, 229, 252);">.buy-or-rent</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">top</span>: -<span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">font-weight</span>: <span style="color: rgb(211, 99, 99);">700</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.div-block-5</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: absolute;
+  <span style="color: rgb(255, 255, 170);">top</span>: -<span style="color: rgb(211, 99, 99);">12px</span>;
+  <span style="color: rgb(255, 255, 170);">right</span>: -<span style="color: rgb(211, 99, 99);">7px</span>;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">23px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">23px</span>;
+  <span style="color: rgb(255, 255, 170);">border-style</span>: solid;
+  <span style="color: rgb(255, 255, 170);">border-width</span>: <span style="color: rgb(211, 99, 99);">1px</span>;
+  <span style="color: rgb(255, 255, 170);">border-color</span>: <span style="color: rgb(211, 99, 99);">#bb3d07</span>;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">12px</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#fd7607</span>;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#fff</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">18px</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.message-datetime</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: block;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#969696</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">12px</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: left;
+}
+
+<span style="color: rgb(173, 229, 252);">.message-state</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: block;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#969696</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">12px</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: right;
+}
+
+<span style="color: rgb(173, 229, 252);">.message-details</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">157.46875px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: justify;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: space-between;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: justify;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: space-between;
+}
+
+<span style="color: rgb(173, 229, 252);">.sent-message</span> {
+  <span style="color: rgb(255, 255, 170);">max-width</span>: <span style="color: rgb(211, 99, 99);">60%</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: flex-start;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: start;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: flex-start;
+}
+
+<span style="color: rgb(173, 229, 252);">.received-message</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">max-width</span>: <span style="color: rgb(211, 99, 99);">60%</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: end;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: flex-end;
+}
+
+<span style="color: rgb(173, 229, 252);">.active-bid</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">69px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">4px</span>;
+  <span style="color: rgb(255, 255, 170);">border-style</span>: solid none;
+  <span style="color: rgb(255, 255, 170);">border-width</span>: <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">3px</span>;
+  <span style="color: rgb(255, 255, 170);">border-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(255, 255, 170);">hsla</span>(235, 0%, 92%, 0);
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: none;
+}
+
+<span style="color: rgb(173, 229, 252);">.body-2</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">font-family</span>: Merriweather, serif;
+}
+
+<span style="color: rgb(173, 229, 252);">.home-container</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">70px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.home-page-main-header</span> {
+  <span style="color: rgb(255, 255, 170);">text-align</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.footer</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">90%</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">15px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-bottom</span>: <span style="color: rgb(211, 99, 99);">40px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">border-top</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#a5a5a5</span>;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#464646</span>;
+  <span style="color: rgb(255, 255, 170);">font-weight</span>: <span style="color: rgb(211, 99, 99);">300</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.utility-page-wrap</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100vw</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100vh</span>;
+  <span style="color: rgb(255, 255, 170);">max-height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">max-width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: center;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-items</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.utility-page-content</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">260px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.utility-page-form</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-align</span>: stretch;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-items</span>: stretch;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-align</span>: stretch;
+  <span style="color: rgb(255, 255, 170);">align-items</span>: stretch;
+}
+
+<span style="color: rgb(173, 229, 252);">.home-page-header-container</span> {
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">40px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.home-page-sub-header</span> {
+  <span style="color: rgb(255, 255, 170);">text-align</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.home-search-form</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">700px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">40px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-items</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.home-search-bar</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">90px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: end;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: end;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">border-radius</span>: <span style="color: rgb(211, 99, 99);">40px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.book-search-dropdown</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: absolute;
+  <span style="color: rgb(255, 255, 170);">top</span>: <span style="color: rgb(211, 99, 99);">90px</span>;
+  <span style="color: rgb(255, 255, 170);">overflow</span>: auto;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">700px</span>;
+  <span style="color: rgb(255, 255, 170);">max-height</span>: <span style="color: rgb(211, 99, 99);">304px</span>;
+  <span style="color: rgb(255, 255, 170);">border-top</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#e5e5e5</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.book-search-dropdown</span><span style="color: rgb(173, 229, 252);">.navbar</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: fixed;
+  <span style="color: rgb(255, 255, 170);">left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">top</span>: <span style="color: rgb(211, 99, 99);">70px</span>;
+  <span style="color: rgb(255, 255, 170);">z-index</span>: <span style="color: rgb(211, 99, 99);">11</span>;
+  <span style="color: rgb(255, 255, 170);">display</span>: none;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: <span style="color: rgb(211, 99, 99);">4px</span> <span style="color: rgb(211, 99, 99);">4px</span> <span style="color: rgb(211, 99, 99);">9px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">#000</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.home-search-button</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">105px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">90px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: center;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">border-top-left-radius</span>: <span style="color: rgb(211, 99, 99);">45px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.home-search-button</span><span style="color: rgb(173, 229, 252);">.theme-background</span> {
+  <span style="color: rgb(255, 255, 170);">cursor</span>: pointer;
+}
+
+<span style="color: rgb(173, 229, 252);">.home-search-button</span><span style="color: rgb(173, 229, 252);">.theme-background</span><span>:hover</span> {
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: inset <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(255, 255, 170);">hsla</span>(0, 0%, 99.3%, 0.23);
+}
+
+<span style="color: rgb(173, 229, 252);">.home-search-input</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">padding-right</span>: <span style="color: rgb(211, 99, 99);">66px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: center;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">border-top-right-radius</span>: <span style="color: rgb(211, 99, 99);">45px</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#e5e5e5</span>;
+  <span style="color: rgb(255, 255, 170);">color</span>: <span style="color: rgb(211, 99, 99);">#7a7a7a</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">36px</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.theme-background</span> {
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#1a3d61</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.home-search-glass</span> {
+  <span style="color: rgb(255, 255, 170);">position</span>: relative;
+  <span style="color: rgb(255, 255, 170);">left</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">60px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">60px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-list</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-bottom</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-items</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-book</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">640px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">80px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">border-top</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">border-bottom</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#fff</span>;
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(255, 255, 170);">rgba</span>(0, 0, 0, 0.57);
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-book-info</span> {
+  <span style="color: rgb(255, 255, 170);">overflow</span>: auto;
+  <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-book-button</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">120px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">30px</span>;
+  <span style="color: rgb(255, 255, 170);">border-left</span>: <span style="color: rgb(211, 99, 99);">3px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">24px</span>;
+  <span style="color: rgb(255, 255, 170);">text-align</span>: center;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-book-button</span><span>:hover</span> {
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: inset <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(255, 255, 170);">hsla</span>(0, 0%, 100%, 0.12);
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-book-button</span><span>:active</span> {
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: inset <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">#000</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-book-button</span><span style="color: rgb(173, 229, 252);">.sell</span> {
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-book-cover</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">60px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-book-text</span> {
+  <span style="color: rgb(255, 255, 170);">margin-bottom</span>: -<span style="color: rgb(211, 99, 99);">2px</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">12px</span>;
+  <span style="color: rgb(255, 255, 170);">white-space</span>: nowrap;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-book-text</span><span style="color: rgb(173, 229, 252);">.title</span> {
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">14px</span>;
+  <span style="color: rgb(255, 255, 170);">font-weight</span>: <span style="color: rgb(211, 99, 99);">700</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-book-text</span><span style="color: rgb(173, 229, 252);">.edition</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: inline-block;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-book-text</span><span style="color: rgb(173, 229, 252);">.isbn</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: inline-block;
+  <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-add-book</span> {
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+  <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+  <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+  <span style="color: rgb(255, 255, 170);">display</span>: flex;
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">640px</span>;
+  <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">80px</span>;
+  <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: end;
+  <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: end;
+  <span style="color: rgb(255, 255, 170);">justify-content</span>: flex-end;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-items</span>: center;
+  <span style="color: rgb(255, 255, 170);">border-top</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">border-bottom</span>: <span style="color: rgb(211, 99, 99);">1px</span> solid <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#fff</span>;
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">3px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(255, 255, 170);">rgba</span>(0, 0, 0, 0.57);
+  <span style="color: rgb(255, 255, 170);">cursor</span>: pointer;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-add-book</span><span>:hover</span> {
+  <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#ececec</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-add-book</span><span>:active</span> {
+  <span style="color: rgb(255, 255, 170);">border-top-style</span>: none;
+  <span style="color: rgb(255, 255, 170);">border-bottom-style</span>: none;
+  <span style="color: rgb(255, 255, 170);">box-shadow</span>: none;
+}
+
+<span style="color: rgb(173, 229, 252);">.plus-sign</span> {
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">13px</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-flex-item-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-row-align</span>: center;
+  <span style="color: rgb(255, 255, 170);">align-self</span>: center;
+  <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">60px</span>;
+  <span style="color: rgb(255, 255, 170);">line-height</span>: <span style="color: rgb(211, 99, 99);">40px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.booksearch-add-text</span> {
+  <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  <span style="color: rgb(255, 255, 170);">padding-bottom</span>: <span style="color: rgb(211, 99, 99);">5px</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">.course-instructor</span> {
+  <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">35%</span>;
+}
+
+@<span style="color: rgb(252, 194, 140);">media</span> screen and (max-width: <span style="color: rgb(211, 99, 99);">991px</span>) {
+  <span style="color: rgb(173, 229, 252);">.navbar</span> {
+    <span style="color: rgb(255, 255, 170);">position</span>: fixed;
+    <span style="color: rgb(255, 255, 170);">z-index</span>: <span style="color: rgb(211, 99, 99);">5</span>;
+    <span style="color: rgb(255, 255, 170);">background-color</span>: <span style="color: rgb(211, 99, 99);">#f4f4f4</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.user-listing</span> {
+    <span style="color: rgb(255, 255, 170);">z-index</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.grid</span> {
+    <span style="color: rgb(255, 255, 170);">width</span>: auto;
+    <span style="color: rgb(255, 255, 170);">-ms-grid-columns</span>: <span style="color: rgb(211, 99, 99);">1</span>fr;
+    <span style="color: rgb(255, 255, 170);">grid-template-columns</span>: <span style="color: rgb(211, 99, 99);">1</span>fr;
+    <span style="color: rgb(255, 255, 170);">-ms-grid-rows</span>: auto;
+    <span style="color: rgb(255, 255, 170);">grid-template-rows</span>: auto;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.listing-header</span> {
+    <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">16px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.condition-color</span> {
+    <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+    <span style="color: rgb(255, 255, 170);">padding-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+    <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+    <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+    <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+    <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+    <span style="color: rgb(255, 255, 170);">border-top-width</span>: <span style="color: rgb(211, 99, 99);">2px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.list-2</span> {
+    <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+    <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+    <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+    <span style="color: rgb(255, 255, 170);">display</span>: flex;
+    <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">80%</span>;
+    <span style="color: rgb(255, 255, 170);">margin-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+    <span style="color: rgb(255, 255, 170);">margin-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+    <span style="color: rgb(255, 255, 170);">padding-top</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+    <span style="color: rgb(255, 255, 170);">padding-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+    <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+    <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+    <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+    <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+    <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+    <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: justify;
+    <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: space-between;
+    <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: justify;
+    <span style="color: rgb(255, 255, 170);">justify-content</span>: space-between;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.list-item</span> {
+    <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">33%</span>;
+    <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+    <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+    <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+    <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+    <span style="color: rgb(255, 255, 170);">border-top-style</span>: none;
+    <span style="color: rgb(255, 255, 170);">border-bottom-style</span>: solid;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.list-item-2</span> {
+    <span style="color: rgb(255, 255, 170);">overflow</span>: hidden;
+    <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+    <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+    <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+    <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+    <span style="color: rgb(255, 255, 170);">border-bottom-style</span>: none;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.list-4</span> {
+    <span style="color: rgb(255, 255, 170);">display</span>: -webkit-box;
+    <span style="color: rgb(255, 255, 170);">display</span>: -webkit-flex;
+    <span style="color: rgb(255, 255, 170);">display</span>: -ms-flexbox;
+    <span style="color: rgb(255, 255, 170);">display</span>: flex;
+    <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+    <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">3px</span>;
+    <span style="color: rgb(255, 255, 170);">-webkit-box-orient</span>: vertical;
+    <span style="color: rgb(255, 255, 170);">-webkit-box-direction</span>: normal;
+    <span style="color: rgb(255, 255, 170);">-webkit-flex-direction</span>: column;
+    <span style="color: rgb(255, 255, 170);">-ms-flex-direction</span>: column;
+    <span style="color: rgb(255, 255, 170);">flex-direction</span>: column;
+    <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: space-around;
+    <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: distribute;
+    <span style="color: rgb(255, 255, 170);">justify-content</span>: space-around;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.column-5</span> {
+    <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.listing-info</span> {
+    <span style="color: rgb(255, 255, 170);">font-family</span>: <span style="color: rgb(162, 252, 162);">'Red Hat Display'</span>, sans-serif;
+    <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">16px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.image-2</span> {
+    <span style="color: rgb(255, 255, 170);">overflow</span>: hidden;
+    <span style="color: rgb(255, 255, 170);">width</span>: auto;
+    <span style="color: rgb(255, 255, 170);">height</span>: auto;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.listing-book</span> {
+    <span style="color: rgb(255, 255, 170);">height</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+    <span style="color: rgb(255, 255, 170);">padding-bottom</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+    <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+    <span style="color: rgb(255, 255, 170);">border-left</span>: <span style="color: rgb(211, 99, 99);">2px</span> solid <span style="color: rgb(211, 99, 99);">#000</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.school-select</span> {
+    <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+    <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+    <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+    <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">0</span> auto;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.navbar-search</span> {
+    <span style="color: rgb(255, 255, 170);">overflow</span>: visible;
+    <span style="color: rgb(255, 255, 170);">-webkit-box-pack</span>: center;
+    <span style="color: rgb(255, 255, 170);">-webkit-justify-content</span>: center;
+    <span style="color: rgb(255, 255, 170);">-ms-flex-pack</span>: center;
+    <span style="color: rgb(255, 255, 170);">justify-content</span>: center;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.navbar-school-logo</span> {
+    <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">80px</span>;
+    <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">0px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.navbar-link</span> {
+    <span style="color: rgb(255, 255, 170);">display</span>: block;
+    <span style="color: rgb(255, 255, 170);">margin-right</span>: <span style="color: rgb(211, 99, 99);">15px</span>;
+    <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">15px</span>;
+    <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">20px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.navbar-link</span><span style="color: rgb(173, 229, 252);">.main-logo</span> {
+    <span style="color: rgb(255, 255, 170);">margin-right</span>: <span style="color: rgb(211, 99, 99);">15px</span>;
+    <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">15px</span>;
+    <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">32px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.navbar-link</span><span style="color: rgb(173, 229, 252);">.large-only</span> {
+    <span style="color: rgb(255, 255, 170);">display</span>: none;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.navbar-user-settings</span> {
+    <span style="color: rgb(255, 255, 170);">margin-left</span>: <span style="color: rgb(211, 99, 99);">10px</span>;
+    <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+    <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+    <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+    <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.navbar-profile-pic</span> {
+    <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+    <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+    <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+    <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.burger-list</span> {
+    <span style="color: rgb(255, 255, 170);">-webkit-box-flex</span>: <span style="color: rgb(211, 99, 99);">0</span>;
+    <span style="color: rgb(255, 255, 170);">-webkit-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+    <span style="color: rgb(255, 255, 170);">-ms-flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+    <span style="color: rgb(255, 255, 170);">flex</span>: <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">0</span> auto;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.container-page-tracker</span> {
+    <span style="color: rgb(255, 255, 170);">top</span>: -<span style="color: rgb(211, 99, 99);">7px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.messenger-container</span> {
+    <span style="color: rgb(255, 255, 170);">z-index</span>: <span style="color: rgb(211, 99, 99);">5</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.messenger-header</span> {
+    <span style="color: rgb(255, 255, 170);">border-width</span>: <span style="color: rgb(211, 99, 99);">2px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.messenger-body</span> {
+    <span style="color: rgb(255, 255, 170);">border-right-width</span>: <span style="color: rgb(211, 99, 99);">2px</span>;
+    <span style="color: rgb(255, 255, 170);">border-right-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+    <span style="color: rgb(255, 255, 170);">border-left-width</span>: <span style="color: rgb(211, 99, 99);">2px</span>;
+    <span style="color: rgb(255, 255, 170);">border-left-color</span>: <span style="color: rgb(211, 99, 99);">#59585c</span>;
+    <span style="color: rgb(255, 255, 170);">box-shadow</span>: inset -<span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">0</span> <span style="color: rgb(211, 99, 99);">2px</span> <span style="color: rgb(211, 99, 99);">1px</span> <span style="color: rgb(211, 99, 99);">#59585c</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.messenger-footer</span> {
+    <span style="color: rgb(255, 255, 170);">border-right-width</span>: <span style="color: rgb(211, 99, 99);">2px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.active-bid</span> {
+    <span style="color: rgb(255, 255, 170);">z-index</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.body-2</span> {
+    <span style="color: rgb(255, 255, 170);">min-width</span>: <span style="color: rgb(211, 99, 99);">750px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.home-page-sub-header</span> {
+    <span style="color: rgb(255, 255, 170);">font-size</span>: <span style="color: rgb(211, 99, 99);">18px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.home-search-form</span> {
+    <span style="color: rgb(255, 255, 170);">min-width</span>: <span style="color: rgb(211, 99, 99);">700px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.book-search-dropdown</span><span style="color: rgb(173, 229, 252);">.navbar</span> {
+    <span style="color: rgb(255, 255, 170);">left</span>: -<span style="color: rgb(211, 99, 99);">0.35938px</span>;
+    <span style="color: rgb(255, 255, 170);">top</span>: <span style="color: rgb(211, 99, 99);">67px</span>;
+    <span style="color: rgb(255, 255, 170);">width</span>: <span style="color: rgb(211, 99, 99);">100%</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.booksearch-book-info</span> {
+    <span style="color: rgb(255, 255, 170);">padding-left</span>: <span style="color: rgb(211, 99, 99);">8px</span>;
+  }
+}
+
+@<span style="color: rgb(252, 194, 140);">media</span> screen and (max-width: <span style="color: rgb(211, 99, 99);">767px</span>) {
+  <span style="color: rgb(173, 229, 252);">.navbar</span> {
+    <span style="color: rgb(255, 255, 170);">position</span>: static;
+    <span style="color: rgb(255, 255, 170);">min-width</span>: <span style="color: rgb(211, 99, 99);">750px</span>;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.grid</span> {
+    <span style="color: rgb(255, 255, 170);">-ms-grid-columns</span>: <span style="color: rgb(211, 99, 99);">1</span>fr;
+    <span style="color: rgb(255, 255, 170);">grid-template-columns</span>: <span style="color: rgb(211, 99, 99);">1</span>fr;
+  }
+
+  <span style="color: rgb(173, 229, 252);">.book-search-dropdown</span><span style="color: rgb(173, 229, 252);">.navbar</span> {
+    <span style="color: rgb(255, 255, 170);">position</span>: absolute;
+    <span style="color: rgb(255, 255, 170);">min-width</span>: <span style="color: rgb(211, 99, 99);">750px</span>;
+  }
+}
+
+@<span style="color: rgb(252, 194, 140);">media</span> screen and (max-width: <span style="color: rgb(211, 99, 99);">479px</span>) {
+  <span style="color: rgb(173, 229, 252);">.navbar</span> {
+    <span style="color: rgb(255, 255, 170);">position</span>: static;
+    <span style="color: rgb(255, 255, 170);">width</span>: auto;
+  }
+}
+
+<span style="color: rgb(173, 229, 252);">#w-node-30fe698c4036-03dd9f23</span> {
+  <span style="color: rgb(255, 255, 170);">-ms-grid-column</span>: span <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">grid-column-start</span>: span <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-column-span</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">grid-column-end</span>: span <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-row</span>: span <span style="color: rgb(211, 99, 99);">2</span>;
+  <span style="color: rgb(255, 255, 170);">grid-row-start</span>: span <span style="color: rgb(211, 99, 99);">2</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-row-span</span>: <span style="color: rgb(211, 99, 99);">2</span>;
+  <span style="color: rgb(255, 255, 170);">grid-row-end</span>: span <span style="color: rgb(211, 99, 99);">2</span>;
+}
+
+<span style="color: rgb(173, 229, 252);">#w-node-c74f0eb9261c-03dd9f23</span> {
+  <span style="color: rgb(255, 255, 170);">-ms-grid-column</span>: span <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">grid-column-start</span>: span <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-column-span</span>: <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">grid-column-end</span>: span <span style="color: rgb(211, 99, 99);">1</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-row</span>: span <span style="color: rgb(211, 99, 99);">2</span>;
+  <span style="color: rgb(255, 255, 170);">grid-row-start</span>: span <span style="color: rgb(211, 99, 99);">2</span>;
+  <span style="color: rgb(255, 255, 170);">-ms-grid-row-span</span>: <span style="color: rgb(211, 99, 99);">2</span>;
+  <span style="color: rgb(255, 255, 170);">grid-row-end</span>: span <span style="color: rgb(211, 99, 99);">2</span>;
+}
+
+</code>

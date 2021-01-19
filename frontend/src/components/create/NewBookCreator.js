@@ -14,6 +14,7 @@ import booksAPI from "../../tools/api/booksAPI";
 import UserContext from "../../tools/react/UserContext";
 import AuthModalWithContext from "../auth/AuthModalWithContext";
 import ResponseStatusAlert from "../pieces/ResponseStatusAlert";
+import getSuffixFromNumber from "../../tools/react/getSuffixFromNumber"
 import "./NewBookCreator.css";
 
 let authorSchema = yup.object().shape({
@@ -111,22 +112,7 @@ function NewBookCreator() {
     };
 
     useEffect(() => {
-        switch (bookData.edition) {
-            case "":
-                setEditionSuffix("");
-                break;
-            case "1":
-                setEditionSuffix("st");
-                break;
-            case "2":
-                setEditionSuffix("nd");
-                break;
-            case "3":
-                setEditionSuffix("rd");
-                break;
-            default:
-                setEditionSuffix("th");
-        }
+        setEditionSuffix(getSuffixFromNumber(bookData.edition))
         console.log("rerendered");
     }, [bookData.edition]);
 

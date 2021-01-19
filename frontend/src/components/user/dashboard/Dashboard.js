@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ListingsBox from "./components/ListingsBox";
 import RequestsBox from "./components/RequestsBox";
-import UserInfo from "./components/UserInfo/UserInfo";
+import ProfileContainer from "./components/UserInfo/ProfileContainer";
 import restURL from "../../../tools/api/restURL";
 import authAPI from "../../../tools/api/authAPI";
 import axios from 'axios';
@@ -24,7 +24,7 @@ function Dashboard() {
 
     return (
         <div className="user-dashboard">
-            <UserInfo />
+            <ProfileContainer />
 
             <ListingsBox />
             <RequestsBox unreadDictionary={unreadRequestsDictionary}/>

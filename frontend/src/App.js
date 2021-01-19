@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-//Styles
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-
-//Dependencies
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
-//Components
 import HomeNavbar from "./components/universal/HomeNavbar";
 import Footer from './components/universal/Footer';
 import Home from "./components/home/Home";
@@ -22,7 +14,6 @@ import UserContext from "./tools/react/UserContext";
 import Error from "./components/static/Error";
 import authAPI from "./tools/api/authAPI";
 import ListingCreator from "./components/create/ListingCreator";
-import { Container } from "react-bootstrap";
 
 function App() {
     const [userState, setUserState] = useState(authAPI.getDefaultUser());
@@ -57,8 +48,8 @@ function App() {
                         component={NewBookCreator}
                     />
                     <Route path="/donate" component={Donate} />
-                    <Footer />
                 </Switch>
+                <Footer />
             </Router>
 
         )

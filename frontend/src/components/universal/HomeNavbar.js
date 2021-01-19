@@ -1,80 +1,107 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import auth from "../../tools/api/authAPI";
 import UserContext from "../../tools/react/UserContext";
 import AuthModal from "../auth/AuthModal";
+import NavbarSearch from "./NavbarSearch";
 
-//Helper function that returns correct user links for whether the user is logged in or logged out
 /**
- * 
- * @param {Function} setModalVisible A CB function set state function to set login modal visibility
+ * Returns the global navbar.
  */
-function UserNavDropdown(props) {
-    const currentUser = useContext(UserContext);
-    if (currentUser.isAuth) {
-        return (
-            // Show "My Profile" and "Log Out"
-            <NavDropdown
-                title={"Hello, " + currentUser.username + "!"}
-                id="user-nav-dropdown"
-            >
-                <NavDropdown.Item eventKey={"/user/" + currentUser.username}>
-                    My Dashboard
-                </NavDropdown.Item>
-
-                <NavDropdown.Divider />
-                <NavDropdown.Item eventKey="/logout">Logout</NavDropdown.Item>
-            </NavDropdown>
-        );
-    } else {
-        return (
-            <>
-                <Nav.Link id="navbar-login-button" onClick={()=>props.setModalMode("login")}>Login</Nav.Link> {/*eventKey="/login"*/}
-                <Nav.Link id="navbar-register-button" onClick={()=>props.setModalMode("register")}>
-                    Register
-                </Nav.Link>
-            </>
-       );
-    }
-}
-
-function HomeNavbar() {
+const HomeNavbar = () => {
     const history = useHistory();
-    const currentUser = useContext(UserContext);
+
     const [modalMode, setModalMode] = useState("hide");
+    const [userLinksActive, setUserLinksActive] = useState(false);
+    const currentUser = useContext(UserContext);
 
+    const handleNavLinks = (reference) => {
+        switch (reference) {
+            case "home":
+                history.push("/")
+                break;
 
-    function handleLogoutEvent() {
-        currentUser.changeUserContext(auth.getDefaultUser());
-        auth.logout();
-        history.push("/");
-    }
+            case "logout":
+                auth.logout();
+                history.push("/");
+                break;
 
-    function handleSelect(eventKey) {
-        eventKey === "/logout" ? handleLogoutEvent() : history.push(eventKey);
-    }
+            case "dashboard":
+                if (auth.isAuth()) history.push(`/user/${auth.user.username}`);
+                else setModalMode("login");
+                break;
 
-    useEffect(() => {
-        if (currentUser.isAuth) {
-            setModalMode("hide")
+            case "login":
+                if (!auth.isAuth()) setModalMode("login");
+                break;
+
+            case "register":
+                if (!auth.isAuth()) setModalMode("register");
+                break;
+
+            default:
+                console.log(reference)
+                break;
         }
-    }, [currentUser.isAuth])
-
+    };
     return (
-        <>
-            <Navbar className="header" bg="dark" variant="dark" expand="lg">
-                <Navbar.Brand>TextTrader</Navbar.Brand>
-                <Nav className="mr-auto" onSelect={handleSelect}>
-                    <Nav.Link eventKey="/">Home</Nav.Link>
-                    <UserNavDropdown setModalMode={setModalMode}/>
-                </Nav>
-            </Navbar>
-            <AuthModal mode={modalMode} setMode={setModalMode}/>
-        </>
+        <div className="navbar">
+            <h1 className="navbar-link main-logo">TextTrader</h1>
+            <div className="navbar-link" onClick={() => handleNavLinks("home")}>Home</div>
+            <div className="navbar-link" onClick={() => handleNavLinks("dashboard")}>Dashboard</div>
+            <NavbarSearch />
+            <div className="school-select">
+                <img
+                    className="navbar-school-logo"
+                    src="https://via.placeholder.com/100x50"
+                    alt="School logo"
+                />
+                <div className="navbar-link change-link">Change</div>
+            </div>
+            <div className="navbar-user-settings" hidden={!auth.isAuth()}>
+                {/* In the future, replace image source with context user link */}
+                <div>{currentUser.first_name}</div>
+                <img
+                    className="navbar-profile-pic"
+                    src="https://via.placeholder.com/45"
+                    alt="Current User"
+                />
+                <ul
+                    className="burger-list"
+                    onClick={() => setUserLinksActive(!userLinksActive)}
+                >
+                    <li className="burger-slice" />
+                    <li className="burger-slice" />
+                    <li className="burger-slice" />
+                </ul>
+                <ul
+                    classname="navbar-user-links"
+                    hidden={userLinksActive || !auth.isAuth()}
+                >
+                    <li onClick={() => handleNavLinks("dashboard")}>
+                        Dashboard
+                    </li>
+                    <li onClick={() => handleNavLinks("logout")}>Logout</li>
+                </ul>
+            </div>
+            <div className="navbar-auth-links" hidden={auth.isAuth()}>
+                <div
+                    className="navbar-login"
+                    onClick={() => handleNavLinks("login")}
+                >
+                    Login
+                </div>
+                <div
+                    className="navbar-register"
+                    onClick={() => handleNavLinks("register")}
+                >
+                    Register
+                </div>
+            </div>
+
+            <AuthModal mode={modalMode} setMode={setModalMode} />
+        </div>
     );
-}
+};
 
 export default HomeNavbar;

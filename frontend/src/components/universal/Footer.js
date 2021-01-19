@@ -1,14 +1,14 @@
 import React from 'react';
-import "./Footer.css"
 
 function Footer () {
     return(
         <div className="footer">
-            <footer>
-                Created by Jared Gluck and Corey Bean
-            </footer>
+            <div>Contact us!</div>
+            <div>bookersRus@gmail.com</div>
+            <div></div>
+            <div>Created by Corey Bean at Messiah University</div>
+            <div>and Jared Gluck at Penn State University</div>
         </div>
-
     )
 }
 

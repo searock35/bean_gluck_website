@@ -6,6 +6,7 @@ const defaultUser = {
     email: '',
     first_name: "Text",
     last_name: "Trader",
+    user_logo_link: "",
     majors: [
         'Book Selling'
     ],
@@ -16,6 +17,7 @@ const defaultUser = {
     school_name: 'Text Trader University',
     school_primary_color: defaultColorPrimary,
     school_secondary_color: defaultColorSecondary,
+    school_logo_link: "",
     isAuth: false,
 };
 
